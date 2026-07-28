@@ -211,11 +211,12 @@ input.award.overridden { border-color: var(--warn-line); background: var(--warn-
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 16px 18px 24px;
+  padding: 16px 16px 24px;
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 13px;
 }
+.footer-inner.narrow { max-width: 1000px; margin: 0 auto; }
 .jackrabbit-link { white-space: nowrap; }
 /* Stays an inline link so its text keeps the footer's baseline; only the mark
    is shifted, -3px centring a 16px icon against 13px text. */

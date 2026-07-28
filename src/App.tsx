@@ -63,17 +63,21 @@ function Shell() {
         {phase === 'export' && <ExportScreen />}
       </main>
       <footer className="app-footer">
-        v{__APP_VERSION__} (build {__BUILD_SHA__}) · Questions or a suspected error:{' '}
-        <a href="mailto:info@gazehound.io">info@gazehound.io</a> ·{' '}
-        <a
-          className="jackrabbit-link"
-          href="https://github.com/jackrabbit-project/jackrabbit"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src={jackrabbitIcon} alt="" aria-hidden="true" />
-          The Jackrabbit Project
-        </a>
+        {/* The home screen narrows its content to 1000px; the footer follows so
+            the credit line starts level with whatever boxes are above it. */}
+        <div className={`footer-inner ${phase === 'home' ? 'narrow' : ''}`}>
+          v{__APP_VERSION__} (build {__BUILD_SHA__}) · Questions or a suspected error:{' '}
+          <a href="mailto:info@gazehound.io">info@gazehound.io</a> ·{' '}
+          <a
+            className="jackrabbit-link"
+            href="https://github.com/jackrabbit-project/jackrabbit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={jackrabbitIcon} alt="" aria-hidden="true" />
+            The Jackrabbit Project
+          </a>
+        </div>
       </footer>
     </div>
   );
