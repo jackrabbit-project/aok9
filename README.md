@@ -78,7 +78,7 @@ and a bundled-sample-meet test, both run against full meets captured from the re
 
 ## Reporting a problem
 
-Open an [issue](https://github.com/gazehound-group/aok9/issues/new/choose) — there are templates for
+Open an [issue](https://github.com/jackrabbit-project/aok9/issues/new/choose) — there are templates for
 a **bug** and for a **scoring or rule question**, both of which ask for the version and build shown
 at the bottom of the app, so a report can be traced to the exact code that produced it. If you do
 not have a GitHub account, email <info@gazehound.io> instead.
@@ -126,3 +126,8 @@ See [LICENSE](LICENSE).
 
 This application is a work in progress. Feedback from race secretaries, clubs, and participants is
 welcomed and encouraged — <info@gazehound.io>.
+
+---
+
+Check out [The Jackrabbit Project](https://github.com/jackrabbit-project/jackrabbit) — the other
+tools and sites built for the sighthound coursing and racing community.
