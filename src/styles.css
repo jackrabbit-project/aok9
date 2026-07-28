@@ -216,14 +216,10 @@ input.award.overridden { border-color: var(--warn-line); background: var(--warn-
   color: var(--muted);
   font-size: 13px;
 }
-.jackrabbit-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-.jackrabbit-link img { height: 16px; width: auto; }
+.jackrabbit-link { white-space: nowrap; }
+/* Stays an inline link so its text keeps the footer's baseline; only the mark
+   is shifted, -3px centring a 16px icon against 13px text. */
+.jackrabbit-link img { height: 16px; width: auto; margin-right: 5px; vertical-align: -3px; }
 
 /* Landing page */
 .landing { max-width: 1000px; margin: 0 auto; }
