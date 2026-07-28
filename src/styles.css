@@ -216,6 +216,14 @@ input.award.overridden { border-color: var(--warn-line); background: var(--warn-
   color: var(--muted);
   font-size: 13px;
 }
+.jackrabbit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.jackrabbit-link img { height: 16px; width: auto; }
 
 /* Landing page */
 .landing { max-width: 1000px; margin: 0 auto; }

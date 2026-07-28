@@ -9,6 +9,7 @@ import { ProgramScreen } from './ui/ProgramScreen';
 import { ResultsScreen } from './ui/ResultsScreen';
 import { ExportScreen } from './ui/ExportScreen';
 import type { Phase } from './domain/types';
+import jackrabbitIcon from './assets/jackrabbit-icon-40.png';
 
 const STEPS: { phase: Phase; label: string }[] = [
   { phase: 'setup', label: '1. Meet setup' },
@@ -63,7 +64,16 @@ function Shell() {
       </main>
       <footer className="app-footer">
         v{__APP_VERSION__} (build {__BUILD_SHA__}) · Questions or a suspected error:{' '}
-        <a href="mailto:info@gazehound.io">info@gazehound.io</a>
+        <a href="mailto:info@gazehound.io">info@gazehound.io</a> ·{' '}
+        <a
+          className="jackrabbit-link"
+          href="https://github.com/jackrabbit-project/jackrabbit"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={jackrabbitIcon} alt="" aria-hidden="true" />
+          The Jackrabbit Project
+        </a>
       </footer>
     </div>
   );
