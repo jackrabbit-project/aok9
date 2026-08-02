@@ -274,10 +274,55 @@ a:hover { color: #0d3a61; }
 }
 .hint { color: var(--muted); font-size: 13.5px; margin: 8px 0; }
 
+/* Update prompt -- pinned so it is noticed, sized so it never blocks the page.
+   Wraps rather than overflowing on a phone. */
+.update-prompt {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 60;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 1px solid var(--warn-line);
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow: 0 6px 20px rgba(23, 31, 46, 0.18);
+  font-size: 14px;
+}
+.update-prompt-text { display: flex; flex-direction: column; min-width: 0; }
+.update-prompt-note { color: var(--muted); font-size: 12.5px; }
+.update-prompt-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.update-prompt-actions button { padding: 6px 14px; font-size: 14px; }
+
+/* iOS-only nudge to install; inline, not pinned -- it is advice, not an alert. */
+.install-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-line);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.install-hint button { padding: 6px 12px; font-size: 13.5px; flex-shrink: 0; }
+
 /* Print */
 .print-only { display: none; }
 @media print {
-  .app-ui, .app-header, .app-footer, .section, .sticky-actions, .warn, .hint { display: none !important; }
+  .app-ui, .app-header, .app-footer, .section, .sticky-actions, .warn, .hint,
+  .update-prompt { display: none !important; }
   .print-only { display: block; font-size: 12px; }
   .print-only h1 { font-size: 16px; margin: 0 0 4px; }
   .print-only h2 { font-size: 14px; margin: 0 0 10px; }

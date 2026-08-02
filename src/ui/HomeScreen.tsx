@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useMeet } from '../store/meetStore';
 import { downloadBackup, parseBackup } from '../io/backup';
 import { Hint, Section } from './common';
+import { InstallHint } from './InstallHint';
 import sampleMeet from '../data/sample-meet.json';
 import { ShareLinks } from './ShareLinks';
 import type { MeetState, Phase } from '../domain/types';
@@ -45,6 +46,8 @@ export function HomeScreen() {
       <p className="subtitle">
         Offline app for running an official R.A.C.E. AOK9 Sprint Racing meet per Rule Book v3.0.
       </p>
+
+      <InstallHint />
 
       <Section title="Current meet">
         <div className="kv">
