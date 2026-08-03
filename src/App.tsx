@@ -11,15 +11,19 @@ import { ExportScreen } from './ui/ExportScreen';
 import type { Phase } from './domain/types';
 import jackrabbitIcon from './assets/jackrabbit-icon-40.png';
 
-const STEPS: { phase: Phase; label: string }[] = [
-  { phase: 'setup', label: '1. Meet setup' },
-  { phase: 'entries', label: '2. Entries' },
-  { phase: 'divisions', label: '3. Divisions' },
-  { phase: 'program1', label: '4. Program 1' },
-  { phase: 'program2', label: '5. Program 2' },
-  { phase: 'program3', label: '6. Program 3' },
-  { phase: 'results', label: '7. Results' },
-  { phase: 'export', label: '8. Export' },
+/* Number and name are separate so the tab can style them differently.
+   "4. Program 1" puts two unrelated numbers side by side -- the step's place
+   in the sequence and the program's own number -- and they read as one. The
+   step number is only position, so it is set back and the name leads. */
+const STEPS: { phase: Phase; n: number; name: string }[] = [
+  { phase: 'setup', n: 1, name: 'Meet setup' },
+  { phase: 'entries', n: 2, name: 'Entries' },
+  { phase: 'divisions', n: 3, name: 'Divisions' },
+  { phase: 'program1', n: 4, name: 'Program 1' },
+  { phase: 'program2', n: 5, name: 'Program 2' },
+  { phase: 'program3', n: 6, name: 'Program 3' },
+  { phase: 'results', n: 7, name: 'Results' },
+  { phase: 'export', n: 8, name: 'Export' },
 ];
 
 function Shell() {
@@ -43,9 +47,14 @@ function Shell() {
             <button
               key={s.phase}
               className={`step ${phase === s.phase ? 'active' : ''}`}
+              // Two spans with a CSS gap read as "4Program 1" to a screen
+              // reader, so spell the name out and mark which one is current.
+              aria-label={`Step ${s.n}: ${s.name}`}
+              aria-current={phase === s.phase ? 'step' : undefined}
               onClick={() => dispatch({ type: 'setPhase', phase: s.phase })}
             >
-              {s.label}
+              <span className="step-n">{s.n}</span>
+              <span className="step-name">{s.name}</span>
             </button>
           ))}
         </nav>
@@ -61,7 +70,7 @@ function Shell() {
             <option value="home">Home</option>
             {STEPS.map((s) => (
               <option key={s.phase} value={s.phase}>
-                {s.label}
+                {s.n}. {s.name}
               </option>
             ))}
           </select>

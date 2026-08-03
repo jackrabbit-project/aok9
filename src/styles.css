@@ -56,9 +56,28 @@ main { flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 16px; }
   border-radius: 6px;
   cursor: pointer;
   font-size: 14.5px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
 }
+/* Set back, so "4  Program 1" is not read as one number. Tabular figures keep
+   the digits the same width, which stops the row shifting between steps. */
+.step-n {
+  color: var(--muted);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+.step-name { color: inherit; }
 .step:hover { background: #f0f3f6; }
-.step.active { color: #000; font-weight: 700; }
+/* Bold alone was doing all the work of showing where you are, which is easy to
+   miss in a row of eight. The underline gives it a second, louder signal. */
+.step.active {
+  color: #000;
+  font-weight: 700;
+  box-shadow: inset 0 -2px 0 var(--accent);
+  border-radius: 6px 6px 0 0;
+}
+.step.active .step-n { color: var(--accent); font-weight: 700; }
 .save-status {
   margin-left: auto;
   color: var(--muted);
