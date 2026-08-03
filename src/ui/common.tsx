@@ -1,6 +1,10 @@
 import React from 'react';
 import { JACKET_COLORS } from '../domain/types';
 
+/** Release notes. Lives here so the footer and the update prompt agree, and so
+    neither has to import from App. */
+export const RELEASES_URL = 'https://github.com/jackrabbit-project/aok9/releases';
+
 export function Section({
   title,
   children,

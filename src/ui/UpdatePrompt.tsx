@@ -5,6 +5,7 @@
 // that happen to them, so the new version waits here until they say when.
 
 import { useRegisterSW } from 'virtual:pwa-register/react';
+import { RELEASES_URL } from './common';
 
 export function UpdatePrompt() {
   const {
@@ -18,7 +19,12 @@ export function UpdatePrompt() {
     <div className="update-prompt" role="status">
       <span className="update-prompt-text">
         A new version of AOK9 is ready.
-        <span className="update-prompt-note">Your meet stays open — reload when it suits.</span>
+        <span className="update-prompt-note">
+          Your meet stays open — reload when it suits.{' '}
+          <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer">
+            What&rsquo;s new
+          </a>
+        </span>
       </span>
       <span className="update-prompt-actions">
         <button type="button" onClick={() => void updateServiceWorker(true)}>

@@ -8,6 +8,7 @@ import { DivisionsScreen } from './ui/DivisionsScreen';
 import { ProgramScreen } from './ui/ProgramScreen';
 import { ResultsScreen } from './ui/ResultsScreen';
 import { ExportScreen } from './ui/ExportScreen';
+import { RELEASES_URL } from './ui/common';
 import type { Phase } from './domain/types';
 import jackrabbitIcon from './assets/jackrabbit-icon-40.png';
 
@@ -92,7 +93,13 @@ function Shell() {
         {/* The home screen narrows its content to 1000px; the footer follows so
             the credit line starts level with whatever boxes are above it. */}
         <div className={`footer-inner ${phase === 'home' ? 'narrow' : ''}`}>
-          v{__APP_VERSION__} (build {__BUILD_SHA__}) · Questions or a suspected error:{' '}
+          v{__APP_VERSION__} (build {__BUILD_SHA__}) ·{' '}
+          {/* Most secretaries will never open the repo, so the release notes
+              need a way in from inside the app. */}
+          <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer">
+            What&rsquo;s new
+          </a>{' '}
+          · Questions or a suspected error:{' '}
           <a href="mailto:info@gazehound.io">info@gazehound.io</a> ·{' '}
           <a
             className="jackrabbit-link"
