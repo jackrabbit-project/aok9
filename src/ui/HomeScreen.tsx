@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useMeet } from '../store/meetStore';
 import { downloadBackup, parseBackup } from '../io/backup';
+import { downloadReport } from '../io/reportExport';
 import { Hint, Section } from './common';
-import { InstallHint } from './InstallHint';
+import { InstallApp } from './InstallApp';
 import sampleMeet from '../data/sample-meet.json';
 import { ShareLinks } from './ShareLinks';
 import type { MeetState, Phase } from '../domain/types';
@@ -47,7 +48,9 @@ export function HomeScreen() {
         Offline app for running an official R.A.C.E. AOK9 Sprint Racing meet per Rule Book v3.0.
       </p>
 
-      <InstallHint />
+      <Section title="Get the app">
+        <InstallApp />
+      </Section>
 
       <Section title="Current meet">
         <div className="kv">
@@ -68,9 +71,6 @@ export function HomeScreen() {
           <button onClick={() => dispatch({ type: 'setPhase', phase: nextPhase(state) })}>
             Continue
           </button>
-          <button className="secondary" onClick={() => downloadBackup(state)}>
-            Save Meet to File
-          </button>
           <button className="secondary" onClick={() => restoreRef.current?.click()}>
             Open Meet from File
           </button>
@@ -86,8 +86,8 @@ export function HomeScreen() {
           </button>
         </div>
         <p className="muted small">
-          Saves or opens a .json file holding the whole meet — use it to move a meet between
-          laptops, or as a spare copy alongside the automatic browser save.
+          Opens a .json meet file — use it to move a meet between laptops, or to restore a spare
+          copy alongside the automatic browser save.
         </p>
         <input
           ref={restoreRef}
@@ -108,6 +108,31 @@ export function HomeScreen() {
         />
         {msg && <Hint>{msg}</Hint>}
       </Section>
+
+      {/* Only once there is something to download -- an empty workbook or a
+          backup of nothing helps nobody. */}
+      {hasWork(state) && (
+        <Section title="Downloads">
+          <div className="btn-row">
+            <button className="secondary" onClick={() => downloadBackup(state)}>
+              Save Meet to File (.json)
+            </button>
+            <button className="secondary" onClick={() => downloadReport(state)}>
+              Meet Report (.xlsx)
+            </button>
+            {/* Printing needs the results markup, which only the Export screen
+                renders -- printing from here would produce a blank page. */}
+            <button className="secondary" onClick={() => dispatch({ type: 'setPhase', phase: 'export' })}>
+              Print results →
+            </button>
+          </div>
+          <p className="muted small">
+            The .json is the whole meet, for backup or moving between laptops. The .xlsx is the
+            official results report. Printing opens the Export screen, where the printable results
+            live.
+          </p>
+        </Section>
+      )}
 
       <Section title="Try it out">
         <p>

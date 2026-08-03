@@ -301,22 +301,6 @@ a:hover { color: #0d3a61; }
 .update-prompt-actions { display: flex; gap: 8px; flex-shrink: 0; }
 .update-prompt-actions button { padding: 6px 14px; font-size: 14px; }
 
-/* iOS-only nudge to install; inline, not pinned -- it is advice, not an alert. */
-.install-hint {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px 16px;
-  background: var(--warn-bg);
-  border: 1px solid var(--warn-line);
-  border-radius: 6px;
-  padding: 10px 12px;
-  margin: 12px 0;
-  font-size: 14px;
-  line-height: 1.5;
-}
-.install-hint button { padding: 6px 12px; font-size: 13.5px; flex-shrink: 0; }
 
 /* Print */
 .print-only { display: none; }
