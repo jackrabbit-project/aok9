@@ -66,6 +66,28 @@ main { flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 16px; }
   white-space: nowrap;
 }
 
+/* Step picker: the phone alternative to the eight step buttons above. */
+.steps-picker { display: none; flex: 1; min-width: 0; }
+.steps-picker select {
+  width: 100%;
+  max-width: 260px;
+  padding: 7px 10px;
+  font-size: 15px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Sections */
 .section {
   background: var(--card);
@@ -301,6 +323,32 @@ a:hover { color: #0d3a61; }
 .update-prompt-actions { display: flex; gap: 8px; flex-shrink: 0; }
 .update-prompt-actions button { padding: 6px 14px; font-size: 14px; }
 
+
+/* Small screens ----------------------------------------------------------
+   The app is for use on a phone at a field, so below this width the sticky
+   header has to stop being the main event: eight wrapped step buttons were
+   holding 276px of a 390px screen and 310px of a 360px one.
+
+   Kept at the end of the file on purpose. A media query adds no specificity,
+   so these rules only win by coming after the ones they override -- put this
+   block higher up and .kv below simply overrides it. */
+@media (max-width: 640px) {
+  /* Still wraps, so the save line drops to its own row beneath the brand and
+     picker, which share row one. */
+  .app-header { padding: 6px 12px; gap: 4px 8px; }
+  .brand { font-size: 15px; padding: 6px 8px 6px 0; white-space: nowrap; }
+  .steps { display: none; }
+  .steps-picker { display: block; }
+  .save-status {
+    flex-basis: 100%;
+    margin-left: 0;
+    font-size: 12px;
+    white-space: normal;
+  }
+  /* A 140px minimum label left too little for the value: club names broke
+     across three lines and dates read "2026-" / "07-20". */
+  .kv { grid-template-columns: minmax(88px, 38%) 1fr; column-gap: 12px; }
+}
 
 /* Print */
 .print-only { display: none; }

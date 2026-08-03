@@ -49,6 +49,23 @@ function Shell() {
             </button>
           ))}
         </nav>
+        {/* Phones get a picker instead. Eight buttons wrap to three rows there,
+            and the header is sticky, so the nav was holding a third to nearly
+            half of the screen permanently. CSS swaps which of the two shows. */}
+        <label className="steps-picker">
+          <span className="sr-only">Go to step</span>
+          <select
+            value={phase}
+            onChange={(e) => dispatch({ type: 'setPhase', phase: e.target.value as Phase })}
+          >
+            <option value="home">Home</option>
+            {STEPS.map((s) => (
+              <option key={s.phase} value={s.phase}>
+                {s.label}
+              </option>
+            ))}
+          </select>
+        </label>
         <span className="save-status">{status}</span>
       </header>
       <main>

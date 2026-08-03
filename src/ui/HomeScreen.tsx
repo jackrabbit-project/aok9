@@ -40,6 +40,7 @@ export function HomeScreen() {
   const { state, dispatch } = useMeet();
   const restoreRef = useRef<HTMLInputElement>(null);
   const [msg, setMsg] = useState('');
+  const started = hasWork(state);
 
   return (
     <div className="landing">
@@ -52,42 +53,55 @@ export function HomeScreen() {
         <InstallApp />
       </Section>
 
-      <Section title="Current meet">
-        <div className="kv">
-          <span>Club</span>
-          <span>{state.info.clubName || '—'}</span>
-          <span>Meet ID</span>
-          <span>{state.info.meetId || '—'}</span>
-          <span>Date</span>
-          <span>{state.info.date}</span>
-          <span>Entries</span>
-          <span>{state.entries.length}</span>
-          <span>Divisions</span>
-          <span>{state.divisions.length}</span>
-          <span>Programs run</span>
-          <span>{programsRun(state)} / 3</span>
-        </div>
+      <Section title={started ? 'Current meet' : 'Start here'}>
+        {/* With nothing entered, the summary is six dashes and zeros and
+            "Continue" answers a question nobody asked. Show the first action
+            instead, and keep the summary for when there is one to show. */}
+        {started ? (
+          <div className="kv">
+            <span>Club</span>
+            <span>{state.info.clubName || '—'}</span>
+            <span>Meet ID</span>
+            <span>{state.info.meetId || '—'}</span>
+            <span>Date</span>
+            <span>{state.info.date}</span>
+            <span>Entries</span>
+            <span>{state.entries.length}</span>
+            <span>Divisions</span>
+            <span>{state.divisions.length}</span>
+            <span>Programs run</span>
+            <span>{programsRun(state)} / 3</span>
+          </div>
+        ) : (
+          <p>
+            No meet loaded yet. Start a new one, open a meet you saved earlier, or load the sample
+            meet below to look around first.
+          </p>
+        )}
         <div className="btn-row">
           <button onClick={() => dispatch({ type: 'setPhase', phase: nextPhase(state) })}>
-            Continue
+            {started ? 'Continue' : 'Start a new meet'}
           </button>
           <button className="secondary" onClick={() => restoreRef.current?.click()}>
             Open Meet from File
           </button>
-          <button
-            className="outline-danger"
-            onClick={() => {
-              if (confirm('Start a NEW meet? Current meet data will be cleared (back it up first if needed).')) {
-                dispatch({ type: 'reset' });
-              }
-            }}
-          >
-            Reset
-          </button>
+          {/* Nothing to reset before a meet exists. */}
+          {started && (
+            <button
+              className="outline-danger"
+              onClick={() => {
+                if (confirm('Start a NEW meet? Current meet data will be cleared (back it up first if needed).')) {
+                  dispatch({ type: 'reset' });
+                }
+              }}
+            >
+              Reset
+            </button>
+          )}
         </div>
         <p className="muted small">
-          Opens a .json meet file — use it to move a meet between laptops, or to restore a spare
-          copy alongside the automatic browser save.
+          <b>Open Meet from File</b> takes a .json saved from this app — use it to move a meet
+          between laptops, or to restore a spare copy alongside the automatic browser save.
         </p>
         <input
           ref={restoreRef}
@@ -111,7 +125,7 @@ export function HomeScreen() {
 
       {/* Only once there is something to download -- an empty workbook or a
           backup of nothing helps nobody. */}
-      {hasWork(state) && (
+      {started && (
         <Section title="Downloads">
           <div className="btn-row">
             <button className="secondary" onClick={() => downloadBackup(state)}>
