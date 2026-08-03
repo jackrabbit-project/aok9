@@ -269,6 +269,18 @@ export function EntriesScreen() {
           insertion only per 4.3.1.3 (schooling results / oval record).
         </Hint>
       </Section>
+
+      {/* Every other step ends with a way forward; this one only had the tabs. */}
+      <div className="btn-row sticky-actions">
+        <button
+          className="big"
+          disabled={state.entries.length === 0}
+          onClick={() => dispatch({ type: 'setPhase', phase: 'divisions' })}
+        >
+          Continue to Divisions →
+        </button>
+        {state.entries.length === 0 && <Hint>Enter at least one dog first.</Hint>}
+      </div>
     </div>
   );
 }

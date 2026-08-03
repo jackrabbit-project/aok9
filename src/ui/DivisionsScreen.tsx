@@ -200,6 +200,22 @@ export function DivisionsScreen() {
           </Warn>
         )}
       </Section>
+
+      {/* Mirrors what ProgramScreen requires before Draw Program 1, so a
+          blocker surfaces here instead of after a wasted trip forward. */}
+      <div className="btn-row sticky-actions">
+        <button
+          className="big"
+          disabled={state.divisions.length === 0 || unassigned.length > 0}
+          onClick={() => dispatch({ type: 'setPhase', phase: 'program1' })}
+        >
+          Continue to Program 1 →
+        </button>
+        {state.divisions.length === 0 && <Hint>Create at least one division first.</Hint>}
+        {state.divisions.length > 0 && unassigned.length > 0 && (
+          <Hint>Assign every active dog to a division before drawing.</Hint>
+        )}
+      </div>
     </div>
   );
 }
