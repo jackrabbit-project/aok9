@@ -41,6 +41,9 @@ export function HomeScreen() {
   const restoreRef = useRef<HTMLInputElement>(null);
   const [msg, setMsg] = useState('');
   const started = hasWork(state);
+  // Captured once, so loading the sample meet mid-read does not snap the
+  // "How it works" list shut under the person reading it.
+  const [startedOnLoad] = useState(started);
 
   return (
     <div className="landing">
@@ -175,8 +178,13 @@ export function HomeScreen() {
         </div>
       </Section>
 
+      {/* Open for a newcomer, who needs the tour; folded away once a meet
+          exists, since a returning secretary is scrolling past seven steps
+          they already know. Uncontrolled after mount, so toggling sticks. */}
       <Section title="How it works">
-        <ol className="howto">
+        <details className="howto-details" open={!startedOnLoad}>
+          <summary>The seven steps, start to finish</summary>
+          <ol className="howto">
           <li>
             <b>Meet setup</b> — club, date, meet ID.
           </li>
@@ -201,7 +209,8 @@ export function HomeScreen() {
           <li>
             <b>Export</b> — official AOK9 Race Meet Report xlsx + full JSON backup.
           </li>
-        </ol>
+          </ol>
+        </details>
         <p className="muted">
           Autosaves to browser storage after every change. Fully offline once loaded.
         </p>

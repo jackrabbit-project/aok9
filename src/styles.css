@@ -284,6 +284,7 @@ a:hover { color: #0d3a61; }
 
 .disclaimer summary { cursor: pointer; color: #14548a; margin-top: 4px; }
 .disclaimer p { font-size: 14px; color: #33404f; line-height: 1.55; }
+.howto-details summary { cursor: pointer; color: #14548a; margin: 2px 0 4px; }
 
 /* Notices */
 .warn {
