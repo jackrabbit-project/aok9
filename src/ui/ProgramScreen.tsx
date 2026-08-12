@@ -251,7 +251,9 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                           const e = entryMap.get(slot.entryId)!;
                           return (
                             <tr key={slot.entryId}>
-                              <td>{slot.post}</td>
+                              <td className={slot.post ? `post post-${slot.post}` : 'post'}>
+                                {slot.post}
+                              </td>
                               <td>{slot.post ? JACKET_COLORS[slot.post] : ''}</td>
                               <td>
                                 {e.callName} ({e.breed})

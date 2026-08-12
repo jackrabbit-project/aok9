@@ -382,5 +382,30 @@ a:hover { color: #0d3a61; }
   .print-division { break-inside: avoid; }
   .print-tbl { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
   .print-tbl th, .print-tbl td { border: 1px solid #000; padding: 4px 6px; text-align: left; }
+
+  /* Post number carries its jacket colour, so the sheet can be read at the
+     lure without cross-referencing the column beside it.
+
+     Pale tints with black text rather than the saturated screen colours, on
+     purpose. Printers drop backgrounds when "Background graphics" is off and
+     print-color-adjust is not always honoured; white-on-red would then leave a
+     blank cell where the post number should be. Black on a tint degrades to
+     black on white, which is still a readable sheet. It also survives a mono
+     laser printer, where all four saturated colours land on the same grey.
+
+     The Jacket column keeps the colour name for exactly that reason -- do not
+     merge the two columns, or a black-and-white printout loses the jacket
+     entirely. */
+  .print-tbl td.post {
+    text-align: center;
+    font-weight: 700;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .print-tbl td.post-1 { background: #f7d6d6; } /* Red */
+  .print-tbl td.post-2 { background: #d6e2f5; } /* Blue */
+  .print-tbl td.post-3 { background: #fff; }    /* White */
+  .print-tbl td.post-4 { background: #d8ead9; } /* Green */
+
   body { background: #fff; }
 }
