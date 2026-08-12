@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMeet } from '../store/meetStore';
 import { scoreRace, validatePlaces } from '../domain/points';
+import { redrawPosts } from '../domain/draw';
 import { Jacket, Warn } from './common';
 import type { Division, Entry, Race, RaceOutcome } from '../domain/types';
 
@@ -71,7 +72,10 @@ export function RaceCard({
         </b>
         <span className="race-flags">
           {!locked && (
-            <button className="secondary sm" onClick={() => dispatch({ type: 'redrawPosts', raceId: race.id })}>
+            <button
+              className="secondary sm"
+              onClick={() => dispatch({ type: 'setRace', race: redrawPosts(race, Math.random) })}
+            >
               Redraw posts
             </button>
           )}

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useMeet } from '../store/meetStore';
+import { buildDivisionDraw, buildProgramDraws, useMeet } from '../store/meetStore';
 import { totalsThrough } from '../domain/rotation';
 import { entryGrade } from '../domain/draw';
 import { JACKET_COLORS } from '../domain/types';
@@ -46,7 +46,17 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
               ? 'Groups each division by WAVE (graded) or random draw (ungraded), splits races per Figure 8.1 and draws post positions.'
               : 'Drops grades, ranks every dog by points earned so far, regroups races per Figure 8.1 (ties per 4.3.4.1) and draws new post positions.'}
           </p>
-          <button className="big" disabled={!canDraw} onClick={() => dispatch({ type: 'drawProgram', program })}>
+          <button
+            className="big"
+            disabled={!canDraw}
+            onClick={() =>
+              dispatch({
+                type: 'setProgramDraws',
+                program,
+                draws: buildProgramDraws(state, program, Math.random),
+              })
+            }
+          >
             Draw Program {program}
           </button>
         </Section>
@@ -74,7 +84,14 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                   <div className="btn-row">
                     <button
                       className="secondary"
-                      onClick={() => dispatch({ type: 'redrawDivision', program, divisionId: division.id })}
+                      onClick={() =>
+                        dispatch({
+                          type: 'setDivisionDraw',
+                          program,
+                          divisionId: division.id,
+                          draw: buildDivisionDraw(state, program, division.id, Math.random),
+                        })
+                      }
                     >
                       Redraw division
                     </button>

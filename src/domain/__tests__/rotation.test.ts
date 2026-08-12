@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { drawFirstProgram } from '../draw';
 import { drawNextProgram, rotationOrder, totalsThrough } from '../rotation';
 import { entryMap, finishRace, mkDivision, mkEntry, raceWith, seededRng } from './helpers';
+import type { ProgramDraw, Race } from '../types';
 
 /** 10-dog graded division, deterministic WAVEs 20..11. */
 function setup10() {
@@ -14,6 +15,60 @@ function setup10() {
   const p1 = drawFirstProgram(division, map, rng);
   return { entries, division, map, rng, p1 };
 }
+
+/** A finished race with every dog placed, built by hand so a specific set of
+ *  point values can be arranged across programs. */
+function mkRace(program: 1 | 2 | 3, raceNo: number, isHP: boolean, places: Record<string, number>): Race {
+  return {
+    id: `r${program}-${raceNo}`,
+    divisionId: 'div1',
+    program,
+    raceNo,
+    isHP,
+    slots: Object.keys(places).map((entryId, i) => ({ entryId, post: i + 1 })),
+    outcomes: Object.fromEntries(
+      Object.entries(places).map(([id, place]) => [id, { kind: 'placed' as const, place }])
+    ),
+    finished: true,
+    rerun: false,
+    splitAllPoints: false,
+    note: '',
+  };
+}
+
+const mkDraw = (program: 1 | 2 | 3, races: Race[]): ProgramDraw => ({
+  program,
+  divisionId: 'div1',
+  races,
+  tieDecisions: [],
+  locked: true,
+});
+
+describe('point totals (4.3.5)', () => {
+  it('two dogs tied on 11 2/3 read as tied even though the shares land in different programs', () => {
+    // 'a' takes a 3-way dead heat for 2nd in program 1 -- (3+2+0)/3 = 1.666...,
+    // which has no exact binary form -- then 6 and 4. 'b' takes the same three
+    // values in the reverse order. They are mathematically level on 11 2/3, but
+    // the raw sums differ by ~2e-15, and that epsilon decides whether they split
+    // an award value (5.2) and share a rotation group (4.3.4.1).
+    const division = mkDivision(['a', 'b', 'f1', 'f2', 'f3', 'g1', 'g2', 'g3']);
+    const draws = [
+      mkDraw(1, [
+        mkRace(1, 1, false, { f1: 1, a: 2, f2: 2, f3: 2 }), // a: (3+2+0)/3
+        mkRace(1, 2, true, { g1: 1, b: 2, g2: 3, g3: 4 }), // b: 6
+      ]),
+      mkDraw(2, [mkRace(2, 1, true, { a: 1, b: 2, g1: 3, g2: 4 })]), // a: 6, b: 4
+      mkDraw(3, [
+        mkRace(3, 1, true, { g1: 1, g2: 2, a: 3, g3: 4 }), // a: 4
+        mkRace(3, 2, false, { f1: 1, b: 2, f2: 2, f3: 2 }), // b: (3+2+0)/3
+      ]),
+    ];
+
+    const totals = totalsThrough(division, draws, 3);
+    expect(totals.a).toBe(totals.b);
+    expect(totals.a).toBe(11.667);
+  });
+});
 
 describe('rotation by points (4.3.4)', () => {
   it('regroups purely by points, ignoring grades', () => {
@@ -89,6 +144,30 @@ describe('rotation by points (4.3.4)', () => {
     // 8 dogs -> two 4-dog races (Figure 8.1)
     expect(p2.races.map((r) => r.slots.length)).toEqual([4, 4]);
     expect(p2.races[1].isHP).toBe(true);
+  });
+
+  it('logs one tie decision per adjacent pair, never a duplicate or a stranger', () => {
+    const { division, map, p1 } = setup10();
+    finishRace(raceWith(p1, 'd7'), ['d7', 'd8', 'd9']);
+    finishRace(raceWith(p1, 'd4'), ['d4', 'd5', 'd6']);
+    finishRace(raceWith(p1, 'd0'), ['d0', 'd1', 'd2', 'd3']);
+
+    const totals = totalsThrough(division, [p1], 1);
+    const { order, decisions } = rotationOrder(division, [p1], map, 1);
+
+    // This list is the protest trail, so every line has to be about two dogs
+    // the secretary can see next to each other, tied, in the finished order.
+    for (const d of decisions) {
+      const [above, below] = d.entryIds;
+      expect(order.indexOf(below)).toBe(order.indexOf(above) + 1);
+      expect(totals[above]).toBe(totals[below]);
+    }
+    // Each pair once, and never more lines than there are gaps in the order.
+    const pairs = decisions.map((d) => d.entryIds.join('>'));
+    expect(new Set(pairs).size).toBe(pairs.length);
+    expect(decisions.length).toBeLessThanOrEqual(order.length - 1);
+    // The real ties here: d4/d7 on 5, d3/d5 and d5/d8 on 3, d6/d9 on 2.
+    expect(decisions).toHaveLength(4);
   });
 
   it('fills races from the High Score race down per Figure 8.1', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { pointsForPlace, scoreRace } from '../points';
+import { pointsForPlace, roundPoints, scoreRace } from '../points';
 import type { Race } from '../types';
 
 const mkRace = (over: Partial<Race>): Race => ({
@@ -15,6 +15,24 @@ const mkRace = (over: Partial<Race>): Race => ({
   splitAllPoints: false,
   note: '',
   ...over,
+});
+
+describe('roundPoints', () => {
+  it('makes mathematically equal totals compare equal despite float error', () => {
+    const share = (3 + 2 + 0) / 3; // 3-way dead heat for 2nd, non-HP: 1.666...
+    // Same three values, different programs -> different addition order. Float
+    // addition is not associative, so the raw sums are not equal.
+    expect((share + 6) + 4).not.toBe((6 + 4) + share);
+    expect(roundPoints((share + 6) + 4)).toBe(roundPoints((6 + 4) + share));
+  });
+
+  it('leaves ordinary totals untouched and keeps real gaps apart', () => {
+    expect(roundPoints(11)).toBe(11);
+    expect(roundPoints(2.25)).toBe(2.25);
+    expect(roundPoints((5 + 3 + 2) / 3)).toBe(3.333);
+    // The smallest gap real point values can produce is 1/6 -- far above 0.001.
+    expect(roundPoints(3.333)).not.toBe(roundPoints(3.5));
+  });
 });
 
 describe('validatePlaces / splitAllPoints', () => {

@@ -93,10 +93,16 @@ npm run build
   worked examples); ordinary ineligible dogs do. Dogs tied on race points split award values.
 - A leftover dog's MRC award corresponds to its actual placement among the whole division.
 - Dogs running alone: single non-HP race, no championship points, WAVE unchanged (4.2.2.4).
+- **Beating a scratched dog counts** as defeating a dog for Chapter V eligibility. A dog that
+  finished ahead of a no-show (ABS) has defeated someone; only a DQ is scored as if the dog had
+  never run (6.1.3).
+- Point totals are held to **three decimals**. A three-way dead heat splits 5 points as 1.666…,
+  which no computer stores exactly; without rounding, two dogs who are level on paper can differ
+  by a fifteenth decimal place and fail to split an award value they are both entitled to.
 
 ## Tests
 
-`npm test` — 49 unit tests covering Figure 8.1 (all rows), points tables 8.2A/8.2B, dead-heat
+`npm test` — 59 unit tests covering Figure 8.1 (all rows), points tables 8.2A/8.2B, dead-heat
 splitting, DQ redistribution, WAVE formulas, rotation tie chain, and every worked example in the
 rule book (TRC examples 5.7 #1–2, the eligible-entry example in 5.2), plus a report-export test
 and a bundled-sample-meet test, both run against full meets captured from the real UI.

@@ -97,6 +97,24 @@ export function scoreRace(race: Race, ungraded: boolean): Record<string, number>
   return out;
 }
 
+/**
+ * Round an accumulated point total to a fixed precision.
+ *
+ * A dead heat (or a 6.5.1(b) split) among three dogs shares 5 points as
+ * 1.666..., which has no exact binary representation. Two dogs that are
+ * mathematically tied can then differ by ~1e-15 depending on which program the
+ * split landed in, because floating-point addition is not associative. That
+ * epsilon is invisible but decides real awards: `===` on the totals is what
+ * makes tied dogs split an award value (5.2/5.3) and share a rotation group
+ * (4.3.4.1). Rounding here — every total passes through this — keeps the
+ * comparison honest and keeps 1.667 out of the standings table as
+ * 1.6666666666666667. Real point gaps are never smaller than 1/6, so three
+ * decimals cannot merge two genuinely different totals.
+ */
+export function roundPoints(total: number): number {
+  return Math.round(total * 1000) / 1000;
+}
+
 /** Effective placement used for tie-breaking: lower is better; null = unplaced. */
 export function effectivePlace(outcome: RaceOutcome | undefined): number | null {
   return outcome && outcome.kind === 'placed' ? outcome.place : null;

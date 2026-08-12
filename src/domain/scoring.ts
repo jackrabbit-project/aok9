@@ -1,7 +1,7 @@
 // Final meet scoring (4.3.5): total points, final placements with tie rules,
 // completion flags used by Chapter V championship point calculations.
 
-import { scoreRace, effectivePlace } from './points';
+import { scoreRace, effectivePlace, roundPoints } from './points';
 import { raceOf, totalsThrough } from './rotation';
 import type { Division, Entry, ProgramDraw, Standing } from './types';
 
@@ -111,5 +111,6 @@ export function meetScores(division: Division, draws: ProgramDraw[]): Record<str
       for (const [id, p] of Object.entries(pts)) totals[id] = (totals[id] ?? 0) + p;
     }
   }
+  for (const id of Object.keys(totals)) totals[id] = roundPoints(totals[id]);
   return totals;
 }

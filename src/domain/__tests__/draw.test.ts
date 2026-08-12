@@ -46,6 +46,18 @@ describe('first program draw (4.3.3)', () => {
     }
   });
 
+  it('a dog with no one to run against gets a single non-HP race (4.2.2.4)', () => {
+    // One dog is outside Figure 8.1 entirely. It still needs a race so the meet
+    // can be completed, but it cannot be a High Point race -- nobody was beaten.
+    const solo = mkEntry({ id: 'solo', callName: 'Solo', bwave: 10 });
+    const division = mkDivision(['solo']);
+    const draw = drawFirstProgram(division, entryMap([solo]), seededRng(4));
+    expect(draw.races).toHaveLength(1);
+    expect(draw.races[0].slots.map((s) => s.entryId)).toEqual(['solo']);
+    expect(draw.races[0].isHP).toBe(false);
+    expect(draw.races[0].slots[0].post).toBe(1);
+  });
+
   it('ungraded division uses random order but the same chart split', () => {
     const entries = Array.from({ length: 7 }, (_, i) =>
       mkEntry({ id: `d${i}`, callName: `Dog${i}`, fte: true })
