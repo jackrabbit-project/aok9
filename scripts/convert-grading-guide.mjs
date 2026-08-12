@@ -2,7 +2,7 @@
 // Usage: node scripts/convert-grading-guide.mjs [path-to-xlsx]
 import * as XLSX from 'xlsx';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -98,11 +98,34 @@ for (let i = 5; i < rows.length; i++) {
   });
 }
 
-const out = {
-  source: src.split('\\').pop(),
-  convertedAt: new Date().toISOString(),
-  dogs,
-};
+// Setup shows this to the secretary, so it has to be the file's name and not
+// wherever it happened to be sitting. Splitting on backslash alone returned the
+// whole path on Linux, which is where the refresh workflow runs.
+const source = basename(src);
+const target = join(root, 'src', 'data', 'grading-guide.json');
+
+/**
+ * Converting the same guide twice is a no-op.
+ *
+ * A fresh timestamp on every run made this file differ even when not one dog
+ * had changed, which would have the weekly refresh open a pull request every
+ * Monday whose entire content was a new date. Keeping the old stamp when the
+ * data is identical means "the file changed" and "the guide changed" are the
+ * same statement, which is what the workflow tests.
+ */
+function convertedAt() {
+  const now = new Date().toISOString();
+  try {
+    const previous = JSON.parse(readFileSync(target, 'utf8'));
+    const unchanged =
+      previous.source === source && JSON.stringify(previous.dogs) === JSON.stringify(dogs);
+    return unchanged ? previous.convertedAt ?? now : now;
+  } catch {
+    return now; // no previous conversion to compare against
+  }
+}
+
+const out = { source, convertedAt: convertedAt(), dogs };
 mkdirSync(join(root, 'src', 'data'), { recursive: true });
-writeFileSync(join(root, 'src', 'data', 'grading-guide.json'), JSON.stringify(out));
+writeFileSync(target, JSON.stringify(out));
 console.log(`Wrote ${dogs.length} dogs from ${new Set(dogs.map((d) => d.breed)).size} breeds.`);

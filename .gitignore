@@ -5,5 +5,9 @@ node_modules/
 # Build artifacts
 tsconfig.tsbuildinfo
 
+# Downloaded copies of the published Grading Guide (npm run refresh-guide).
+# The converted JSON in src/data is what ships; the xlsx is just the input.
+.guide-cache/
+
 # Local editor/tooling config
 .claude/
