@@ -227,7 +227,12 @@ tr.scratched td { opacity: 0.45; text-decoration: line-through; }
 .post-cell { width: 36px; }
 .outcome-cell { display: flex; gap: 3px; flex-wrap: wrap; }
 .outcome-cell .pl { background: #e8edf2; color: var(--ink); min-width: 30px; }
-.outcome-cell .pl.on { background: var(--accent-2); color: #fff; }
+/* Navy, not the accent green: these chips are numbered 1..4 and sit inches
+   from the jacket chips, which are also numbered 1..4 and include a green 4.
+   A green "3" here read as a jacket. Navy is what .title-chip.on already uses
+   for a chosen value, so selection stays one colour across the app and none of
+   the four jacket colours is spent on meaning something else. */
+.outcome-cell .pl.on { background: var(--primary); color: #fff; }
 .outcome-cell .st { background: #f3e8e8; color: #7a2e2e; }
 .outcome-cell .st.on { background: var(--danger); color: #fff; }
 .pts-cell { font-weight: 700; white-space: nowrap; }
