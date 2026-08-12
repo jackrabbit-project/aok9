@@ -110,7 +110,8 @@ is how you get a demo that disagrees with the rules it is demonstrating.
 
 ## Rule interpretations encoded
 
-- **Figure 8.1 is encoded verbatim**, including its odd rows (9 dogs → 4/2/3; 5 dogs → 3-dog HP).
+- **Figure 8.1 is encoded verbatim**, including the rows that do not divide evenly and would be
+  wrong if the split were worked out arithmetically (9 dogs → 4/2/3; 5 dogs → a 3-dog HP race).
 - Ungraded trigger is **¾ FTE** per rule 4.4 (a 2/3 option exists in Setup).
 - Award slots: titled champions above the line don't consume High-Score slots (per the 5.2/5.7
   worked examples); ordinary ineligible dogs do. Dogs tied on race points split award values.

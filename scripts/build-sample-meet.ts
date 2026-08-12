@@ -62,8 +62,9 @@ interface Pick {
  */
 const ROSTER: { division: string; type: 'breed' | 'mixed'; dogs: Pick[]; leftovers?: Pick[] }[] = [
   {
-    // Nine dogs is Figure 8.1's odd row: races of 3, 2 and 4 rather than an
-    // even split, which is exactly the case worth having in a demo.
+    // Nine dogs is one of the rows of Figure 8.1 that does not divide evenly:
+    // races of 3, 2 and 4, not 3/3/3. Worth having in a demo precisely because
+    // it is the shape somebody would get wrong working it out for themselves.
     division: 'WHIPPET',
     type: 'breed',
     dogs: [

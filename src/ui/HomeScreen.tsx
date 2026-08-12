@@ -166,9 +166,9 @@ export function HomeScreen() {
           <li>
             <b>Example meet 2</b> — 29 dogs in 6 divisions: Whippets, Border Collies, Salukis,
             Azawakhs and Taigans, with a lone Sloughi running as a leftover among the Azawakhs and
-            the herding breeds in mixed. Between them the divisions show a nine-dog draw on Figure
-            8.1's odd row, dogs tied on points splitting an award, and a champion coming off the
-            eligible entry.
+            the herding breeds in mixed. Between them they cover the cases worth checking: nine
+            dogs splitting into races of 3, 2 and 4 rather than evenly, two dogs tied on points
+            sharing an award between them, and a champion who wins coming off the eligible entry.
           </li>
         </ul>
         <div className="btn-row">

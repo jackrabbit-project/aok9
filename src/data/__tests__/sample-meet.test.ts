@@ -125,7 +125,7 @@ describe('example meet 2 (2026-A02)', () => {
     ]);
   });
 
-  it("runs a nine-dog division on Figure 8.1's odd row", () => {
+  it('splits a nine-dog division into races of 3, 2 and 4', () => {
     const whippets = divisionNamed(largeMeet, 'WHIPPET');
     const p1 = largeMeet.draws.find((d) => d.divisionId === whippets.id && d.program === 1)!;
     // 9 dogs is 3 / 2 / 4 in run order, not an even split (chart.ts).
