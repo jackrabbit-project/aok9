@@ -75,12 +75,8 @@ const ROSTER: { division: string; type: 'breed' | 'mixed'; dogs: Pick[]; leftove
       { reg: 'WH-235', sex: 'M' }, // Alias    15.0
       { reg: 'WH-51', sex: 'M' }, //  Axl      14.7
       { reg: 'WH-209', sex: 'F' }, // Baja     14.6
+      { reg: 'WH-62', sex: 'F' }, //  Baba     13.8
     ],
-    // The guide lists two Sloughis, so one entering alone has no division of
-    // his own and runs with the Whippets as a leftover (4.1.7): he is judged on
-    // his Mixed WAVE rather than his Breed WAVE, races against the whole field,
-    // and can take mixed points only.
-    leftovers: [{ reg: 'SL-1', sex: 'M' }], // Asim al-Rhys, Sloughi, M 18.5
   },
   {
     division: 'BORDER COLLIE',
@@ -126,6 +122,13 @@ const ROSTER: { division: string; type: 'breed' | 'mixed'; dogs: Pick[]; leftove
       { reg: 'AZ-2', sex: 'F' }, // Amidi  16.0
       { reg: 'AZ-7', sex: 'F' }, // Birdie 14.0
     ],
+    // The guide lists two Sloughis, so one entering alone has no division of
+    // his own (4.1.7). Where a leftover is placed is the secretary's judgement
+    // on size, speed and running style, and a Sloughi belongs with the Azawakhs
+    // on all three — not with the Whippets, who are a different dog entirely.
+    // He is judged on his Mixed WAVE here rather than his Breed WAVE, races the
+    // whole field, and can take mixed points only.
+    leftovers: [{ reg: 'SL-1', sex: 'M' }], // Asim al-Rhys, Sloughi, M 18.5
   },
   {
     // Where the non-sighthounds end up. Two Belgian Shepherds would be enough
@@ -199,7 +202,7 @@ const divisions: Division[] = ROSTER.map((d) => ({
 // Fixed so the demo is the same meet every time it is rebuilt. Override with
 // SAMPLE_SEED to reroll it — the results are meant to be a plausible meet, and
 // which plausible meet is a choice, so it is worth being able to look at a few.
-const SEED = Number(process.env.SAMPLE_SEED ?? 1234);
+const SEED = Number(process.env.SAMPLE_SEED ?? 7);
 const rng = seededRng(SEED);
 
 /** Finish a race: fastest first by form, with any scripted incident applied. */

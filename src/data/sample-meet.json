@@ -300,39 +300,43 @@
       "preScratched": false
     },
     {
-      "id": "entry-sl-1",
-      "regNo": "SL-1",
-      "callName": "Asim al-Rhys",
-      "registeredName": "Almaboubin Asim al-Rhys",
-      "breed": "SLOUGHI",
-      "sex": "M",
-      "owner": "Pierce",
+      "id": "entry-wh-62",
+      "regNo": "WH-62",
+      "callName": "Baba",
+      "registeredName": "Take Five Brigas Nunca Mais",
+      "breed": "WHIPPET",
+      "sex": "F",
+      "owner": "Harrington",
       "fte": false,
-      "bwave": null,
-      "mwave": 18.47058824,
+      "bwave": 13.81818182,
+      "mwave": null,
       "fteGrade": "A",
       "hasBRC": false,
       "hasMRC": false,
       "hasSBRC": false,
       "hasSMRC": false,
       "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 1,
-        "nmrc": 1,
+        "brc": 3.5,
+        "nbrc": 3.5,
+        "mrc": 0,
+        "nmrc": 0,
         "trc": 1
       },
-      "guideBreedMeets": [],
-      "guideMixedMeets": [
+      "guideBreedMeets": [
         {
-          "meet": "2025-S68",
+          "meet": "2023-S50",
           "score": 16
         },
         {
-          "meet": "2022-S58",
-          "score": 22
+          "meet": "2022-S59",
+          "score": 12
+        },
+        {
+          "meet": "Sun Nov 07 2021 00:00:00 GMT-0600 (Mountain Daylight Time)",
+          "score": 12
         }
       ],
+      "guideMixedMeets": [],
       "preScratched": false
     },
     {
@@ -941,6 +945,42 @@
       "preScratched": false
     },
     {
+      "id": "entry-sl-1",
+      "regNo": "SL-1",
+      "callName": "Asim al-Rhys",
+      "registeredName": "Almaboubin Asim al-Rhys",
+      "breed": "SLOUGHI",
+      "sex": "M",
+      "owner": "Pierce",
+      "fte": false,
+      "bwave": null,
+      "mwave": 18.47058824,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 0,
+        "nbrc": 0,
+        "mrc": 1,
+        "nmrc": 1,
+        "trc": 1
+      },
+      "guideBreedMeets": [],
+      "guideMixedMeets": [
+        {
+          "meet": "2025-S68",
+          "score": 16
+        },
+        {
+          "meet": "2022-S58",
+          "score": 22
+        }
+      ],
+      "preScratched": false
+    },
+    {
       "id": "entry-bsd-10",
       "regNo": "BSD-10",
       "callName": "Baloo",
@@ -1120,11 +1160,9 @@
         "entry-wh-235",
         "entry-wh-51",
         "entry-wh-209",
-        "entry-sl-1"
+        "entry-wh-62"
       ],
-      "leftoverIds": [
-        "entry-sl-1"
-      ],
+      "leftoverIds": [],
       "ungraded": false
     },
     {
@@ -1173,9 +1211,12 @@
       "entryIds": [
         "entry-az-5",
         "entry-az-2",
-        "entry-az-7"
+        "entry-az-7",
+        "entry-sl-1"
       ],
-      "leftoverIds": [],
+      "leftoverIds": [
+        "entry-sl-1"
+      ],
       "ungraded": false
     },
     {
@@ -1204,16 +1245,16 @@
           "isHP": false,
           "slots": [
             {
-              "entryId": "entry-wh-235",
-              "post": 2
-            },
-            {
               "entryId": "entry-wh-51",
               "post": 3
             },
             {
               "entryId": "entry-wh-209",
               "post": 1
+            },
+            {
+              "entryId": "entry-wh-62",
+              "post": 2
             }
           ],
           "outcomes": {
@@ -1224,7 +1265,7 @@
               "kind": "placed",
               "place": 1
             },
-            "entry-wh-235": {
+            "entry-wh-62": {
               "kind": "placed",
               "place": 2
             }
@@ -1242,16 +1283,16 @@
           "isHP": false,
           "slots": [
             {
-              "entryId": "entry-wh-179",
+              "entryId": "entry-wh-35",
               "post": 1
             },
             {
-              "entryId": "entry-wh-35",
+              "entryId": "entry-wh-235",
               "post": 2
             }
           ],
           "outcomes": {
-            "entry-wh-179": {
+            "entry-wh-235": {
               "kind": "placed",
               "place": 1
             },
@@ -1274,23 +1315,23 @@
           "slots": [
             {
               "entryId": "entry-wh-251",
-              "post": 4
+              "post": 3
             },
             {
               "entryId": "entry-wh-288",
               "post": 2
             },
             {
-              "entryId": "entry-sl-1",
-              "post": 3
+              "entryId": "entry-wh-128",
+              "post": 4
             },
             {
-              "entryId": "entry-wh-128",
+              "entryId": "entry-wh-179",
               "post": 1
             }
           ],
           "outcomes": {
-            "entry-sl-1": {
+            "entry-wh-128": {
               "kind": "placed",
               "place": 1
             },
@@ -1302,7 +1343,7 @@
               "kind": "placed",
               "place": 3
             },
-            "entry-wh-128": {
+            "entry-wh-179": {
               "kind": "placed",
               "place": 4
             }
@@ -1329,19 +1370,19 @@
           "slots": [
             {
               "entryId": "entry-bc-17",
-              "post": 2
+              "post": 1
             },
             {
               "entryId": "entry-bc-9",
-              "post": 1
+              "post": 2
             }
           ],
           "outcomes": {
-            "entry-bc-17": {
+            "entry-bc-9": {
               "kind": "placed",
               "place": 1
             },
-            "entry-bc-9": {
+            "entry-bc-17": {
               "kind": "placed",
               "place": 2
             }
@@ -1364,15 +1405,15 @@
             },
             {
               "entryId": "entry-bc-11",
-              "post": 1
-            },
-            {
-              "entryId": "entry-bc-38",
               "post": 4
             },
             {
-              "entryId": "entry-bc-20",
+              "entryId": "entry-bc-38",
               "post": 2
+            },
+            {
+              "entryId": "entry-bc-20",
+              "post": 1
             }
           ],
           "outcomes": {
@@ -1415,15 +1456,15 @@
           "slots": [
             {
               "entryId": "entry-taig-1",
-              "post": 3
+              "post": 2
             },
             {
               "entryId": "entry-taig-2",
-              "post": 1
+              "post": 3
             },
             {
               "entryId": "entry-taig-4",
-              "post": 2
+              "post": 1
             }
           ],
           "outcomes": {
@@ -1462,11 +1503,11 @@
           "slots": [
             {
               "entryId": "entry-sa-23",
-              "post": 2
+              "post": 1
             },
             {
               "entryId": "entry-sa-4",
-              "post": 1
+              "post": 2
             },
             {
               "entryId": "entry-sa-11",
@@ -1512,8 +1553,12 @@
               "post": 1
             },
             {
-              "entryId": "entry-az-2",
+              "entryId": "entry-sl-1",
               "post": 2
+            },
+            {
+              "entryId": "entry-az-2",
+              "post": 4
             },
             {
               "entryId": "entry-az-7",
@@ -1525,13 +1570,17 @@
               "kind": "placed",
               "place": 1
             },
-            "entry-az-2": {
+            "entry-sl-1": {
               "kind": "placed",
               "place": 2
             },
-            "entry-az-7": {
+            "entry-az-2": {
               "kind": "placed",
               "place": 3
+            },
+            "entry-az-7": {
+              "kind": "placed",
+              "place": 4
             }
           },
           "finished": true,
@@ -1556,7 +1605,7 @@
           "slots": [
             {
               "entryId": "entry-bsd-10",
-              "post": 1
+              "post": 2
             },
             {
               "entryId": "entry-bsd-16",
@@ -1564,7 +1613,7 @@
             },
             {
               "entryId": "entry-ds-2",
-              "post": 2
+              "post": 1
             }
           ],
           "outcomes": {
@@ -1606,25 +1655,26 @@
               "post": 2
             },
             {
-              "entryId": "entry-wh-235",
-              "post": 1
+              "entryId": "entry-wh-62",
+              "post": 3
             },
             {
               "entryId": "entry-wh-209",
-              "post": 3
+              "post": 1
             }
           ],
           "outcomes": {
-            "entry-wh-235": {
-              "kind": "DQ"
-            },
-            "entry-wh-35": {
+            "entry-wh-209": {
               "kind": "placed",
               "place": 1
             },
-            "entry-wh-209": {
+            "entry-wh-35": {
               "kind": "placed",
               "place": 2
+            },
+            "entry-wh-62": {
+              "kind": "placed",
+              "place": 3
             }
           },
           "finished": true,
@@ -1641,11 +1691,11 @@
           "slots": [
             {
               "entryId": "entry-wh-288",
-              "post": 2
+              "post": 1
             },
             {
-              "entryId": "entry-wh-128",
-              "post": 1
+              "entryId": "entry-wh-179",
+              "post": 2
             }
           ],
           "outcomes": {
@@ -1653,7 +1703,7 @@
               "kind": "placed",
               "place": 1
             },
-            "entry-wh-128": {
+            "entry-wh-179": {
               "kind": "placed",
               "place": 2
             }
@@ -1671,38 +1721,37 @@
           "isHP": true,
           "slots": [
             {
-              "entryId": "entry-sl-1",
-              "post": 3
+              "entryId": "entry-wh-128",
+              "post": 1
             },
             {
               "entryId": "entry-wh-251",
-              "post": 2
-            },
-            {
-              "entryId": "entry-wh-179",
               "post": 4
             },
             {
+              "entryId": "entry-wh-235",
+              "post": 3
+            },
+            {
               "entryId": "entry-wh-51",
-              "post": 1
+              "post": 2
             }
           ],
           "outcomes": {
-            "entry-sl-1": {
+            "entry-wh-235": {
+              "kind": "DQ"
+            },
+            "entry-wh-251": {
               "kind": "placed",
               "place": 1
             },
-            "entry-wh-251": {
+            "entry-wh-128": {
               "kind": "placed",
               "place": 2
             },
             "entry-wh-51": {
               "kind": "placed",
               "place": 3
-            },
-            "entry-wh-179": {
-              "kind": "placed",
-              "place": 4
             }
           },
           "finished": true,
@@ -1714,24 +1763,24 @@
       "tieDecisions": [
         {
           "entryIds": [
-            "entry-wh-179",
+            "entry-wh-235",
             "entry-wh-51"
           ],
-          "explanation": "Babs placed above Axl (5 pts each): ran in the higher race of program 1 (race 2)."
+          "explanation": "Alias placed above Axl (5 pts each): ran in the higher race of program 1 (race 2)."
         },
         {
           "entryIds": [
-            "entry-wh-128",
+            "entry-wh-179",
             "entry-wh-35"
           ],
-          "explanation": "Baker placed above Ailia (3 pts each): ran in the higher race of program 1 (race 3)."
+          "explanation": "Babs placed above Ailia (3 pts each): ran in the higher race of program 1 (race 3)."
         },
         {
           "entryIds": [
             "entry-wh-35",
-            "entry-wh-235"
+            "entry-wh-62"
           ],
-          "explanation": "Ailia placed above Alias (3 pts each): ran in the higher race of program 1 (race 2)."
+          "explanation": "Ailia placed above Baba (3 pts each): ran in the higher race of program 1 (race 2)."
         }
       ],
       "locked": true
@@ -1752,18 +1801,17 @@
               "post": 1
             },
             {
-              "entryId": "entry-bc-9",
+              "entryId": "entry-bc-17",
               "post": 2
             }
           ],
           "outcomes": {
-            "entry-bc-9": {
-              "kind": "placed",
-              "place": 1
+            "entry-bc-17": {
+              "kind": "ABS"
             },
             "entry-bc-20": {
               "kind": "placed",
-              "place": 2
+              "place": 1
             }
           },
           "finished": true,
@@ -1780,36 +1828,37 @@
           "slots": [
             {
               "entryId": "entry-bc-11",
-              "post": 4
-            },
-            {
-              "entryId": "entry-bc-10",
-              "post": 3
-            },
-            {
-              "entryId": "entry-bc-17",
               "post": 1
             },
             {
-              "entryId": "entry-bc-38",
+              "entryId": "entry-bc-10",
               "post": 2
+            },
+            {
+              "entryId": "entry-bc-9",
+              "post": 4
+            },
+            {
+              "entryId": "entry-bc-38",
+              "post": 3
             }
           ],
           "outcomes": {
-            "entry-bc-17": {
-              "kind": "ABS"
-            },
-            "entry-bc-10": {
+            "entry-bc-11": {
               "kind": "placed",
               "place": 1
             },
-            "entry-bc-11": {
+            "entry-bc-10": {
               "kind": "placed",
               "place": 2
             },
             "entry-bc-38": {
               "kind": "placed",
               "place": 3
+            },
+            "entry-bc-9": {
+              "kind": "placed",
+              "place": 4
             }
           },
           "finished": true,
@@ -1822,9 +1871,9 @@
         {
           "entryIds": [
             "entry-bc-20",
-            "entry-bc-9"
+            "entry-bc-17"
           ],
-          "explanation": "Critter placed above Akira (3 pts each): ran in the higher race of program 1 (race 2)."
+          "explanation": "Critter placed above Chili (3 pts each): ran in the higher race of program 1 (race 2)."
         }
       ],
       "locked": true
@@ -1893,11 +1942,11 @@
             },
             {
               "entryId": "entry-sa-23",
-              "post": 3
+              "post": 2
             },
             {
               "entryId": "entry-sa-11",
-              "post": 2
+              "post": 3
             }
           ],
           "outcomes": {
@@ -1936,15 +1985,19 @@
           "slots": [
             {
               "entryId": "entry-az-5",
-              "post": 2
-            },
-            {
-              "entryId": "entry-az-2",
               "post": 1
             },
             {
-              "entryId": "entry-az-7",
+              "entryId": "entry-sl-1",
+              "post": 4
+            },
+            {
+              "entryId": "entry-az-2",
               "post": 3
+            },
+            {
+              "entryId": "entry-az-7",
+              "post": 2
             }
           ],
           "outcomes": {
@@ -1952,13 +2005,17 @@
               "kind": "placed",
               "place": 1
             },
-            "entry-az-7": {
+            "entry-sl-1": {
               "kind": "placed",
               "place": 2
             },
-            "entry-az-2": {
+            "entry-az-7": {
               "kind": "placed",
               "place": 3
+            },
+            "entry-az-2": {
+              "kind": "placed",
+              "place": 4
             }
           },
           "finished": true,
@@ -1983,15 +2040,15 @@
           "slots": [
             {
               "entryId": "entry-bsd-10",
-              "post": 2
-            },
-            {
-              "entryId": "entry-bsd-16",
               "post": 1
             },
             {
-              "entryId": "entry-ds-2",
+              "entryId": "entry-bsd-16",
               "post": 3
+            },
+            {
+              "entryId": "entry-ds-2",
+              "post": 2
             }
           ],
           "outcomes": {
@@ -2029,36 +2086,36 @@
           "isHP": false,
           "slots": [
             {
-              "entryId": "entry-wh-35",
+              "entryId": "entry-wh-179",
               "post": 1
             },
             {
-              "entryId": "entry-wh-179",
-              "post": 4
-            },
-            {
-              "entryId": "entry-wh-128",
+              "entryId": "entry-wh-35",
               "post": 2
             },
             {
               "entryId": "entry-wh-209",
               "post": 3
+            },
+            {
+              "entryId": "entry-wh-62",
+              "post": 4
             }
           ],
           "outcomes": {
-            "entry-wh-128": {
+            "entry-wh-35": {
               "kind": "placed",
               "place": 1
             },
-            "entry-wh-35": {
+            "entry-wh-62": {
               "kind": "placed",
               "place": 2
             },
-            "entry-wh-179": {
+            "entry-wh-209": {
               "kind": "placed",
               "place": 3
             },
-            "entry-wh-209": {
+            "entry-wh-179": {
               "kind": "placed",
               "place": 4
             }
@@ -2076,11 +2133,11 @@
           "isHP": true,
           "slots": [
             {
-              "entryId": "entry-sl-1",
-              "post": 1
+              "entryId": "entry-wh-251",
+              "post": 2
             },
             {
-              "entryId": "entry-wh-251",
+              "entryId": "entry-wh-128",
               "post": 3
             },
             {
@@ -2089,23 +2146,23 @@
             },
             {
               "entryId": "entry-wh-51",
-              "post": 2
+              "post": 1
             }
           ],
           "outcomes": {
-            "entry-wh-288": {
+            "entry-wh-251": {
               "kind": "placed",
               "place": 1
             },
-            "entry-sl-1": {
+            "entry-wh-288": {
               "kind": "placed",
               "place": 2
             },
-            "entry-wh-251": {
+            "entry-wh-51": {
               "kind": "placed",
               "place": 3
             },
-            "entry-wh-51": {
+            "entry-wh-128": {
               "kind": "placed",
               "place": 4
             }
@@ -2119,10 +2176,24 @@
       "tieDecisions": [
         {
           "entryIds": [
-            "entry-wh-51",
+            "entry-wh-251",
+            "entry-wh-128"
+          ],
+          "explanation": "Annex placed above Baker (12 pts each): placed higher (1 vs 2) in the same race of program 2."
+        },
+        {
+          "entryIds": [
+            "entry-wh-179",
             "entry-wh-35"
           ],
-          "explanation": "Axl placed above Ailia (8 pts each): ran in the higher race of program 2 (race 3)."
+          "explanation": "Babs placed above Ailia (6 pts each): ran in the higher race of program 2 (race 2)."
+        },
+        {
+          "entryIds": [
+            "entry-wh-209",
+            "entry-wh-62"
+          ],
+          "explanation": "Baja placed above Baba (5 pts each): placed higher (1 vs 3) in the same race of program 2."
         }
       ],
       "locked": true
@@ -2143,16 +2214,16 @@
               "post": 1
             },
             {
-              "entryId": "entry-bc-20",
+              "entryId": "entry-bc-9",
               "post": 2
             }
           ],
           "outcomes": {
-            "entry-bc-38": {
+            "entry-bc-9": {
               "kind": "placed",
               "place": 1
             },
-            "entry-bc-20": {
+            "entry-bc-38": {
               "kind": "placed",
               "place": 2
             }
@@ -2170,15 +2241,15 @@
           "isHP": true,
           "slots": [
             {
-              "entryId": "entry-bc-10",
-              "post": 2
-            },
-            {
               "entryId": "entry-bc-11",
               "post": 1
             },
             {
-              "entryId": "entry-bc-9",
+              "entryId": "entry-bc-10",
+              "post": 2
+            },
+            {
+              "entryId": "entry-bc-20",
               "post": 3
             }
           ],
@@ -2191,7 +2262,7 @@
               "kind": "placed",
               "place": 2
             },
-            "entry-bc-9": {
+            "entry-bc-20": {
               "kind": "placed",
               "place": 3
             }
@@ -2205,10 +2276,10 @@
       "tieDecisions": [
         {
           "entryIds": [
-            "entry-bc-10",
-            "entry-bc-11"
+            "entry-bc-38",
+            "entry-bc-9"
           ],
-          "explanation": "Dillon placed above Atari (12 pts each): placed higher (1 vs 2) in the same race of program 2."
+          "explanation": "Creek placed above Akira (7 pts each): placed higher (3 vs 4) in the same race of program 2."
         }
       ],
       "locked": true
@@ -2226,15 +2297,15 @@
           "slots": [
             {
               "entryId": "entry-taig-1",
-              "post": 2
-            },
-            {
-              "entryId": "entry-taig-2",
               "post": 3
             },
             {
-              "entryId": "entry-taig-4",
+              "entryId": "entry-taig-2",
               "post": 1
+            },
+            {
+              "entryId": "entry-taig-4",
+              "post": 2
             }
           ],
           "outcomes": {
@@ -2273,23 +2344,23 @@
           "slots": [
             {
               "entryId": "entry-sa-4",
-              "post": 3
+              "post": 1
             },
             {
               "entryId": "entry-sa-23",
-              "post": 2
+              "post": 3
             },
             {
               "entryId": "entry-sa-11",
-              "post": 1
+              "post": 2
             }
           ],
           "outcomes": {
-            "entry-sa-4": {
+            "entry-sa-23": {
               "kind": "placed",
               "place": 1
             },
-            "entry-sa-23": {
+            "entry-sa-4": {
               "kind": "placed",
               "place": 2
             },
@@ -2320,15 +2391,19 @@
           "slots": [
             {
               "entryId": "entry-az-5",
-              "post": 2
+              "post": 3
             },
             {
-              "entryId": "entry-az-2",
-              "post": 1
+              "entryId": "entry-sl-1",
+              "post": 4
             },
             {
               "entryId": "entry-az-7",
-              "post": 3
+              "post": 1
+            },
+            {
+              "entryId": "entry-az-2",
+              "post": 2
             }
           ],
           "outcomes": {
@@ -2336,13 +2411,17 @@
               "kind": "placed",
               "place": 1
             },
-            "entry-az-2": {
+            "entry-sl-1": {
               "kind": "placed",
               "place": 2
             },
-            "entry-az-7": {
+            "entry-az-2": {
               "kind": "placed",
               "place": 3
+            },
+            "entry-az-7": {
+              "kind": "placed",
+              "place": 4
             }
           },
           "finished": true,
@@ -2351,7 +2430,15 @@
           "note": ""
         }
       ],
-      "tieDecisions": [],
+      "tieDecisions": [
+        {
+          "entryIds": [
+            "entry-az-7",
+            "entry-az-2"
+          ],
+          "explanation": "Birdie placed above Amidi (6 pts each): placed higher (3 vs 4) in the same race of program 2."
+        }
+      ],
       "locked": true
     },
     {
@@ -2367,11 +2454,11 @@
           "slots": [
             {
               "entryId": "entry-bsd-10",
-              "post": 3
+              "post": 1
             },
             {
               "entryId": "entry-bsd-16",
-              "post": 1
+              "post": 3
             },
             {
               "entryId": "entry-ds-2",

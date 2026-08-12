@@ -16,24 +16,25 @@ const state = sample as unknown as MeetState;
 const entryMap = new Map<string, Entry>(state.entries.map((e) => [e.id, e]));
 
 const divisionNamed = (name: string) => state.divisions.find((d) => d.name === name)!;
+const resultsOf = (name: string) => computeDivisionResults(divisionNamed(name), state.draws, entryMap);
 
-const resultsFor = (name: string) => {
-  const div = divisionNamed(name);
-  const res = computeDivisionResults(div, state.draws, entryMap);
+const standingsOf = (name: string) => {
+  const res = resultsOf(name);
   return res.standings.map((s) => ({
     name: entryMap.get(s.entryId)!.callName,
+    place: s.place,
     total: s.total,
     ...res.awards[s.entryId],
   }));
 };
 
-const row = (division: string, dog: string) => resultsFor(division).find((r) => r.name === dog)!;
+const row = (division: string, dog: string) => standingsOf(division).find((r) => r.name === dog)!;
 
 describe('bundled sample meet', () => {
   it('is a complete, finished meet that opens on the home page', () => {
     expect(state.phase).toBe('home');
     expect(state.info.meetId).toBe('2026-A02');
-    expect(state.entries).toHaveLength(28);
+    expect(state.entries).toHaveLength(29);
     expect(state.divisions).toHaveLength(6);
     expect([...new Set(state.draws.map((d) => d.program))].sort()).toEqual([1, 2, 3]);
     expect(state.draws.every((d) => d.races.every((r) => r.finished))).toBe(true);
@@ -47,7 +48,7 @@ describe('bundled sample meet', () => {
     expect(state.entries.some((e) => e.preScratched)).toBe(true);
   });
 
-  it('gives the sighthound breeds their own divisions and pools the rest', () => {
+  it('gives each sighthound breed its own division and pools the rest', () => {
     expect(state.divisions.filter((d) => d.type === 'breed').map((d) => d.name).sort()).toEqual([
       'AZAWAKH',
       'BORDER COLLIE',
@@ -79,48 +80,54 @@ describe('bundled sample meet', () => {
     }
   });
 
-  it('pays a leftover dog mixed points and no breed points (4.1.7 / 5.3 / 5.4)', () => {
+  it('places a leftover with dogs it can fairly race and pays it mixed points only', () => {
+    // A Sloughi entering alone has no division of his own (4.1.7). He is put
+    // with the Azawakhs — comparable size and running style — not the Whippets.
     const sloughi = state.entries.find((e) => e.breed === 'SLOUGHI')!;
-    expect(divisionNamed('WHIPPET').leftoverIds).toContain(sloughi.id);
+    expect(divisionNamed('AZAWAKH').leftoverIds).toContain(sloughi.id);
+    expect(divisionNamed('WHIPPET').leftoverIds).toEqual([]);
 
-    // He wins the division outright, which is the clearest form of the rule:
-    // the top mixed award, and nothing from the breed or national breed pools.
-    expect(row('WHIPPET', sloughi.callName)).toEqual(
-      expect.objectContaining({ mrc: 3, brc: 0, nbrc: 0 })
+    expect(row('AZAWAKH', sloughi.callName)).toEqual(
+      expect.objectContaining({ place: 2, mrc: 0.5, brc: 0, nbrc: 0 })
     );
-    // And because a leftover consumes no breed slot, the first Whippet home is
-    // still the High Score Dog for breed points despite finishing second.
-    expect(row('WHIPPET', 'Bandit-S').brc).toBe(3);
+    // A leftover consumes no breed slot, so the Azawakh behind him still takes
+    // the second breed award rather than the third.
+    expect(row('AZAWAKH', 'Amidi')).toEqual(expect.objectContaining({ place: 3, brc: 0.5 }));
   });
 
   it('splits championship points between dogs tied on race points (5.2)', () => {
-    // Axl, Baker and Ailia all finish on 11. Ailia holds a BRC, so she takes no
-    // breed points and occupies no slot; the other two share the 3rd and 4th
-    // high-score values, (0.5 + 0) / 2 = 0.25 each.
-    expect(row('WHIPPET', 'Axl')).toEqual(expect.objectContaining({ total: 11, brc: 0.25 }));
-    expect(row('WHIPPET', 'Baker')).toEqual(expect.objectContaining({ total: 11, brc: 0.25 }));
-    expect(row('WHIPPET', 'Ailia')).toEqual(expect.objectContaining({ total: 11, brc: 0 }));
-    expect(entryMap.get(state.entries.find((e) => e.callName === 'Ailia')!.id)!.hasBRC).toBe(true);
+    // Bandit-S and Baker both finish on 15 in the 2nd and 3rd high-score slots
+    // of an eligible entry of 9, so they share (1.5 + 0.5) / 2 = 1.0 each.
+    expect(row('WHIPPET', 'Bandit-S')).toEqual(expect.objectContaining({ total: 15, brc: 1 }));
+    expect(row('WHIPPET', 'Baker')).toEqual(expect.objectContaining({ total: 15, brc: 1 }));
+    // And again a division over, on a smaller chart row: 0.5 each.
+    expect(row('BORDER COLLIE', 'Critter')).toEqual(expect.objectContaining({ total: 12, brc: 0.5 }));
+    expect(row('BORDER COLLIE', 'Akira')).toEqual(expect.objectContaining({ total: 12, brc: 0.5 }));
   });
 
-  it('withholds breed points from a titled champion but not national points', () => {
-    // Atari holds a BRC. Finishing behind a non-titled dog he does not reduce
-    // the eligible entry, earns no BRC, and still takes National Breed points.
-    const atari = row('BORDER COLLIE', 'Atari');
-    expect(atari.brc).toBe(0);
-    expect(atari.nbrc).toBeGreaterThan(0);
+  it('subtracts a champion who wins from the eligible entry (5.2)', () => {
+    // Atari holds a BRC and wins the division outright. Placing above the first
+    // non-titled dog he comes off the eligible entry: 6 starters, entry of 5.
+    // He earns no breed points and still takes National Breed points, and
+    // Dillon behind him is the High Score Dog for breed purposes.
+    expect(entryMap.get(state.entries.find((e) => e.callName === 'Atari')!.id)!.hasBRC).toBe(true);
+    expect(resultsOf('BORDER COLLIE').eligibleEntryBreed).toBe(5);
+    expect(row('BORDER COLLIE', 'Atari')).toEqual(
+      expect.objectContaining({ place: 1, brc: 0, nbrc: 2 })
+    );
+    expect(row('BORDER COLLIE', 'Dillon')).toEqual(expect.objectContaining({ place: 2, brc: 2 }));
   });
 
   it('gives Turtle Racing points only to a last dog that finished (5.7)', () => {
     const trcWinners = state.divisions
-      .flatMap((d) => resultsFor(d.name))
+      .flatMap((d) => standingsOf(d.name))
       .filter((r) => r.trc > 0)
       .map((r) => r.name)
       .sort();
     expect(trcWinners).toEqual(['Ak-Tosh', 'Annie', 'Birdie']);
 
     // Dori finishes last in mixed but did not finish every race, which bars her.
-    expect(resultsFor('MIXED').at(-1)!.name).toBe('Dori');
+    expect(standingsOf('MIXED').at(-1)!.name).toBe('Dori');
     expect(row('MIXED', 'Dori').trc).toBe(0);
   });
 });
