@@ -4,7 +4,8 @@ import { downloadBackup, parseBackup } from '../io/backup';
 import { downloadReport } from '../io/reportExport';
 import { Hint, Section } from './common';
 import { InstallApp } from './InstallApp';
-import sampleMeet from '../data/sample-meet.json';
+import sampleMeet1 from '../data/sample-meet-1.json';
+import sampleMeet2 from '../data/sample-meet-2.json';
 import { ShareLinks } from './ShareLinks';
 import type { MeetState, Phase } from '../domain/types';
 
@@ -153,28 +154,47 @@ export function HomeScreen() {
 
       <Section title="Try it out">
         <p>
-          Loads a complete finished meet — 4 divisions, 19 dogs, all three programs run, including
-          a scratch, a DQ, off-course and did-not-finish results — so you can explore the draws,
+          Two complete finished meets, both with all three programs run and each including a
+          scratch, a DQ, an off-course and a did-not-finish, so you can explore the draws,
           rotations, results and export without entering anything.
         </p>
+        <ul className="sample-list">
+          <li>
+            <b>Example meet 1</b> — 19 dogs in 4 divisions: Jack Russells, Standard Poodles,
+            Taigans, and a small mixed division.
+          </li>
+          <li>
+            <b>Example meet 2</b> — 29 dogs in 6 divisions: Whippets, Border Collies, Salukis,
+            Azawakhs and Taigans, with a lone Sloughi running as a leftover among the Azawakhs and
+            the herding breeds in mixed. Between them the divisions show a nine-dog draw on Figure
+            8.1's odd row, dogs tied on points splitting an award, and a champion coming off the
+            eligible entry.
+          </li>
+        </ul>
         <div className="btn-row">
-          <button
-            className="secondary"
-            onClick={() => {
-              if (
-                hasWork(state) &&
-                !confirm(
-                  'Load the sample meet? This replaces the meet currently loaded — back it up first if you need it.'
-                )
-              ) {
-                return;
-              }
-              dispatch({ type: 'importState', state: sampleMeet as unknown as MeetState });
-              setMsg('Loaded sample meet — use Reset when you want to start your own.');
-            }}
-          >
-            Load sample meet
-          </button>
+          {[
+            { n: 1, meet: sampleMeet1 },
+            { n: 2, meet: sampleMeet2 },
+          ].map(({ n, meet }) => (
+            <button
+              key={n}
+              className="secondary"
+              onClick={() => {
+                if (
+                  hasWork(state) &&
+                  !confirm(
+                    `Load example meet ${n}? This replaces the meet currently loaded — back it up first if you need it.`
+                  )
+                ) {
+                  return;
+                }
+                dispatch({ type: 'importState', state: meet as unknown as MeetState });
+                setMsg(`Loaded example meet ${n} — use Reset when you want to start your own.`);
+              }}
+            >
+              Load example meet {n}
+            </button>
+          ))}
         </div>
       </Section>
 

@@ -282,6 +282,10 @@ input.award.overridden { border-color: var(--warn-line); background: var(--warn-
 .kv > span:nth-child(odd) { color: var(--muted); }
 .howto { margin: 8px 0; padding-left: 22px; }
 .howto li { margin: 7px 0; }
+/* What each bundled sample meet contains, so the choice between the two
+   buttons below is made before pressing one rather than after. */
+.sample-list { margin: 8px 0 12px; padding-left: 22px; font-size: 14px; }
+.sample-list li { margin: 6px 0; line-height: 1.5; }
 .muted { color: var(--muted); }
 .small { font-size: 13.5px; }
 a { color: #14548a; }

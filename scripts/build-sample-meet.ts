@@ -269,7 +269,11 @@ const meet: MeetState = {
   overrides: {},
 };
 
-const target = join(root, 'src', 'data', 'sample-meet.json');
+// Only meet 2 is generated. sample-meet-1.json is an older capture from the
+// real UI, kept as it is because it is a different shape of meet — a smaller
+// entry, 19 dogs in 4 divisions — and regenerating it would only turn it into
+// another version of this one.
+const target = join(root, 'src', 'data', 'sample-meet-2.json');
 writeFileSync(target, `${JSON.stringify(meet, null, 2)}\n`);
 
 const races = draws.reduce((n, d) => n + d.races.length, 0);
