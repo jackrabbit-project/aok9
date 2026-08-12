@@ -78,8 +78,8 @@ export function HomeScreen() {
           </div>
         ) : (
           <p>
-            No meet loaded yet. Start a new one, open a meet you saved earlier, or load the sample
-            meet below to look around first.
+            No meet loaded yet. Start a new one, open a meet you saved earlier, or load one of the
+            example meets below to look around first.
           </p>
         )}
         <div className="btn-row">
@@ -166,7 +166,7 @@ export function HomeScreen() {
           <li>
             <b>Example meet 2</b> — 29 dogs in 6 divisions: Whippets, Border Collies, Salukis,
             Azawakhs and Taigans, with a lone Sloughi running as a leftover among the Azawakhs and
-            the herding breeds in mixed. Between them they cover the cases worth checking: nine
+            the herding breeds in mixed. Its divisions cover the cases worth checking: nine
             dogs splitting into races of 3, 2 and 4 rather than evenly, two dogs tied on points
             sharing an award between them, and a champion winning his division without taking a
             breed point from it — he is left out of the eligible entry, and the dog behind him
@@ -215,21 +215,25 @@ export function HomeScreen() {
             FTE dogs manually.
           </li>
           <li>
-            <b>Divisions</b> — auto-suggest breed divisions; compose mixed divisions; mark
-            leftover dogs.
+            <b>Divisions</b> — breed divisions suggested for you, mixed divisions put together by
+            hand, and a dog with too few of its own breed placed with another as a leftover.
           </li>
           <li>
-            <b>Program 1</b> — graded WAVE draw (or random for ungraded per the ¾ rule) with
-            post-position randomization.
+            <b>Program 1</b> — dogs grouped by WAVE, or drawn at random if the division runs
+            ungraded (4.4). Posts are drawn at random too.
           </li>
           <li>
-            <b>Programs 2 &amp; 3</b> — rotate by cumulative points with the boundary-tie chain.
+            <b>Programs 2 &amp; 3</b> — regrouped by the points earned so far. Dogs level on points
+            are separated by the 4.3.4.1 chain, and each decision is written out so it can be
+            shown to anyone who asks.
           </li>
           <li>
-            <b>Results</b> — final placings, BRC/MRC/NRC/TRC point calculations.
+            <b>Results</b> — final placings, and BRC, MRC, National Breed, National Mixed and
+            Turtle Racing points, with the working shown.
           </li>
           <li>
-            <b>Export</b> — official AOK9 Race Meet Report xlsx + full JSON backup.
+            <b>Export</b> — the official AOK9 Race Meet Report to send the NRD, and a backup file
+            of the whole meet to keep.
           </li>
           </ol>
         </details>
@@ -263,7 +267,7 @@ export function HomeScreen() {
           </li>
         </ul>
         <p className="muted small">
-          Open in a new tab and need an internet connection — the meet you have loaded is not
+          Both open in a new tab and need an internet connection. The meet you have loaded is not
           affected.
         </p>
       </Section>
