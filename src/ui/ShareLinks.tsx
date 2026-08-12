@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
+import { APP_URL } from './common';
 
 // Share targets are plain links rather than the platforms' script widgets: no
 // third-party JavaScript, no tracking of visitors who never click, and nothing
-// extra for the browser to fetch. window.location keeps them correct whatever
-// domain the app is served from.
+// extra for the browser to fetch.
+//
+// They all point at APP_URL rather than the address in the bar. These used to
+// mirror wherever the app was being served from, which sounds right and is not:
+// a share posted from the older gazehound.io reseeds that address with every
+// person who clicks it, which is how an old domain outlives the decision to
+// stop using it.
 
 const TITLE = 'AOK9 Sprint Race Secretary';
 const BLURB =
@@ -30,9 +36,7 @@ const ICONS = {
 export function ShareLinks() {
   const [copied, setCopied] = useState(false);
 
-  // Read at render so it is correct on pages.dev, a custom domain or localhost.
-  const url = typeof window === 'undefined' ? '' : window.location.origin + window.location.pathname;
-  const u = encodeURIComponent(url);
+  const u = encodeURIComponent(APP_URL);
   const text = encodeURIComponent(`${TITLE} — ${BLURB}`);
 
   const targets = [
@@ -67,7 +71,7 @@ export function ShareLinks() {
         title="Copy the link to this app"
         onClick={async () => {
           try {
-            await navigator.clipboard.writeText(url);
+            await navigator.clipboard.writeText(APP_URL);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
           } catch {

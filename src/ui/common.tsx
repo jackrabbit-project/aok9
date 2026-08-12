@@ -5,6 +5,14 @@ import { JACKET_COLORS } from '../domain/types';
     neither has to import from App. */
 export const RELEASES_URL = 'https://github.com/jackrabbit-project/aok9/releases';
 
+/** Where the app lives, and the address to hand out.
+
+    Fixed rather than read from window.location. A share link exists to give
+    somebody else the address, and that is this one no matter where the person
+    sharing happens to be: the older gazehound.io, a pages.dev preview, or a
+    localhost dev server, none of which are useful to send to anyone. */
+export const APP_URL = 'https://aok9rms.gazehound.io/';
+
 export function Section({
   title,
   children,
