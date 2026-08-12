@@ -9,7 +9,7 @@ Grading Guide are on its [Documents & Forms](https://www.aok9racing.com/document
 
 ## Using it
 
-**<https://gazehound.io>** — nothing to download, no account.
+**<https://aok9rms.gazehound.io>** — nothing to download, no account.
 
 Open it once with a signal and press **Install AOK9** on the home screen. It gets its own icon and
 opens without the browser bar, like any other app. On an iPhone or iPad there is no install button,
