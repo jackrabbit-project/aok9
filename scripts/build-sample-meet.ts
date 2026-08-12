@@ -105,23 +105,39 @@ const ROSTER: { division: string; type: 'breed' | 'mixed'; dogs: Pick[]; leftove
     ],
   },
   {
-    // Salukis carry a Mixed WAVE; no Azawakh in the guide has one, so they are
-    // graded by the secretary's judgement instead — the ordinary case for a
-    // breed that mostly runs against its own. The herding breeds run here too,
-    // which is where a non-sighthound normally ends up.
+    // The guide splits Salukis in two: four carry a Breed WAVE and eight carry
+    // only a Mixed one. A breed division needs the first group.
+    division: 'SALUKI',
+    type: 'breed',
+    dogs: [
+      { reg: 'SA-23', sex: 'M' }, // Falcon 22.0
+      { reg: 'SA-4', sex: 'M' }, //  Miraj  22.0
+      { reg: 'SA-11', sex: 'F' }, // Annie  16.0
+    ],
+  },
+  {
+    // The reverse of the Salukis: eight Azawakh carry a Breed WAVE and not one
+    // has a Mixed WAVE, which is what a breed that runs against its own looks
+    // like in the guide.
+    division: 'AZAWAKH',
+    type: 'breed',
+    dogs: [
+      { reg: 'AZ-5', sex: 'M' }, // Anubi  22.0
+      { reg: 'AZ-2', sex: 'F' }, // Amidi  16.0
+      { reg: 'AZ-7', sex: 'F' }, // Birdie 14.0
+    ],
+  },
+  {
+    // Where the non-sighthounds end up. Two Belgian Shepherds would be enough
+    // for a breed division of their own under 4.1.5; keeping them with the lone
+    // Dutch Shepherd instead is the secretary's call, which the app leaves open.
     division: 'MIXED',
     type: 'mixed',
     dogs: [
-      { reg: 'SA-8', sex: 'M' }, //   Noyan  Saluki          M 22.0
-      { reg: 'SA-2', sex: 'F' }, //   Ash    Saluki          M 20.6
-      { reg: 'SA-15', sex: 'M' }, //  Hopsu  Saluki          M 20.0
       { reg: 'BSD-10', sex: 'M' }, // Baloo  Belgian Shepherd M 22.0
       { reg: 'BSD-16', sex: 'F' }, // Cassie Belgian Shepherd M 14.8
-      { reg: 'AZ-5', sex: 'M' }, //   Anubi  Azawakh, no Mixed WAVE
-      { reg: 'AZ-2', sex: 'F' }, //   Amidi  Azawakh, no Mixed WAVE
-      { reg: 'AZ-7', sex: 'F' }, //   Birdie Azawakh, no Mixed WAVE
-      { reg: 'DS-2', sex: 'F' }, //   Dori   Dutch Shepherd  M 9.9 — the only
-      //                                 one in the guide, so mixed is her meet
+      { reg: 'DS-2', sex: 'F' }, //   Dori   Dutch Shepherd   M  9.9 — the only
+      //                                  one in the guide, so mixed is her meet
     ],
   },
 ];
@@ -134,11 +150,14 @@ const PRE_SCRATCHED: Pick[] = [{ reg: 'WH-144', sex: 'F' }]; // Ace
  * A DQ or a scratch takes the dog out of every later program (6.1.4 / 4.1.3),
  * which is itself worth seeing.
  */
+// The two that end a dog's meet are put in the two largest divisions, so the
+// small breed divisions are not left racing pairs in program 3.
 const INCIDENTS: Record<string, Record<number, RaceOutcome['kind']>> = {
-  'WH-209': { 1: 'OC' }, //   Baja runs off course in program 1, carries on
-  'BC-17': { 2: 'ABS' }, //   Chili is scratched before program 2 and is done
-  'AZ-2': { 2: 'DQ' }, //     Amidi is disqualified in program 2 and is done
-  'WH-235': { 3: 'DNF' }, //  Alias fails to finish the last program
+  'WH-209': { 1: 'OC' }, //  Baja runs off course in program 1 and carries on
+  'WH-235': { 2: 'DQ' }, //  Alias is disqualified in program 2 and is done
+  'BC-17': { 2: 'ABS' }, //  Chili is scratched before program 2 and is done
+  'DS-2': { 3: 'DNF' }, //   Dori fails to finish, which also bars her from the
+  //                         Turtle Racing points her placing would have earned
 };
 
 // ------------------------------------------------------------------ building
@@ -177,7 +196,11 @@ const divisions: Division[] = ROSTER.map((d) => ({
   ungraded: false,
 }));
 
-const rng = seededRng(20260815);
+// Fixed so the demo is the same meet every time it is rebuilt. Override with
+// SAMPLE_SEED to reroll it — the results are meant to be a plausible meet, and
+// which plausible meet is a choice, so it is worth being able to look at a few.
+const SEED = Number(process.env.SAMPLE_SEED ?? 1234);
+const rng = seededRng(SEED);
 
 /** Finish a race: fastest first by form, with any scripted incident applied. */
 function runRace(race: Race, division: Division): void {
