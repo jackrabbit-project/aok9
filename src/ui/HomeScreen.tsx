@@ -168,7 +168,9 @@ export function HomeScreen() {
             Azawakhs and Taigans, with a lone Sloughi running as a leftover among the Azawakhs and
             the herding breeds in mixed. Between them they cover the cases worth checking: nine
             dogs splitting into races of 3, 2 and 4 rather than evenly, two dogs tied on points
-            sharing an award between them, and a champion who wins coming off the eligible entry.
+            sharing an award between them, and a champion winning his division without taking a
+            breed point from it — he is left out of the eligible entry, and the dog behind him
+            counts as High Score instead.
           </li>
         </ul>
         <div className="btn-row">
