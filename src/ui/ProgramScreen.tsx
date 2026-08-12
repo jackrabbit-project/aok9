@@ -1,10 +1,41 @@
 import React, { useMemo, useState } from 'react';
 import { buildDivisionDraw, buildProgramDraws, useMeet } from '../store/meetStore';
-import { totalsThrough } from '../domain/rotation';
+import { raceOf, totalsThrough } from '../domain/rotation';
 import { entryGrade } from '../domain/draw';
 import { JACKET_COLORS } from '../domain/types';
+import type { ProgramDraw } from '../domain/types';
 import { Hint, Section, Warn } from './common';
 import { RaceCard } from './RaceCard';
+
+const placeLabel = (n: number): string =>
+  n === 1 ? '1st' : n === 2 ? '2nd' : n === 3 ? '3rd' : `${n}th`;
+
+/**
+ * How a dog finished the previous program, for the race sheet.
+ *
+ * The race number is shown alongside the placement because on its own the
+ * placement does not explain the grouping: 4.3.4.1 ranks a 2nd in the higher
+ * race above a 2nd in the lower one, so "2nd (R3)" is what lets a handler or a
+ * protest check why a dog is standing where it is.
+ *
+ * Only a placing, OC or DNF can appear. A dog that was disqualified or
+ * scratched does not run again — activeForNextProgram drops both — so there is
+ * no SCR or DQ row on a program 2 or 3 sheet to label.
+ */
+function previousResult(
+  draws: ProgramDraw[],
+  divisionId: string,
+  program: number,
+  entryId: string
+): string {
+  const race = raceOf(draws, divisionId, program - 1, entryId);
+  const outcome = race && race.outcomes[entryId];
+  if (!race || !outcome) return '—';
+  const where = `R${race.raceNo}`;
+  return outcome.kind === 'placed'
+    ? `${placeLabel(outcome.place)} (${where})`
+    : `${outcome.kind} (${where})`;
+}
 
 export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
   const { state, dispatch } = useMeet();
@@ -187,6 +218,9 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
           {state.divisions.map((division) => {
             const draw = draws.find((d) => d.divisionId === division.id);
             if (!draw) return null;
+            // Constant for the division: hoisted out of the row loop, which
+            // used to recompute every dog's meet from scratch per printed line.
+            const priorTotals = totalsThrough(division, state.draws, program - 1);
             return (
               <div key={division.id} className="print-division">
                 <h3>
@@ -197,7 +231,7 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                   <table className="print-tbl" key={race.id}>
                     <thead>
                       <tr>
-                        <th colSpan={4}>
+                        <th colSpan={program === 1 ? 4 : 5}>
                           Race {race.raceNo}
                           {race.isHP ? ' — HIGH POINT' : ''}
                         </th>
@@ -206,6 +240,7 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                         <th>Post</th>
                         <th>Jacket</th>
                         <th>Dog</th>
+                        {program > 1 && <th>Program {program - 1}</th>}
                         <th>{program === 1 ? 'Grade / WAVE' : 'Points so far'}</th>
                       </tr>
                     </thead>
@@ -214,7 +249,6 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                         .sort((a, b) => (a.post ?? 9) - (b.post ?? 9))
                         .map((slot) => {
                           const e = entryMap.get(slot.entryId)!;
-                          const totals = totalsThrough(division, state.draws, program - 1);
                           return (
                             <tr key={slot.entryId}>
                               <td>{slot.post}</td>
@@ -222,6 +256,11 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                               <td>
                                 {e.callName} ({e.breed})
                               </td>
+                              {program > 1 && (
+                                <td>
+                                  {previousResult(state.draws, division.id, program, slot.entryId)}
+                                </td>
+                              )}
                               <td>
                                 {program === 1
                                   ? `${entryGrade(e, division)} / ${
@@ -229,7 +268,7 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                                         ? e.mwave
                                         : e.bwave) ?? 'FTE'
                                     }`
-                                  : `${totals[slot.entryId] ?? 0}`}
+                                  : `${priorTotals[slot.entryId] ?? 0}`}
                               </td>
                             </tr>
                           );
