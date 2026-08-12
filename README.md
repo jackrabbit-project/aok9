@@ -79,11 +79,32 @@ offline behaviour against `npm run preview`, never `npm run dev`.
 ## Updating the bundled Grading Guide
 
 ```
-npm run convert-guide -- "C:\path\to\new grading guide.xlsx"
-npm run build
+npm run refresh-guide
 ```
 
-(or just upload the xlsx in the app's Setup screen — no rebuild needed).
+Downloads the guide currently published on the AOK9 documents page and converts it. A weekly
+GitHub Action does the same and opens a pull request when the published edition has changed, so
+the bundled copy does not quietly fall behind. To convert a file you already have:
+
+```
+npm run convert-guide -- "C:\path\to\new grading guide.xlsx"
+```
+
+Either way the columns are read by position, so both check the spreadsheet's headings first and
+refuse a guide whose layout has moved rather than misreading every WAVE. Run `npm run build`
+afterwards, or just upload the xlsx in the app's Setup screen — no rebuild needed.
+
+## Rebuilding the sample meet
+
+```
+npm run build-sample
+```
+
+Regenerates `src/data/sample-meet.json` (Home → *Load sample meet*) by running the real domain
+engine over a roster of dogs taken from the bundled guide, so the demo's draws, rotations and
+championship points are the ones the app would actually produce. The roster is at the top of
+`scripts/build-sample-meet.ts`. Editing the JSON by hand is how you get a demo that disagrees with
+the rules it is demonstrating.
 
 ## Rule interpretations encoded
 

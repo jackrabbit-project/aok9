@@ -1,370 +1,24 @@
 {
   "info": {
-    "clubName": "New Mexico Sprinters",
-    "meetId": "2026-A01",
-    "date": "2026-07-20",
-    "fteThreshold": 0.6667
+    "clubName": "High Desert Racing Club",
+    "meetId": "2026-A02",
+    "date": "2026-08-15",
+    "fteThreshold": 0.75
   },
   "phase": "home",
   "entries": [
     {
-      "id": "entry-mrtgu08o-1",
-      "regNo": "JRT-45",
-      "callName": "Arthur",
-      "registeredName": "Arthur",
-      "breed": "JACK RUSSELL TERRIER",
-      "sex": "",
-      "owner": "James",
+      "id": "entry-wh-251",
+      "regNo": "WH-251",
+      "callName": "Annex",
+      "registeredName": "Vitesse's Alternate Take Control",
+      "breed": "WHIPPET",
+      "sex": "F",
+      "owner": "Gravatt",
       "fte": false,
-      "bwave": 11.17647059,
+      "bwave": 22,
       "mwave": null,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 2.5,
-        "nbrc": 2.5,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 3
-      },
-      "guideBreedMeets": [
-        {
-          "meet": "2026-S11",
-          "score": 12
-        },
-        {
-          "meet": "2025-S104",
-          "score": 11
-        },
-        {
-          "meet": "2025-S82",
-          "score": 10
-        }
-      ],
-      "guideMixedMeets": [],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgu4fp-2",
-      "regNo": "JRT-24",
-      "callName": "Bandit",
-      "registeredName": "Oak Leaf Bandit",
-      "breed": "JACK RUSSELL TERRIER",
-      "sex": "",
-      "owner": "Parolini",
-      "fte": false,
-      "bwave": 18,
-      "mwave": null,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 7,
-        "nbrc": 5,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 2
-      },
-      "guideBreedMeets": [
-        {
-          "meet": "2025-S4",
-          "score": 20
-        },
-        {
-          "meet": "2024-S16b",
-          "score": 18
-        },
-        {
-          "meet": "2023-S18",
-          "score": 14
-        }
-      ],
-      "guideMixedMeets": [],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgu9jh-4",
-      "regNo": "JRT-14",
-      "callName": "Coyote",
-      "registeredName": "J&J Coyote Jonz",
-      "breed": "JACK RUSSELL TERRIER",
-      "sex": "",
-      "owner": "Cilliers",
-      "fte": false,
-      "bwave": 0,
-      "mwave": null,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 0
-      },
-      "guideBreedMeets": [
-        {
-          "meet": "Sun Nov 11 2012 00:00:00 GMT-0700 (Mountain Standard Time)",
-          "score": 0
-        }
-      ],
-      "guideMixedMeets": [],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtguale-5",
-      "regNo": "JRT-3",
-      "callName": "Chubby",
-      "registeredName": "Chubby",
-      "breed": "JACK RUSSELL TERRIER",
-      "sex": "",
-      "owner": "Wells",
-      "fte": false,
-      "bwave": 7.294117647,
-      "mwave": null,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 0
-      },
-      "guideBreedMeets": [
-        {
-          "meet": "Sat Oct 12 2013 00:00:00 GMT-0600 (Mountain Daylight Time)",
-          "score": 11
-        },
-        {
-          "meet": "Sat Sep 15 2012 00:00:00 GMT-0600 (Mountain Daylight Time)",
-          "score": 2
-        }
-      ],
-      "guideMixedMeets": [],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgue6f-6",
-      "regNo": "JRT-4",
-      "callName": "Dazzle",
-      "registeredName": "Oakleaf Dazzle",
-      "breed": "JACK RUSSELL TERRIER",
-      "sex": "",
-      "owner": "Peevers",
-      "fte": false,
-      "bwave": 11,
-      "mwave": null,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 0
-      },
-      "guideBreedMeets": [
-        {
-          "meet": "Sat Sep 15 2012 00:00:00 GMT-0600 (Mountain Daylight Time)",
-          "score": 11
-        }
-      ],
-      "guideMixedMeets": [],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgv7h6-8",
-      "regNo": "JRT-53",
-      "callName": "Coco Puff",
-      "registeredName": "Coco Puff",
-      "breed": "JACK RUSSELL TERRIER",
-      "sex": "",
-      "owner": "Chesnut",
-      "fte": false,
-      "bwave": null,
-      "mwave": null,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 0
-      },
-      "guideBreedMeets": [],
-      "guideMixedMeets": [],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgvcky-9",
-      "regNo": "JRT-46",
-      "callName": "Eris",
-      "registeredName": "Avalanche Acres Eris",
-      "breed": "JACK RUSSELL TERRIER",
-      "sex": "",
-      "owner": "Dotson",
-      "fte": false,
-      "bwave": null,
-      "mwave": 8,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 0
-      },
-      "guideBreedMeets": [],
-      "guideMixedMeets": [
-        {
-          "meet": "2024-S7",
-          "score": 8
-        }
-      ],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgvx50-10",
-      "regNo": "SPDL-1",
-      "callName": "Dandi",
-      "registeredName": "Dandi",
-      "breed": "POODLE - STANDARD",
-      "sex": "",
-      "owner": "Peevers",
-      "fte": false,
-      "bwave": null,
-      "mwave": null,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 0
-      },
-      "guideBreedMeets": [],
-      "guideMixedMeets": [],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgvzxy-11",
-      "regNo": "SPDL-6",
-      "callName": "Kisbee",
-      "registeredName": "Zero G's Safe Harbour",
-      "breed": "POODLE - STANDARD",
-      "sex": "",
-      "owner": "McKenna",
-      "fte": false,
-      "bwave": null,
-      "mwave": 13.27272727,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 1,
-        "nmrc": 1,
-        "trc": 2
-      },
-      "guideBreedMeets": [],
-      "guideMixedMeets": [
-        {
-          "meet": "2025-S66",
-          "score": 14
-        },
-        {
-          "meet": "2024-S44",
-          "score": 11
-        },
-        {
-          "meet": "2023-S43",
-          "score": 15
-        }
-      ],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgw4u0-12",
-      "regNo": "SPDL-3",
-      "callName": "Pandora",
-      "registeredName": "Pandora Rothacker",
-      "breed": "POODLE - STANDARD",
-      "sex": "",
-      "owner": "Rothacker",
-      "fte": false,
-      "bwave": null,
-      "mwave": 17.81818182,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 9,
-        "nmrc": 0,
-        "trc": 0
-      },
-      "guideBreedMeets": [],
-      "guideMixedMeets": [
-        {
-          "meet": "Sat Oct 12 2019 00:00:00 GMT-0600 (Mountain Daylight Time)",
-          "score": 18
-        },
-        {
-          "meet": "Sat May 04 2019 00:00:00 GMT-0600 (Mountain Daylight Time)",
-          "score": 16
-        },
-        {
-          "meet": "Sun Dec 02 2018 00:00:00 GMT-0700 (Mountain Standard Time)",
-          "score": 20
-        }
-      ],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgw708-13",
-      "regNo": "SPDL-13",
-      "callName": "Apollo",
-      "registeredName": "Mount Zions Apollo in the Light",
-      "breed": "POODLE - STANDARD",
-      "sex": "",
-      "owner": "Vaughn",
-      "fte": false,
-      "bwave": 16,
-      "mwave": 11.88235294,
-      "fteGrade": "D",
+      "fteGrade": "A",
       "hasBRC": false,
       "hasMRC": false,
       "hasSBRC": false,
@@ -374,46 +28,69 @@
         "nbrc": 2,
         "mrc": 0,
         "nmrc": 0,
-        "trc": 3
+        "trc": 0
       },
       "guideBreedMeets": [
         {
-          "meet": "2025-S90",
-          "score": 16
+          "meet": "2025-S50",
+          "score": 22
         },
         {
-          "meet": "2024-S71",
-          "score": 16
-        },
-        {
-          "meet": "2024-S70",
-          "score": 16
+          "meet": "2025-S49",
+          "score": 22
         }
       ],
-      "guideMixedMeets": [
-        {
-          "meet": "2024-S80",
-          "score": 9
-        },
-        {
-          "meet": "2024-S65",
-          "score": 16
-        }
-      ],
+      "guideMixedMeets": [],
       "preScratched": false
     },
     {
-      "id": "entry-mrtgwf2m-15",
-      "regNo": "SPDL-17",
-      "callName": "Zara",
-      "registeredName": "Zara-Mystic Moon",
-      "breed": "POODLE - STANDARD",
-      "sex": "",
-      "owner": "Kerridge/Vaughn",
+      "id": "entry-wh-288",
+      "regNo": "WH-288",
+      "callName": "Bandit-S",
+      "registeredName": "Offspring's Stealing Hearts & Running Off",
+      "breed": "WHIPPET",
+      "sex": "M",
+      "owner": "Linda Sanders",
       "fte": false,
-      "bwave": null,
+      "bwave": 22,
       "mwave": null,
-      "fteGrade": "D",
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 3,
+        "nbrc": 3,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2026-S44",
+          "score": 22
+        },
+        {
+          "meet": "2026-S43",
+          "score": 22
+        }
+      ],
+      "guideMixedMeets": [],
+      "preScratched": false
+    },
+    {
+      "id": "entry-wh-128",
+      "regNo": "WH-128",
+      "callName": "Baker",
+      "registeredName": "Jammin' the Great Pumpkin Pie",
+      "breed": "WHIPPET",
+      "sex": "M",
+      "owner": "Minnella",
+      "fte": false,
+      "bwave": 18,
+      "mwave": null,
+      "fteGrade": "A",
       "hasBRC": false,
       "hasMRC": false,
       "hasSBRC": false,
@@ -423,24 +100,542 @@
         "nbrc": 0,
         "mrc": 0,
         "nmrc": 0,
-        "trc": 0
+        "trc": 1
       },
-      "guideBreedMeets": [],
+      "guideBreedMeets": [
+        {
+          "meet": "2022-S76",
+          "score": 18
+        }
+      ],
       "guideMixedMeets": [],
       "preScratched": false
     },
     {
-      "id": "entry-mrtgwqa1-16",
+      "id": "entry-wh-179",
+      "regNo": "WH-179",
+      "callName": "Babs",
+      "registeredName": "Wicked Ridge Princess Elizabeth",
+      "breed": "WHIPPET",
+      "sex": "F",
+      "owner": "Kellogg",
+      "fte": false,
+      "bwave": 17.90909091,
+      "mwave": null,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 4.75,
+        "nbrc": 4.75,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2024-S57",
+          "score": 22
+        },
+        {
+          "meet": "2024-S56",
+          "score": 12
+        },
+        {
+          "meet": "2024-S22",
+          "score": 18
+        }
+      ],
+      "guideMixedMeets": [],
+      "preScratched": false
+    },
+    {
+      "id": "entry-wh-35",
+      "regNo": "WH-35",
+      "callName": "Ailia",
+      "registeredName": "Hildidan's Fierce Magic of AiliA BRC",
+      "breed": "WHIPPET",
+      "sex": "F",
+      "owner": "Gaiser",
+      "fte": false,
+      "bwave": 15.27272727,
+      "mwave": null,
+      "fteGrade": "A",
+      "hasBRC": true,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 12,
+        "nbrc": 15,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2024-S57",
+          "score": 13
+        },
+        {
+          "meet": "2024-S56",
+          "score": 18
+        },
+        {
+          "meet": "2023-S42",
+          "score": 16
+        }
+      ],
+      "guideMixedMeets": [],
+      "preScratched": false
+    },
+    {
+      "id": "entry-wh-235",
+      "regNo": "WH-235",
+      "callName": "Alias",
+      "registeredName": "TCS Codename: Blank",
+      "breed": "WHIPPET",
+      "sex": "M",
+      "owner": "Mackey",
+      "fte": false,
+      "bwave": 15,
+      "mwave": null,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 0.5,
+        "nbrc": 0.5,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2025-S10",
+          "score": 15
+        }
+      ],
+      "guideMixedMeets": [],
+      "preScratched": false
+    },
+    {
+      "id": "entry-wh-51",
+      "regNo": "WH-51",
+      "callName": "Axl",
+      "registeredName": "Jammin' Sweet Chai O' Mine",
+      "breed": "WHIPPET",
+      "sex": "M",
+      "owner": "Eberl",
+      "fte": false,
+      "bwave": 14.72727273,
+      "mwave": null,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 2,
+        "nbrc": 2,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "Sun Jul 04 2021 00:00:00 GMT-0600 (Mountain Daylight Time)",
+          "score": 17
+        },
+        {
+          "meet": "Sat May 29 2021 00:00:00 GMT-0600 (Mountain Daylight Time)",
+          "score": 12
+        },
+        {
+          "meet": "Sat Apr 17 2021 00:00:00 GMT-0600 (Mountain Daylight Time)",
+          "score": 14
+        }
+      ],
+      "guideMixedMeets": [],
+      "preScratched": false
+    },
+    {
+      "id": "entry-wh-209",
+      "regNo": "WH-209",
+      "callName": "Baja",
+      "registeredName": "Horsetooth Crotalus Enyo",
+      "breed": "WHIPPET",
+      "sex": "F",
+      "owner": "Poinsett",
+      "fte": false,
+      "bwave": 14.58823529,
+      "mwave": null,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 2,
+        "nbrc": 2,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2025-S85",
+          "score": 15
+        },
+        {
+          "meet": "2025-S84",
+          "score": 14
+        }
+      ],
+      "guideMixedMeets": [],
+      "preScratched": false
+    },
+    {
+      "id": "entry-sl-1",
+      "regNo": "SL-1",
+      "callName": "Asim al-Rhys",
+      "registeredName": "Almaboubin Asim al-Rhys",
+      "breed": "SLOUGHI",
+      "sex": "M",
+      "owner": "Pierce",
+      "fte": false,
+      "bwave": null,
+      "mwave": 18.47058824,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 0,
+        "nbrc": 0,
+        "mrc": 1,
+        "nmrc": 1,
+        "trc": 1
+      },
+      "guideBreedMeets": [],
+      "guideMixedMeets": [
+        {
+          "meet": "2025-S68",
+          "score": 16
+        },
+        {
+          "meet": "2022-S58",
+          "score": 22
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-bc-10",
+      "regNo": "BC-10",
+      "callName": "Dillon",
+      "registeredName": "Dillon",
+      "breed": "BORDER COLLIE",
+      "sex": "M",
+      "owner": "Humphrey",
+      "fte": false,
+      "bwave": 22,
+      "mwave": 20.23529412,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 2,
+        "nbrc": 2,
+        "mrc": 2,
+        "nmrc": 2,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2022-S65",
+          "score": 22
+        },
+        {
+          "meet": "Tue Nov 17 2020 00:00:00 GMT-0700 (Mountain Standard Time)",
+          "score": 22
+        }
+      ],
+      "guideMixedMeets": [
+        {
+          "meet": "2023-S45",
+          "score": 19
+        },
+        {
+          "meet": "2022-S16",
+          "score": 22
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-bc-11",
+      "regNo": "BC-11",
+      "callName": "Atari",
+      "registeredName": "Playing It Old School SBRC2 BOC",
+      "breed": "BORDER COLLIE",
+      "sex": "M",
+      "owner": "Graham",
+      "fte": false,
+      "bwave": 19.27272727,
+      "mwave": 9.954545455,
+      "fteGrade": "A",
+      "hasBRC": true,
+      "hasMRC": false,
+      "hasSBRC": true,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 12,
+        "nbrc": 62.5,
+        "mrc": 0.5,
+        "nmrc": 0.5,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2025-S53",
+          "score": 16
+        },
+        {
+          "meet": "2025-S52",
+          "score": 22
+        },
+        {
+          "meet": "2025-S43",
+          "score": 22
+        }
+      ],
+      "guideMixedMeets": [
+        {
+          "meet": "2024-S42",
+          "score": 9
+        },
+        {
+          "meet": "2024-S13",
+          "score": 12
+        },
+        {
+          "meet": "2024-S12",
+          "score": 9
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-bc-38",
+      "regNo": "BC-38",
+      "callName": "Creek",
+      "registeredName": "OWL Creek BRC",
+      "breed": "BORDER COLLIE",
+      "sex": "F",
+      "owner": "McLaren",
+      "fte": false,
+      "bwave": 16.77272727,
+      "mwave": null,
+      "fteGrade": "A",
+      "hasBRC": true,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 12,
+        "nbrc": 7.25,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 1
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2026-S9",
+          "score": 16
+        },
+        {
+          "meet": "2025-S99",
+          "score": 22
+        },
+        {
+          "meet": "2025-S98",
+          "score": 11
+        }
+      ],
+      "guideMixedMeets": [
+        {
+          "meet": "2026-S10",
+          "score": 8
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-bc-20",
+      "regNo": "BC-20",
+      "callName": "Critter",
+      "registeredName": "UHERDIT Scratching in the Wall",
+      "breed": "BORDER COLLIE",
+      "sex": "F",
+      "owner": "Falk",
+      "fte": false,
+      "bwave": 15.77272727,
+      "mwave": 10.86363636,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 4.75,
+        "nbrc": 4.75,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 1
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2025-S3",
+          "score": 15.5
+        },
+        {
+          "meet": "2025-S2",
+          "score": 16
+        },
+        {
+          "meet": "2024-S9",
+          "score": 16
+        }
+      ],
+      "guideMixedMeets": [
+        {
+          "meet": "2024-S3",
+          "score": 9
+        },
+        {
+          "meet": "2023-S9",
+          "score": 12
+        },
+        {
+          "meet": "2023-S1",
+          "score": 13
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-bc-17",
+      "regNo": "BC-17",
+      "callName": "Chili",
+      "registeredName": "Firestorm's Smokin Hot Chili",
+      "breed": "BORDER COLLIE",
+      "sex": "F",
+      "owner": "Velotta",
+      "fte": false,
+      "bwave": 13.5,
+      "mwave": null,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 2.5,
+        "nbrc": 0.5,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2023-S23",
+          "score": 16
+        },
+        {
+          "meet": "2023-S22",
+          "score": 11
+        },
+        {
+          "meet": "2023-S16",
+          "score": 12
+        }
+      ],
+      "guideMixedMeets": [],
+      "preScratched": false
+    },
+    {
+      "id": "entry-bc-9",
+      "regNo": "BC-9",
+      "callName": "Akira",
+      "registeredName": "Akira",
+      "breed": "BORDER COLLIE",
+      "sex": "M",
+      "owner": "Flores",
+      "fte": false,
+      "bwave": 11.68181818,
+      "mwave": 10.27272727,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 1,
+        "nbrc": 1,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 8
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2026-S17",
+          "score": 11
+        },
+        {
+          "meet": "2025-S19",
+          "score": 11
+        },
+        {
+          "meet": "2022-S58",
+          "score": 14
+        }
+      ],
+      "guideMixedMeets": [
+        {
+          "meet": "2026-S31",
+          "score": 13
+        },
+        {
+          "meet": "2026-S30",
+          "score": 8
+        },
+        {
+          "meet": "2026-S18",
+          "score": 8
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-taig-1",
       "regNo": "TAIG-1",
       "callName": "Azhidar",
       "registeredName": "Xanadu Farms Azhidar at In Stride MRC",
       "breed": "TAIGAN",
-      "sex": "",
+      "sex": "M",
       "owner": "Paylor",
       "fte": false,
       "bwave": 20.82352941,
       "mwave": 22,
-      "fteGrade": "D",
+      "fteGrade": "A",
       "hasBRC": false,
       "hasMRC": true,
       "hasSBRC": false,
@@ -479,71 +674,17 @@
       "preScratched": false
     },
     {
-      "id": "entry-mrtgwrh8-17",
-      "regNo": "TAIG-4",
-      "callName": "Ak-Tosh",
-      "registeredName": "Ak-Tosh of Wind Mesa",
-      "breed": "TAIGAN",
-      "sex": "",
-      "owner": "Bisbee",
-      "fte": false,
-      "bwave": null,
-      "mwave": null,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 0
-      },
-      "guideBreedMeets": [],
-      "guideMixedMeets": [],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgwtbf-18",
-      "regNo": "TAIG-3",
-      "callName": "Jayyl",
-      "registeredName": "Xanadu Farms Jayyl",
-      "breed": "TAIGAN",
-      "sex": "",
-      "owner": "Bisbee",
-      "fte": false,
-      "bwave": null,
-      "mwave": null,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 0,
-        "nbrc": 0,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 0
-      },
-      "guideBreedMeets": [],
-      "guideMixedMeets": [],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgwtyq-19",
+      "id": "entry-taig-2",
       "regNo": "TAIG-2",
       "callName": "Slinky",
       "registeredName": "Xanadu Farms Kayingdi",
       "breed": "TAIGAN",
-      "sex": "",
+      "sex": "F",
       "owner": "Martinez",
       "fte": false,
       "bwave": 13.41176471,
       "mwave": null,
-      "fteGrade": "D",
+      "fteGrade": "A",
       "hasBRC": false,
       "hasMRC": false,
       "hasSBRC": false,
@@ -569,17 +710,317 @@
       "preScratched": false
     },
     {
-      "id": "entry-mrtgx800-20",
+      "id": "entry-taig-4",
+      "regNo": "TAIG-4",
+      "callName": "Ak-Tosh",
+      "registeredName": "Ak-Tosh of Wind Mesa",
+      "breed": "TAIGAN",
+      "sex": "M",
+      "owner": "Bisbee",
+      "fte": false,
+      "bwave": null,
+      "mwave": null,
+      "fteGrade": "D",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 0,
+        "nbrc": 0,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 0
+      },
+      "guideBreedMeets": [],
+      "guideMixedMeets": [],
+      "preScratched": false
+    },
+    {
+      "id": "entry-sa-8",
+      "regNo": "SA-8",
+      "callName": "Noyan",
+      "registeredName": "Avendeh Ravan Bacht",
+      "breed": "SALUKI",
+      "sex": "M",
+      "owner": "Walker",
+      "fte": false,
+      "bwave": null,
+      "mwave": 22,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 0,
+        "nbrc": 0,
+        "mrc": 6,
+        "nmrc": 6,
+        "trc": 0
+      },
+      "guideBreedMeets": [],
+      "guideMixedMeets": [
+        {
+          "meet": "2026-S2",
+          "score": 22
+        },
+        {
+          "meet": "2025-S102",
+          "score": 22
+        },
+        {
+          "meet": "2025-S16",
+          "score": 22
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-sa-2",
+      "regNo": "SA-2",
+      "callName": "Ash",
+      "registeredName": "Ashen Moonlight TRC ESR",
+      "breed": "SALUKI",
+      "sex": "F",
+      "owner": "Paylor",
+      "fte": false,
+      "bwave": null,
+      "mwave": 20.63636364,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 0,
+        "nbrc": 0,
+        "mrc": 5,
+        "nmrc": 5,
+        "trc": 17
+      },
+      "guideBreedMeets": [],
+      "guideMixedMeets": [
+        {
+          "meet": "2025-S60",
+          "score": 22
+        },
+        {
+          "meet": "2025-S42",
+          "score": 22
+        },
+        {
+          "meet": "2025-S10",
+          "score": 16
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-sa-15",
+      "regNo": "SA-15",
+      "callName": "Hopsu",
+      "registeredName": "Qashani Fustuq Saudi",
+      "breed": "SALUKI",
+      "sex": "M",
+      "owner": "Robertson",
+      "fte": false,
+      "bwave": null,
+      "mwave": 20,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 0,
+        "nbrc": 0,
+        "mrc": 3,
+        "nmrc": 3,
+        "trc": 0
+      },
+      "guideBreedMeets": [],
+      "guideMixedMeets": [
+        {
+          "meet": "2026-S10",
+          "score": 20
+        },
+        {
+          "meet": "2026-S9",
+          "score": 20
+        },
+        {
+          "meet": "2025-S30",
+          "score": 20
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-bsd-10",
+      "regNo": "BSD-10",
+      "callName": "Baloo",
+      "registeredName": "Baloo of Wildrose",
+      "breed": "BELGIAN SHEPHERD DOG",
+      "sex": "M",
+      "owner": "Kovell",
+      "fte": false,
+      "bwave": 22,
+      "mwave": 22,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 1,
+        "nbrc": 1,
+        "mrc": 3,
+        "nmrc": 2,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "Sat Sep 26 2020 00:00:00 GMT-0600 (Mountain Daylight Time)",
+          "score": 22
+        }
+      ],
+      "guideMixedMeets": [
+        {
+          "meet": "Sun Sep 27 2020 00:00:00 GMT-0600 (Mountain Daylight Time)",
+          "score": 22
+        },
+        {
+          "meet": "Sat Oct 05 2019 00:00:00 GMT-0600 (Mountain Daylight Time)",
+          "score": 22
+        },
+        {
+          "meet": "Sun Nov 11 2018 00:00:00 GMT-0700 (Mountain Standard Time)",
+          "score": 22
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-bsd-16",
+      "regNo": "BSD-16",
+      "callName": "Cassie",
+      "registeredName": "Cassiopeia En Jay",
+      "breed": "BELGIAN SHEPHERD DOG",
+      "sex": "F",
+      "owner": "Lambert",
+      "fte": false,
+      "bwave": null,
+      "mwave": 14.81818182,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 0,
+        "nbrc": 0,
+        "mrc": 7.5,
+        "nmrc": 7.5,
+        "trc": 0
+      },
+      "guideBreedMeets": [],
+      "guideMixedMeets": [
+        {
+          "meet": "2023-S23",
+          "score": 16
+        },
+        {
+          "meet": "2023-S22",
+          "score": 8
+        },
+        {
+          "meet": "2022-S2",
+          "score": 22
+        }
+      ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-az-5",
+      "regNo": "AZ-5",
+      "callName": "Anubi",
+      "registeredName": "Naram-Sin du Haras de Crouz",
+      "breed": "AZAWAKH",
+      "sex": "M",
+      "owner": "Paylor",
+      "fte": false,
+      "bwave": 22,
+      "mwave": null,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 2,
+        "nbrc": 2,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2025-S57",
+          "score": 22
+        }
+      ],
+      "guideMixedMeets": [],
+      "preScratched": false
+    },
+    {
+      "id": "entry-az-2",
+      "regNo": "AZ-2",
+      "callName": "Amidi",
+      "registeredName": "Kel Simoon Shani n' Sambala",
+      "breed": "AZAWAKH",
+      "sex": "F",
+      "owner": "Paylor",
+      "fte": false,
+      "bwave": 16,
+      "mwave": null,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 1,
+        "nbrc": 0.5,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 0
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2025-S57",
+          "score": 13
+        },
+        {
+          "meet": "2022-S43",
+          "score": 16
+        }
+      ],
+      "guideMixedMeets": [],
+      "preScratched": false
+    },
+    {
+      "id": "entry-az-7",
       "regNo": "AZ-7",
       "callName": "Birdie",
       "registeredName": "In Stride's Bye Bye Birdie",
       "breed": "AZAWAKH",
-      "sex": "",
+      "sex": "F",
       "owner": "Paylor",
       "fte": false,
       "bwave": 14,
       "mwave": null,
-      "fteGrade": "D",
+      "fteGrade": "A",
       "hasBRC": false,
       "hasMRC": false,
       "hasSBRC": false,
@@ -601,49 +1042,17 @@
       "preScratched": false
     },
     {
-      "id": "entry-mrtgxkk6-21",
-      "regNo": "SA-23",
-      "callName": "Falcon",
-      "registeredName": "Windbourne Freefallin’At Warp Speed",
-      "breed": "SALUKI",
-      "sex": "",
-      "owner": "J. Colleti",
-      "fte": false,
-      "bwave": 22,
-      "mwave": null,
-      "fteGrade": "D",
-      "hasBRC": false,
-      "hasMRC": false,
-      "hasSBRC": false,
-      "hasSMRC": false,
-      "guidePoints": {
-        "brc": 1,
-        "nbrc": 1,
-        "mrc": 0,
-        "nmrc": 0,
-        "trc": 0
-      },
-      "guideBreedMeets": [
-        {
-          "meet": "2026-S33",
-          "score": 22
-        }
-      ],
-      "guideMixedMeets": [],
-      "preScratched": false
-    },
-    {
-      "id": "entry-mrtgz6xx-26",
-      "regNo": "MPDL-1",
-      "callName": "Sammy",
-      "registeredName": "Samuel Look of Cannedy Farm",
-      "breed": "POODLE - MINIATURE",
-      "sex": "",
-      "owner": "Cannedy",
+      "id": "entry-ds-2",
+      "regNo": "DS-2",
+      "callName": "Dori",
+      "registeredName": "Northwood's Discovery By Design",
+      "breed": "DUTCH SHEPHERD",
+      "sex": "F",
+      "owner": "Bunn",
       "fte": false,
       "bwave": null,
-      "mwave": 12,
-      "fteGrade": "D",
+      "mwave": 9.863636364,
+      "fteGrade": "B",
       "hasBRC": false,
       "hasMRC": false,
       "hasSBRC": false,
@@ -653,69 +1062,128 @@
         "nbrc": 0,
         "mrc": 0,
         "nmrc": 0,
-        "trc": 0
+        "trc": 2
       },
       "guideBreedMeets": [],
       "guideMixedMeets": [
         {
-          "meet": "Sat May 08 2021 00:00:00 GMT-0600 (Mountain Daylight Time)",
-          "score": 12
+          "meet": "2023-S16",
+          "score": 5
+        },
+        {
+          "meet": "2023-S11",
+          "score": 16
+        },
+        {
+          "meet": "2023-S10",
+          "score": 11
         }
       ],
+      "preScratched": false
+    },
+    {
+      "id": "entry-wh-144",
+      "regNo": "WH-144",
+      "callName": "Ace",
+      "registeredName": "Greenbluff's Ace Healer of My Heart",
+      "breed": "WHIPPET",
+      "sex": "F",
+      "owner": "McConnell",
+      "fte": false,
+      "bwave": 11.90909091,
+      "mwave": null,
+      "fteGrade": "A",
+      "hasBRC": false,
+      "hasMRC": false,
+      "hasSBRC": false,
+      "hasSMRC": false,
+      "guidePoints": {
+        "brc": 0,
+        "nbrc": 0,
+        "mrc": 0,
+        "nmrc": 0,
+        "trc": 3
+      },
+      "guideBreedMeets": [
+        {
+          "meet": "2024-S66",
+          "score": 8
+        },
+        {
+          "meet": "2024-S1",
+          "score": 16
+        },
+        {
+          "meet": "2023-S54",
+          "score": 14
+        }
+      ],
+      "guideMixedMeets": [],
       "preScratched": true
     }
   ],
   "divisions": [
     {
-      "id": "div-mrtgzv0w-31",
+      "id": "div-whippet",
       "type": "breed",
-      "name": "JACK RUSSELL TERRIER",
+      "name": "WHIPPET",
       "entryIds": [
-        "entry-mrtgu08o-1",
-        "entry-mrtgu4fp-2",
-        "entry-mrtgu9jh-4",
-        "entry-mrtguale-5",
-        "entry-mrtgue6f-6",
-        "entry-mrtgv7h6-8",
-        "entry-mrtgvcky-9"
+        "entry-wh-251",
+        "entry-wh-288",
+        "entry-wh-128",
+        "entry-wh-179",
+        "entry-wh-35",
+        "entry-wh-235",
+        "entry-wh-51",
+        "entry-wh-209",
+        "entry-sl-1"
+      ],
+      "leftoverIds": [
+        "entry-sl-1"
+      ],
+      "ungraded": false
+    },
+    {
+      "id": "div-border-collie",
+      "type": "breed",
+      "name": "BORDER COLLIE",
+      "entryIds": [
+        "entry-bc-10",
+        "entry-bc-11",
+        "entry-bc-38",
+        "entry-bc-20",
+        "entry-bc-17",
+        "entry-bc-9"
       ],
       "leftoverIds": [],
       "ungraded": false
     },
     {
-      "id": "div-mrtgzv0w-32",
-      "type": "breed",
-      "name": "POODLE - STANDARD",
-      "entryIds": [
-        "entry-mrtgvx50-10",
-        "entry-mrtgvzxy-11",
-        "entry-mrtgw4u0-12",
-        "entry-mrtgw708-13",
-        "entry-mrtgwf2m-15"
-      ],
-      "leftoverIds": [],
-      "ungraded": false
-    },
-    {
-      "id": "div-mrtgzv0w-33",
+      "id": "div-taigan",
       "type": "breed",
       "name": "TAIGAN",
       "entryIds": [
-        "entry-mrtgwqa1-16",
-        "entry-mrtgwrh8-17",
-        "entry-mrtgwtbf-18",
-        "entry-mrtgwtyq-19"
+        "entry-taig-1",
+        "entry-taig-2",
+        "entry-taig-4"
       ],
       "leftoverIds": [],
       "ungraded": false
     },
     {
-      "id": "div-mrtgzv0w-34",
+      "id": "div-mixed",
       "type": "mixed",
       "name": "MIXED",
       "entryIds": [
-        "entry-mrtgx800-20",
-        "entry-mrtgxkk6-21"
+        "entry-sa-8",
+        "entry-sa-2",
+        "entry-sa-15",
+        "entry-bsd-10",
+        "entry-bsd-16",
+        "entry-az-5",
+        "entry-az-2",
+        "entry-az-7",
+        "entry-ds-2"
       ],
       "leftoverIds": [],
       "ungraded": false
@@ -724,575 +1192,37 @@
   "draws": [
     {
       "program": 1,
-      "divisionId": "div-mrtgzv0w-32",
+      "divisionId": "div-whippet",
       "races": [
         {
-          "id": "race-mrth04o8-38",
-          "divisionId": "div-mrtgzv0w-32",
+          "id": "race-p1-div-whippet-1",
+          "divisionId": "div-whippet",
           "program": 1,
           "raceNo": 1,
           "isHP": false,
           "slots": [
             {
-              "entryId": "entry-mrtgw4u0-12",
+              "entryId": "entry-wh-235",
               "post": 2
             },
             {
-              "entryId": "entry-mrtgwf2m-15",
-              "post": 1
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgwf2m-15": {
-              "kind": "placed",
-              "place": 2
-            },
-            "entry-mrtgw4u0-12": {
-              "kind": "placed",
-              "place": 1
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        },
-        {
-          "id": "race-mrth04o8-37",
-          "divisionId": "div-mrtgzv0w-32",
-          "program": 1,
-          "raceNo": 2,
-          "isHP": true,
-          "slots": [
-            {
-              "entryId": "entry-mrtgw708-13",
-              "post": 2
-            },
-            {
-              "entryId": "entry-mrtgvx50-10",
+              "entryId": "entry-wh-51",
               "post": 3
             },
             {
-              "entryId": "entry-mrtgvzxy-11",
+              "entryId": "entry-wh-209",
               "post": 1
             }
           ],
           "outcomes": {
-            "entry-mrtgvzxy-11": {
-              "kind": "placed",
-              "place": 1
-            },
-            "entry-mrtgw708-13": {
-              "kind": "placed",
-              "place": 2
-            },
-            "entry-mrtgvx50-10": {
-              "kind": "placed",
-              "place": 3
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        }
-      ],
-      "tieDecisions": [],
-      "locked": true
-    },
-    {
-      "program": 1,
-      "divisionId": "div-mrtgzv0w-33",
-      "races": [
-        {
-          "id": "race-mrth04o8-39",
-          "divisionId": "div-mrtgzv0w-33",
-          "program": 1,
-          "raceNo": 1,
-          "isHP": true,
-          "slots": [
-            {
-              "entryId": "entry-mrtgwqa1-16",
-              "post": 3
-            },
-            {
-              "entryId": "entry-mrtgwtyq-19",
-              "post": 4
-            },
-            {
-              "entryId": "entry-mrtgwrh8-17",
-              "post": 1
-            },
-            {
-              "entryId": "entry-mrtgwtbf-18",
-              "post": 2
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgwrh8-17": {
-              "kind": "placed",
-              "place": 1
-            },
-            "entry-mrtgwtbf-18": {
-              "kind": "placed",
-              "place": 3
-            },
-            "entry-mrtgwqa1-16": {
-              "kind": "placed",
-              "place": 2
-            },
-            "entry-mrtgwtyq-19": {
-              "kind": "placed",
-              "place": 4
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        }
-      ],
-      "tieDecisions": [],
-      "locked": true
-    },
-    {
-      "program": 1,
-      "divisionId": "div-mrtgzv0w-34",
-      "races": [
-        {
-          "id": "race-mrth04o8-40",
-          "divisionId": "div-mrtgzv0w-34",
-          "program": 1,
-          "raceNo": 1,
-          "isHP": true,
-          "slots": [
-            {
-              "entryId": "entry-mrtgx800-20",
-              "post": 2
-            },
-            {
-              "entryId": "entry-mrtgxkk6-21",
-              "post": 1
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgxkk6-21": {
-              "kind": "placed",
-              "place": 1
-            },
-            "entry-mrtgx800-20": {
-              "kind": "placed",
-              "place": 2
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        }
-      ],
-      "tieDecisions": [],
-      "locked": true
-    },
-    {
-      "program": 1,
-      "divisionId": "div-mrtgzv0w-31",
-      "races": [
-        {
-          "id": "race-mrth23dk-52",
-          "divisionId": "div-mrtgzv0w-31",
-          "program": 1,
-          "raceNo": 1,
-          "isHP": false,
-          "slots": [
-            {
-              "entryId": "entry-mrtgu9jh-4",
-              "post": 3
-            },
-            {
-              "entryId": "entry-mrtgv7h6-8",
-              "post": 1
-            },
-            {
-              "entryId": "entry-mrtgvcky-9",
-              "post": 2
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgv7h6-8": {
-              "kind": "placed",
-              "place": 1
-            },
-            "entry-mrtgvcky-9": {
-              "kind": "placed",
-              "place": 3
-            },
-            "entry-mrtgu9jh-4": {
-              "kind": "placed",
-              "place": 2
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        },
-        {
-          "id": "race-mrth23dk-51",
-          "divisionId": "div-mrtgzv0w-31",
-          "program": 1,
-          "raceNo": 2,
-          "isHP": true,
-          "slots": [
-            {
-              "entryId": "entry-mrtgu4fp-2",
-              "post": 1
-            },
-            {
-              "entryId": "entry-mrtgu08o-1",
-              "post": 4
-            },
-            {
-              "entryId": "entry-mrtgue6f-6",
-              "post": 2
-            },
-            {
-              "entryId": "entry-mrtguale-5",
-              "post": 3
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgu4fp-2": {
-              "kind": "placed",
-              "place": 4
-            },
-            "entry-mrtgue6f-6": {
-              "kind": "placed",
-              "place": 2
-            },
-            "entry-mrtguale-5": {
-              "kind": "placed",
-              "place": 3
-            },
-            "entry-mrtgu08o-1": {
-              "kind": "placed",
-              "place": 1
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        }
-      ],
-      "tieDecisions": [],
-      "locked": true
-    },
-    {
-      "program": 2,
-      "divisionId": "div-mrtgzv0w-31",
-      "races": [
-        {
-          "id": "race-mrthdc9p-54",
-          "divisionId": "div-mrtgzv0w-31",
-          "program": 2,
-          "raceNo": 1,
-          "isHP": false,
-          "slots": [
-            {
-              "entryId": "entry-mrtgu4fp-2",
-              "post": 1
-            },
-            {
-              "entryId": "entry-mrtgu9jh-4",
-              "post": 2
-            },
-            {
-              "entryId": "entry-mrtgvcky-9",
-              "post": 3
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgu4fp-2": {
-              "kind": "placed",
-              "place": 3
-            },
-            "entry-mrtgu9jh-4": {
-              "kind": "placed",
-              "place": 1
-            },
-            "entry-mrtgvcky-9": {
-              "kind": "placed",
-              "place": 2
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        },
-        {
-          "id": "race-mrthdc9p-53",
-          "divisionId": "div-mrtgzv0w-31",
-          "program": 2,
-          "raceNo": 2,
-          "isHP": true,
-          "slots": [
-            {
-              "entryId": "entry-mrtgu08o-1",
-              "post": 2
-            },
-            {
-              "entryId": "entry-mrtgue6f-6",
-              "post": 3
-            },
-            {
-              "entryId": "entry-mrtgv7h6-8",
-              "post": 4
-            },
-            {
-              "entryId": "entry-mrtguale-5",
-              "post": 1
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgu08o-1": {
-              "kind": "placed",
-              "place": 3
-            },
-            "entry-mrtguale-5": {
-              "kind": "placed",
-              "place": 4
-            },
-            "entry-mrtgv7h6-8": {
-              "kind": "placed",
-              "place": 2
-            },
-            "entry-mrtgue6f-6": {
-              "kind": "placed",
-              "place": 1
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        }
-      ],
-      "tieDecisions": [
-        {
-          "entryIds": [
-            "entry-mrtgu9jh-4",
-            "entry-mrtgu4fp-2"
-          ],
-          "explanation": "Bandit placed above Coyote (3 pts each): ran in the higher race of program 1 (race 2)."
-        }
-      ],
-      "locked": true
-    },
-    {
-      "program": 2,
-      "divisionId": "div-mrtgzv0w-32",
-      "races": [
-        {
-          "id": "race-mrthdc9p-56",
-          "divisionId": "div-mrtgzv0w-32",
-          "program": 2,
-          "raceNo": 1,
-          "isHP": false,
-          "slots": [
-            {
-              "entryId": "entry-mrtgvx50-10",
-              "post": 1
-            },
-            {
-              "entryId": "entry-mrtgwf2m-15",
-              "post": 2
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgvx50-10": {
-              "kind": "placed",
-              "place": 1
-            },
-            "entry-mrtgwf2m-15": {
-              "kind": "placed",
-              "place": 2
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        },
-        {
-          "id": "race-mrthdc9p-55",
-          "divisionId": "div-mrtgzv0w-32",
-          "program": 2,
-          "raceNo": 2,
-          "isHP": true,
-          "slots": [
-            {
-              "entryId": "entry-mrtgvzxy-11",
-              "post": 3
-            },
-            {
-              "entryId": "entry-mrtgw708-13",
-              "post": 1
-            },
-            {
-              "entryId": "entry-mrtgw4u0-12",
-              "post": 2
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgw4u0-12": {
-              "kind": "placed",
-              "place": 2
-            },
-            "entry-mrtgw708-13": {
-              "kind": "placed",
-              "place": 1
-            },
-            "entry-mrtgvzxy-11": {
-              "kind": "ABS"
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        }
-      ],
-      "tieDecisions": [],
-      "locked": true
-    },
-    {
-      "program": 2,
-      "divisionId": "div-mrtgzv0w-33",
-      "races": [
-        {
-          "id": "race-mrthdc9p-57",
-          "divisionId": "div-mrtgzv0w-33",
-          "program": 2,
-          "raceNo": 1,
-          "isHP": true,
-          "slots": [
-            {
-              "entryId": "entry-mrtgwrh8-17",
-              "post": 2
-            },
-            {
-              "entryId": "entry-mrtgwqa1-16",
-              "post": 3
-            },
-            {
-              "entryId": "entry-mrtgwtbf-18",
-              "post": 4
-            },
-            {
-              "entryId": "entry-mrtgwtyq-19",
-              "post": 1
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgwtyq-19": {
-              "kind": "DNF"
-            },
-            "entry-mrtgwrh8-17": {
-              "kind": "placed",
-              "place": 3
-            },
-            "entry-mrtgwqa1-16": {
-              "kind": "placed",
-              "place": 2
-            },
-            "entry-mrtgwtbf-18": {
-              "kind": "placed",
-              "place": 1
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        }
-      ],
-      "tieDecisions": [],
-      "locked": true
-    },
-    {
-      "program": 2,
-      "divisionId": "div-mrtgzv0w-34",
-      "races": [
-        {
-          "id": "race-mrthdc9p-58",
-          "divisionId": "div-mrtgzv0w-34",
-          "program": 2,
-          "raceNo": 1,
-          "isHP": true,
-          "slots": [
-            {
-              "entryId": "entry-mrtgxkk6-21",
-              "post": 2
-            },
-            {
-              "entryId": "entry-mrtgx800-20",
-              "post": 1
-            }
-          ],
-          "outcomes": {
-            "entry-mrtgx800-20": {
-              "kind": "placed",
-              "place": 2
-            },
-            "entry-mrtgxkk6-21": {
-              "kind": "placed",
-              "place": 1
-            }
-          },
-          "finished": true,
-          "rerun": false,
-          "splitAllPoints": false,
-          "note": ""
-        }
-      ],
-      "tieDecisions": [],
-      "locked": true
-    },
-    {
-      "program": 3,
-      "divisionId": "div-mrtgzv0w-31",
-      "races": [
-        {
-          "id": "race-mrthjpn9-60",
-          "divisionId": "div-mrtgzv0w-31",
-          "program": 3,
-          "raceNo": 1,
-          "isHP": false,
-          "slots": [
-            {
-              "entryId": "entry-mrtguale-5",
-              "post": 2
-            },
-            {
-              "entryId": "entry-mrtgvcky-9",
-              "post": 1
-            },
-            {
-              "entryId": "entry-mrtgu4fp-2",
-              "post": 3
-            }
-          ],
-          "outcomes": {
-            "entry-mrtguale-5": {
+            "entry-wh-209": {
               "kind": "OC"
             },
-            "entry-mrtgvcky-9": {
+            "entry-wh-51": {
               "kind": "placed",
               "place": 1
             },
-            "entry-mrtgu4fp-2": {
+            "entry-wh-235": {
               "kind": "placed",
               "place": 2
             }
@@ -1303,43 +1233,459 @@
           "note": ""
         },
         {
-          "id": "race-mrthjpn9-59",
-          "divisionId": "div-mrtgzv0w-31",
-          "program": 3,
+          "id": "race-p1-div-whippet-2",
+          "divisionId": "div-whippet",
+          "program": 1,
           "raceNo": 2,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-wh-179",
+              "post": 2
+            },
+            {
+              "entryId": "entry-wh-35",
+              "post": 1
+            }
+          ],
+          "outcomes": {
+            "entry-wh-179": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-wh-35": {
+              "kind": "placed",
+              "place": 2
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p1-div-whippet-3",
+          "divisionId": "div-whippet",
+          "program": 1,
+          "raceNo": 3,
           "isHP": true,
           "slots": [
             {
-              "entryId": "entry-mrtgue6f-6",
-              "post": 4
-            },
-            {
-              "entryId": "entry-mrtgu08o-1",
+              "entryId": "entry-wh-251",
               "post": 3
             },
             {
-              "entryId": "entry-mrtgv7h6-8",
+              "entryId": "entry-wh-288",
+              "post": 2
+            },
+            {
+              "entryId": "entry-sl-1",
               "post": 1
             },
             {
-              "entryId": "entry-mrtgu9jh-4",
+              "entryId": "entry-wh-128",
+              "post": 4
+            }
+          ],
+          "outcomes": {
+            "entry-wh-251": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-wh-288": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-wh-128": {
+              "kind": "placed",
+              "place": 3
+            },
+            "entry-sl-1": {
+              "kind": "placed",
+              "place": 4
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        }
+      ],
+      "tieDecisions": [],
+      "locked": true
+    },
+    {
+      "program": 1,
+      "divisionId": "div-border-collie",
+      "races": [
+        {
+          "id": "race-p1-div-border-collie-1",
+          "divisionId": "div-border-collie",
+          "program": 1,
+          "raceNo": 1,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-bc-17",
+              "post": 1
+            },
+            {
+              "entryId": "entry-bc-9",
               "post": 2
             }
           ],
           "outcomes": {
-            "entry-mrtgue6f-6": {
-              "kind": "ABS"
-            },
-            "entry-mrtgu9jh-4": {
-              "kind": "DNF"
-            },
-            "entry-mrtgv7h6-8": {
+            "entry-bc-17": {
               "kind": "placed",
               "place": 1
             },
-            "entry-mrtgu08o-1": {
+            "entry-bc-9": {
               "kind": "placed",
               "place": 2
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p1-div-border-collie-2",
+          "divisionId": "div-border-collie",
+          "program": 1,
+          "raceNo": 2,
+          "isHP": true,
+          "slots": [
+            {
+              "entryId": "entry-bc-10",
+              "post": 2
+            },
+            {
+              "entryId": "entry-bc-11",
+              "post": 4
+            },
+            {
+              "entryId": "entry-bc-38",
+              "post": 1
+            },
+            {
+              "entryId": "entry-bc-20",
+              "post": 3
+            }
+          ],
+          "outcomes": {
+            "entry-bc-10": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-bc-11": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-bc-20": {
+              "kind": "placed",
+              "place": 3
+            },
+            "entry-bc-38": {
+              "kind": "placed",
+              "place": 4
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        }
+      ],
+      "tieDecisions": [],
+      "locked": true
+    },
+    {
+      "program": 1,
+      "divisionId": "div-taigan",
+      "races": [
+        {
+          "id": "race-p1-div-taigan-1",
+          "divisionId": "div-taigan",
+          "program": 1,
+          "raceNo": 1,
+          "isHP": true,
+          "slots": [
+            {
+              "entryId": "entry-taig-1",
+              "post": 1
+            },
+            {
+              "entryId": "entry-taig-2",
+              "post": 3
+            },
+            {
+              "entryId": "entry-taig-4",
+              "post": 2
+            }
+          ],
+          "outcomes": {
+            "entry-taig-1": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-taig-2": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-taig-4": {
+              "kind": "placed",
+              "place": 3
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        }
+      ],
+      "tieDecisions": [],
+      "locked": true
+    },
+    {
+      "program": 1,
+      "divisionId": "div-mixed",
+      "races": [
+        {
+          "id": "race-p1-div-mixed-1",
+          "divisionId": "div-mixed",
+          "program": 1,
+          "raceNo": 1,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-az-2",
+              "post": 3
+            },
+            {
+              "entryId": "entry-az-7",
+              "post": 2
+            },
+            {
+              "entryId": "entry-ds-2",
+              "post": 1
+            }
+          ],
+          "outcomes": {
+            "entry-az-7": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-az-2": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-ds-2": {
+              "kind": "placed",
+              "place": 3
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p1-div-mixed-2",
+          "divisionId": "div-mixed",
+          "program": 1,
+          "raceNo": 2,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-bsd-16",
+              "post": 1
+            },
+            {
+              "entryId": "entry-az-5",
+              "post": 2
+            }
+          ],
+          "outcomes": {
+            "entry-bsd-16": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-az-5": {
+              "kind": "placed",
+              "place": 2
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p1-div-mixed-3",
+          "divisionId": "div-mixed",
+          "program": 1,
+          "raceNo": 3,
+          "isHP": true,
+          "slots": [
+            {
+              "entryId": "entry-sa-8",
+              "post": 3
+            },
+            {
+              "entryId": "entry-bsd-10",
+              "post": 2
+            },
+            {
+              "entryId": "entry-sa-2",
+              "post": 1
+            },
+            {
+              "entryId": "entry-sa-15",
+              "post": 4
+            }
+          ],
+          "outcomes": {
+            "entry-sa-2": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-bsd-10": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-sa-8": {
+              "kind": "placed",
+              "place": 3
+            },
+            "entry-sa-15": {
+              "kind": "placed",
+              "place": 4
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        }
+      ],
+      "tieDecisions": [],
+      "locked": true
+    },
+    {
+      "program": 2,
+      "divisionId": "div-whippet",
+      "races": [
+        {
+          "id": "race-p2-div-whippet-1",
+          "divisionId": "div-whippet",
+          "program": 2,
+          "raceNo": 1,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-wh-35",
+              "post": 1
+            },
+            {
+              "entryId": "entry-wh-235",
+              "post": 3
+            },
+            {
+              "entryId": "entry-wh-209",
+              "post": 2
+            }
+          ],
+          "outcomes": {
+            "entry-wh-209": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-wh-235": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-wh-35": {
+              "kind": "placed",
+              "place": 3
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p2-div-whippet-2",
+          "divisionId": "div-whippet",
+          "program": 2,
+          "raceNo": 2,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-wh-128",
+              "post": 1
+            },
+            {
+              "entryId": "entry-sl-1",
+              "post": 2
+            }
+          ],
+          "outcomes": {
+            "entry-sl-1": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-wh-128": {
+              "kind": "placed",
+              "place": 2
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p2-div-whippet-3",
+          "divisionId": "div-whippet",
+          "program": 2,
+          "raceNo": 3,
+          "isHP": true,
+          "slots": [
+            {
+              "entryId": "entry-wh-251",
+              "post": 4
+            },
+            {
+              "entryId": "entry-wh-288",
+              "post": 3
+            },
+            {
+              "entryId": "entry-wh-179",
+              "post": 2
+            },
+            {
+              "entryId": "entry-wh-51",
+              "post": 1
+            }
+          ],
+          "outcomes": {
+            "entry-wh-251": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-wh-51": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-wh-288": {
+              "kind": "placed",
+              "place": 3
+            },
+            "entry-wh-179": {
+              "kind": "placed",
+              "place": 4
             }
           },
           "finished": true,
@@ -1351,57 +1697,281 @@
       "tieDecisions": [
         {
           "entryIds": [
-            "entry-mrtgvcky-9",
-            "entry-mrtgu4fp-2"
+            "entry-wh-179",
+            "entry-wh-51"
           ],
-          "explanation": "Eris placed above Bandit (5 pts each): placed higher (2 vs 3) in the same race of program 2."
+          "explanation": "Babs placed above Axl (5 pts each): ran in the higher race of program 1 (race 2)."
+        },
+        {
+          "entryIds": [
+            "entry-sl-1",
+            "entry-wh-35"
+          ],
+          "explanation": "Asim al-Rhys placed above Ailia (3 pts each): ran in the higher race of program 1 (race 3)."
+        },
+        {
+          "entryIds": [
+            "entry-wh-35",
+            "entry-wh-235"
+          ],
+          "explanation": "Ailia placed above Alias (3 pts each): ran in the higher race of program 1 (race 2)."
         }
       ],
       "locked": true
     },
     {
-      "program": 3,
-      "divisionId": "div-mrtgzv0w-32",
+      "program": 2,
+      "divisionId": "div-border-collie",
       "races": [
         {
-          "id": "race-mrthjpn9-61",
-          "divisionId": "div-mrtgzv0w-32",
-          "program": 3,
+          "id": "race-p2-div-border-collie-1",
+          "divisionId": "div-border-collie",
+          "program": 2,
           "raceNo": 1,
-          "isHP": true,
+          "isHP": false,
           "slots": [
             {
-              "entryId": "entry-mrtgw708-13",
-              "post": 4
-            },
-            {
-              "entryId": "entry-mrtgw4u0-12",
+              "entryId": "entry-bc-38",
               "post": 2
             },
             {
-              "entryId": "entry-mrtgvx50-10",
-              "post": 3
-            },
-            {
-              "entryId": "entry-mrtgwf2m-15",
+              "entryId": "entry-bc-9",
               "post": 1
             }
           ],
           "outcomes": {
-            "entry-mrtgwf2m-15": {
+            "entry-bc-38": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-bc-9": {
+              "kind": "placed",
+              "place": 2
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p2-div-border-collie-2",
+          "divisionId": "div-border-collie",
+          "program": 2,
+          "raceNo": 2,
+          "isHP": true,
+          "slots": [
+            {
+              "entryId": "entry-bc-10",
+              "post": 3
+            },
+            {
+              "entryId": "entry-bc-11",
+              "post": 2
+            },
+            {
+              "entryId": "entry-bc-17",
+              "post": 1
+            },
+            {
+              "entryId": "entry-bc-20",
+              "post": 4
+            }
+          ],
+          "outcomes": {
+            "entry-bc-17": {
+              "kind": "ABS"
+            },
+            "entry-bc-10": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-bc-11": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-bc-20": {
               "kind": "placed",
               "place": 3
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        }
+      ],
+      "tieDecisions": [
+        {
+          "entryIds": [
+            "entry-bc-38",
+            "entry-bc-9"
+          ],
+          "explanation": "Creek placed above Akira (3 pts each): ran in the higher race of program 1 (race 2)."
+        }
+      ],
+      "locked": true
+    },
+    {
+      "program": 2,
+      "divisionId": "div-taigan",
+      "races": [
+        {
+          "id": "race-p2-div-taigan-1",
+          "divisionId": "div-taigan",
+          "program": 2,
+          "raceNo": 1,
+          "isHP": true,
+          "slots": [
+            {
+              "entryId": "entry-taig-1",
+              "post": 2
             },
-            "entry-mrtgw4u0-12": {
+            {
+              "entryId": "entry-taig-2",
+              "post": 1
+            },
+            {
+              "entryId": "entry-taig-4",
+              "post": 3
+            }
+          ],
+          "outcomes": {
+            "entry-taig-1": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-taig-2": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-taig-4": {
+              "kind": "placed",
+              "place": 3
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        }
+      ],
+      "tieDecisions": [],
+      "locked": true
+    },
+    {
+      "program": 2,
+      "divisionId": "div-mixed",
+      "races": [
+        {
+          "id": "race-p2-div-mixed-1",
+          "divisionId": "div-mixed",
+          "program": 2,
+          "raceNo": 1,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-az-5",
+              "post": 3
+            },
+            {
+              "entryId": "entry-az-2",
+              "post": 1
+            },
+            {
+              "entryId": "entry-ds-2",
+              "post": 2
+            }
+          ],
+          "outcomes": {
+            "entry-az-2": {
               "kind": "DQ"
             },
-            "entry-mrtgvx50-10": {
+            "entry-az-5": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-ds-2": {
+              "kind": "placed",
+              "place": 2
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p2-div-mixed-2",
+          "divisionId": "div-mixed",
+          "program": 2,
+          "raceNo": 2,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-sa-8",
+              "post": 2
+            },
+            {
+              "entryId": "entry-sa-15",
+              "post": 1
+            }
+          ],
+          "outcomes": {
+            "entry-sa-8": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-sa-15": {
+              "kind": "placed",
+              "place": 2
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p2-div-mixed-3",
+          "divisionId": "div-mixed",
+          "program": 2,
+          "raceNo": 3,
+          "isHP": true,
+          "slots": [
+            {
+              "entryId": "entry-sa-2",
+              "post": 1
+            },
+            {
+              "entryId": "entry-bsd-10",
+              "post": 3
+            },
+            {
+              "entryId": "entry-bsd-16",
+              "post": 2
+            },
+            {
+              "entryId": "entry-az-7",
+              "post": 4
+            }
+          ],
+          "outcomes": {
+            "entry-bsd-10": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-sa-2": {
               "kind": "placed",
               "place": 2
             },
-            "entry-mrtgw708-13": {
+            "entry-az-7": {
               "kind": "placed",
-              "place": 1
+              "place": 3
+            },
+            "entry-bsd-16": {
+              "kind": "placed",
+              "place": 4
             }
           },
           "finished": true,
@@ -1413,55 +1983,239 @@
       "tieDecisions": [
         {
           "entryIds": [
-            "entry-mrtgw4u0-12",
-            "entry-mrtgvx50-10"
+            "entry-bsd-16",
+            "entry-az-7"
           ],
-          "explanation": "Pandora placed above Dandi (9 pts each): ran in the higher race of program 2 (race 2)."
+          "explanation": "Cassie placed above Birdie (5 pts each): ran in the higher race of program 1 (race 2)."
+        },
+        {
+          "entryIds": [
+            "entry-sa-15",
+            "entry-az-5"
+          ],
+          "explanation": "Hopsu placed above Anubi (3 pts each): ran in the higher race of program 1 (race 3)."
+        },
+        {
+          "entryIds": [
+            "entry-az-5",
+            "entry-az-2"
+          ],
+          "explanation": "Anubi placed above Amidi (3 pts each): ran in the higher race of program 1 (race 2)."
         }
       ],
       "locked": true
     },
     {
       "program": 3,
-      "divisionId": "div-mrtgzv0w-33",
+      "divisionId": "div-whippet",
       "races": [
         {
-          "id": "race-mrthjpn9-62",
-          "divisionId": "div-mrtgzv0w-33",
+          "id": "race-p3-div-whippet-1",
+          "divisionId": "div-whippet",
           "program": 3,
           "raceNo": 1,
-          "isHP": true,
+          "isHP": false,
           "slots": [
             {
-              "entryId": "entry-mrtgwrh8-17",
-              "post": 2
-            },
-            {
-              "entryId": "entry-mrtgwtbf-18",
+              "entryId": "entry-wh-235",
               "post": 3
             },
             {
-              "entryId": "entry-mrtgwqa1-16",
-              "post": 4
+              "entryId": "entry-wh-209",
+              "post": 1
             },
             {
-              "entryId": "entry-mrtgwtyq-19",
+              "entryId": "entry-wh-35",
+              "post": 2
+            }
+          ],
+          "outcomes": {
+            "entry-wh-235": {
+              "kind": "DNF"
+            },
+            "entry-wh-209": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-wh-35": {
+              "kind": "placed",
+              "place": 2
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p3-div-whippet-2",
+          "divisionId": "div-whippet",
+          "program": 3,
+          "raceNo": 2,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-wh-179",
+              "post": 2
+            },
+            {
+              "entryId": "entry-wh-128",
               "post": 1
             }
           ],
           "outcomes": {
-            "entry-mrtgwtbf-18": {
-              "kind": "OC"
-            },
-            "entry-mrtgwtyq-19": {
+            "entry-wh-128": {
               "kind": "placed",
               "place": 1
             },
-            "entry-mrtgwrh8-17": {
+            "entry-wh-179": {
+              "kind": "placed",
+              "place": 2
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p3-div-whippet-3",
+          "divisionId": "div-whippet",
+          "program": 3,
+          "raceNo": 3,
+          "isHP": true,
+          "slots": [
+            {
+              "entryId": "entry-wh-251",
+              "post": 4
+            },
+            {
+              "entryId": "entry-wh-51",
+              "post": 1
+            },
+            {
+              "entryId": "entry-wh-288",
+              "post": 3
+            },
+            {
+              "entryId": "entry-sl-1",
+              "post": 2
+            }
+          ],
+          "outcomes": {
+            "entry-wh-251": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-wh-288": {
               "kind": "placed",
               "place": 2
             },
-            "entry-mrtgwqa1-16": {
+            "entry-sl-1": {
+              "kind": "placed",
+              "place": 3
+            },
+            "entry-wh-51": {
+              "kind": "placed",
+              "place": 4
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        }
+      ],
+      "tieDecisions": [
+        {
+          "entryIds": [
+            "entry-wh-51",
+            "entry-wh-288"
+          ],
+          "explanation": "Axl placed above Bandit-S (9 pts each): placed higher (2 vs 3) in the same race of program 2."
+        },
+        {
+          "entryIds": [
+            "entry-wh-179",
+            "entry-wh-128"
+          ],
+          "explanation": "Babs placed above Baker (7 pts each): ran in the higher race of program 2 (race 3)."
+        },
+        {
+          "entryIds": [
+            "entry-wh-209",
+            "entry-wh-35"
+          ],
+          "explanation": "Baja placed above Ailia (5 pts each): placed higher (1 vs 3) in the same race of program 2."
+        }
+      ],
+      "locked": true
+    },
+    {
+      "program": 3,
+      "divisionId": "div-border-collie",
+      "races": [
+        {
+          "id": "race-p3-div-border-collie-1",
+          "divisionId": "div-border-collie",
+          "program": 3,
+          "raceNo": 1,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-bc-20",
+              "post": 1
+            },
+            {
+              "entryId": "entry-bc-9",
+              "post": 2
+            }
+          ],
+          "outcomes": {
+            "entry-bc-20": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-bc-9": {
+              "kind": "placed",
+              "place": 2
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p3-div-border-collie-2",
+          "divisionId": "div-border-collie",
+          "program": 3,
+          "raceNo": 2,
+          "isHP": true,
+          "slots": [
+            {
+              "entryId": "entry-bc-10",
+              "post": 1
+            },
+            {
+              "entryId": "entry-bc-11",
+              "post": 2
+            },
+            {
+              "entryId": "entry-bc-38",
+              "post": 3
+            }
+          ],
+          "outcomes": {
+            "entry-bc-10": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-bc-11": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-bc-38": {
               "kind": "placed",
               "place": 3
             }
@@ -1472,45 +2226,45 @@
           "note": ""
         }
       ],
-      "tieDecisions": [
-        {
-          "entryIds": [
-            "entry-mrtgwtbf-18",
-            "entry-mrtgwqa1-16"
-          ],
-          "explanation": "Jayyl placed above Azhidar (10 pts each): placed higher (1 vs 2) in the same race of program 2."
-        }
-      ],
+      "tieDecisions": [],
       "locked": true
     },
     {
       "program": 3,
-      "divisionId": "div-mrtgzv0w-34",
+      "divisionId": "div-taigan",
       "races": [
         {
-          "id": "race-mrthjpn9-63",
-          "divisionId": "div-mrtgzv0w-34",
+          "id": "race-p3-div-taigan-1",
+          "divisionId": "div-taigan",
           "program": 3,
           "raceNo": 1,
           "isHP": true,
           "slots": [
             {
-              "entryId": "entry-mrtgxkk6-21",
+              "entryId": "entry-taig-1",
+              "post": 2
+            },
+            {
+              "entryId": "entry-taig-2",
               "post": 1
             },
             {
-              "entryId": "entry-mrtgx800-20",
-              "post": 2
+              "entryId": "entry-taig-4",
+              "post": 3
             }
           ],
           "outcomes": {
-            "entry-mrtgxkk6-21": {
+            "entry-taig-1": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-taig-2": {
               "kind": "placed",
               "place": 2
             },
-            "entry-mrtgx800-20": {
+            "entry-taig-4": {
               "kind": "placed",
-              "place": 1
+              "place": 3
             }
           },
           "finished": true,
@@ -1520,6 +2274,123 @@
         }
       ],
       "tieDecisions": [],
+      "locked": true
+    },
+    {
+      "program": 3,
+      "divisionId": "div-mixed",
+      "races": [
+        {
+          "id": "race-p3-div-mixed-1",
+          "divisionId": "div-mixed",
+          "program": 3,
+          "raceNo": 1,
+          "isHP": false,
+          "slots": [
+            {
+              "entryId": "entry-az-5",
+              "post": 2
+            },
+            {
+              "entryId": "entry-bsd-16",
+              "post": 1
+            },
+            {
+              "entryId": "entry-sa-15",
+              "post": 4
+            },
+            {
+              "entryId": "entry-ds-2",
+              "post": 3
+            }
+          ],
+          "outcomes": {
+            "entry-sa-15": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-az-5": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-bsd-16": {
+              "kind": "placed",
+              "place": 3
+            },
+            "entry-ds-2": {
+              "kind": "placed",
+              "place": 4
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        },
+        {
+          "id": "race-p3-div-mixed-2",
+          "divisionId": "div-mixed",
+          "program": 3,
+          "raceNo": 2,
+          "isHP": true,
+          "slots": [
+            {
+              "entryId": "entry-bsd-10",
+              "post": 2
+            },
+            {
+              "entryId": "entry-sa-2",
+              "post": 1
+            },
+            {
+              "entryId": "entry-sa-8",
+              "post": 3
+            },
+            {
+              "entryId": "entry-az-7",
+              "post": 4
+            }
+          ],
+          "outcomes": {
+            "entry-sa-2": {
+              "kind": "placed",
+              "place": 1
+            },
+            "entry-bsd-10": {
+              "kind": "placed",
+              "place": 2
+            },
+            "entry-sa-8": {
+              "kind": "placed",
+              "place": 3
+            },
+            "entry-az-7": {
+              "kind": "placed",
+              "place": 4
+            }
+          },
+          "finished": true,
+          "rerun": false,
+          "splitAllPoints": false,
+          "note": ""
+        }
+      ],
+      "tieDecisions": [
+        {
+          "entryIds": [
+            "entry-bsd-10",
+            "entry-sa-2"
+          ],
+          "explanation": "Baloo placed above Ash (12 pts each): placed higher (1 vs 2) in the same race of program 2."
+        },
+        {
+          "entryIds": [
+            "entry-az-7",
+            "entry-az-5"
+          ],
+          "explanation": "Birdie placed above Anubi (8 pts each): ran in the higher race of program 2 (race 3)."
+        }
+      ],
       "locked": true
     }
   ],

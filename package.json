@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "convert-guide": "node scripts/convert-grading-guide.mjs",
-    "refresh-guide": "node scripts/refresh-grading-guide.mjs"
+    "refresh-guide": "node scripts/refresh-grading-guide.mjs",
+    "build-sample": "vite-node scripts/build-sample-meet.ts"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -18,6 +19,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/node": "20.19.9",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
