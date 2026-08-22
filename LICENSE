@@ -19,3 +19,26 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+SCOPE OF THIS LICENSE / THIRD-PARTY MATERIALS
+
+The MIT license above applies to the code in this repository: the TypeScript,
+HTML, and CSS authored for this app. It does not apply to the following,
+which are included under separate terms:
+
+1. GRADING GUIDE DATA — "src/data/grading-guide.json" is a snapshot derived
+   from the grading guide published by AOK9. That data remains the property of
+   AOK9. It is bundled for reference so the app works offline, and AOK9's
+   published guide is authoritative wherever the two disagree. AOK9's name is
+   used descriptively to identify the rules this app implements. This project
+   is independent and is not authorized, approved, or endorsed by AOK9.
+
+2. LOGO / ICON FILES — "public/favicon.ico", "public/favicon-16x16.png",
+   "public/favicon-32x32.png", "public/apple-touch-icon.png",
+   "public/pwa-192x192.png", "public/pwa-512x512.png", and
+   "public/pwa-maskable-512x512.png" are taken from the Jackrabbit Project
+   logo, a brand mark of the project maintainer. They are included to identify
+   this app. Nothing in the MIT license above grants rights to use that mark
+   for other purposes.
