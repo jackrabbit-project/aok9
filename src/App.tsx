@@ -10,7 +10,7 @@ import { ResultsScreen } from './ui/ResultsScreen';
 import { ExportScreen } from './ui/ExportScreen';
 import { RELEASES_URL } from './ui/common';
 import type { Phase } from './domain/types';
-import jackrabbitIcon from './assets/jackrabbit-icon-40.png';
+import { JackrabbitMark } from './ui/JackrabbitMark';
 
 /* Number and name are separate so the tab can style them differently.
    "4. Program 1" puts two unrelated numbers side by side -- the step's place
@@ -107,7 +107,7 @@ function Shell() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src={jackrabbitIcon} alt="" aria-hidden="true" />
+            <JackrabbitMark />
             The Jackrabbit Project
           </a>
         </div>
