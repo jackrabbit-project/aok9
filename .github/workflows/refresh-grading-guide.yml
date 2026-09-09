@@ -91,9 +91,16 @@ jobs:
           # than accumulating one commit per week.
           git push --force origin "$BRANCH"
           if [ -z "$(gh pr list --head "$BRANCH" --state open --json number --jq '.[].number')" ]; then
-            gh pr create --base main --head "$BRANCH" \
-              --title "Grading Guide: ${SOURCE}" \
-              --body-file "$RUNNER_TEMP/summary.md"
+            if ! gh pr create --base main --head "$BRANCH" \
+                --title "Grading Guide: ${SOURCE}" \
+                --body-file "$RUNNER_TEMP/summary.md"; then
+              # The branch is already pushed at this point, so nothing is lost --
+              # but a bare exit code here cost a month of silence once. Say why.
+              MSG="gh pr create failed. The usual cause: Settings > Actions > General > Workflow permissions > 'Allow GitHub Actions to create and approve pull requests' is off (GitHub's default). Enable it, or open the PR by hand from branch $BRANCH."
+              echo "::error::$MSG"
+              echo "**Pull request not opened.** $MSG" >> "$GITHUB_STEP_SUMMARY"
+              exit 1
+            fi
           else
             gh pr comment "$BRANCH" --body-file "$RUNNER_TEMP/summary.md"
             echo 'Existing pull request updated.' >> "$GITHUB_STEP_SUMMARY"
