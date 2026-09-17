@@ -615,7 +615,23 @@ input.award.overridden { border-color: var(--rust); box-shadow: inset 3px 0 0 va
 /* Race results: two rows of big targets ------------------------------------
    Placements 1..n fill the width of the card as one segmented row; the four
    ways of not placing sit beneath. 40px tall, for a thumb, not a cursor. */
-.outcome-cell { flex-direction: column; gap: 5px; min-width: 200px; }
+.outcome-cell { flex-direction: column; gap: 5px; min-width: 0; }
+/* A race row is a small grid at every width: jacket, dog and points on the
+   first line, the result controls full-width beneath. A race card is never
+   wider than about 560px, and with three across on a desktop the two rows of
+   buttons beside the name overran the card's edge. Cells stay cells for
+   everything but layout, so the markup is one table on every screen. */
+.race-tbl, .race-tbl tbody { display: block; }
+.race-tbl tr {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  column-gap: 6px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+}
+.race-tbl td { border-bottom: 0; padding: 1px 0; }
+.race-tbl .outcome-cell { grid-column: 1 / -1; margin-top: 4px; }
 .seg { display: flex; gap: 4px; }
 .seg button { flex: 1; min-height: 40px; padding: 6px 4px; font-size: 13.5px; letter-spacing: 0.04em; }
 .seg-status button { font-size: 11px; min-height: 36px; }
@@ -661,20 +677,6 @@ input.award.overridden { background: var(--badge-down-bg); box-shadow: inset 3px
 @media (max-width: 640px) {
   .col-wide { display: none; }
   .subline { display: block; }
-  /* A race row becomes a small grid: jacket, dog and points on the first
-     line, the result controls full-width beneath. Cells stay cells for
-     everything but layout, so the markup is one table on every screen. */
-  .race-tbl, .race-tbl tbody { display: block; }
-  .race-tbl tr {
-    display: grid;
-    grid-template-columns: 40px 1fr auto;
-    align-items: center;
-    column-gap: 6px;
-    padding: 7px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .race-tbl td { border-bottom: 0; padding: 1px 0; }
-  .race-tbl .outcome-cell { grid-column: 1 / -1; min-width: 0; margin-top: 4px; }
   .race-foot { flex-direction: column; }
   .race-foot button { width: 100%; min-height: 44px; }
 }
