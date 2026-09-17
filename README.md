@@ -41,6 +41,16 @@ Under **Downloads** (shown once a meet has something in it):
 Under **Try it out**, *Load example meet 1* or *2* fills the app with a finished meet to explore
 without entering anything — 19 dogs in 4 divisions, or 29 in 6.
 
+## Look and feel
+
+The app shares its design language with [stats.gazehound.io](https://stats.gazehound.io/), the
+Jackrabbit Project's ASFA site: warm paper, one accent, Fraunces for titles and IBM Plex Mono for
+labels and numbers. Both fonts are self-hosted under the SIL Open Font License (see `LICENSE`) so
+they are in the offline precache and the app looks the same with no signal. Everything is built
+for a phone at a field first — big targets for entering results, tables that scroll inside their
+own box, numbers rounded for reading — and there is no dark theme; the tokens in `src/styles.css`
+are laid out so one can be added by redefining them.
+
 ## Running it from source
 
 ```
@@ -126,10 +136,11 @@ is how you get a demo that disagrees with the rules it is demonstrating.
 
 ## Tests
 
-`npm test` — 72 unit tests covering Figure 8.1 (all rows), points tables 8.2A/8.2B, dead-heat
+`npm test` — 82 unit tests covering Figure 8.1 (all rows), points tables 8.2A/8.2B, dead-heat
 splitting, DQ redistribution, WAVE formulas, rotation tie chain, and every worked example in the
 rule book (TRC examples 5.7 #1–2, the eligible-entry example in 5.2), plus a Grading Guide layout
-check, a report-export test, and assertions run over both bundled example meets.
+check, a report-export test, assertions run over both bundled example meets, and the header's
+step-progress rules and number formatting.
 
 ## Reporting a problem
 

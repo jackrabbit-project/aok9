@@ -4,6 +4,7 @@ import { computeDivisionResults } from '../domain/championship';
 import { downloadReport } from '../io/reportExport';
 import { downloadBackup } from '../io/backup';
 import { Hint, Section } from './common';
+import { pts } from './fmt';
 
 export function ExportScreen() {
   const { state } = useMeet();
@@ -80,7 +81,7 @@ export function ExportScreen() {
                         <td>{s.place}</td>
                         <td>{e.callName}</td>
                         <td>{e.owner ?? ''}</td>
-                        <td>{s.total}</td>
+                        <td>{pts(s.total)}</td>
                         <td>{a.brc || ''}</td>
                         <td>{a.nbrc || ''}</td>
                         <td>{a.mrc || ''}</td>

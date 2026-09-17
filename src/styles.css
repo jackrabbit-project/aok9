@@ -370,6 +370,9 @@ button.sm { padding: 6px 9px; font-size: 11px; }
   white-space: nowrap;
 }
 .tbl tbody tr:hover { background: rgba(232, 239, 234, 0.55); }
+/* A dog's name never breaks mid-word to make room for a column; the table
+   scrolls inside its wrapper instead. */
+.tbl td > b { white-space: nowrap; }
 .tbl select, .tbl input:not(.award) { padding: 5px 8px; font-size: 14px; }
 tr.scratched td { opacity: 0.45; text-decoration: line-through; }
 .btn-cell { display: flex; gap: 6px; }
