@@ -75,7 +75,11 @@ export default defineConfig({
       devOptions: { enabled: false },
     }),
   ],
-  base: './',
+  // Absolute, not './'. The app has no routes, and every unknown path falls
+  // back to index.html -- with relative asset paths, a nested address such as
+  // /r/<key> on a deployment without the results Functions asked for
+  // /r/assets/index.js, got index.html back, and rendered a blank page.
+  base: '/',
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
     __BUILD_SHA__: JSON.stringify(buildSha()),
