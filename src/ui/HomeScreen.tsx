@@ -48,10 +48,12 @@ export function HomeScreen() {
 
   return (
     <div className="landing">
-      <h1>AOK9 Sprint Race Secretary</h1>
-      <p className="subtitle">
-        Offline app for running an official R.A.C.E. AOK9 Sprint Racing meet per Rule Book v3.0.
-      </p>
+      <div className="hero">
+        <h1>AOK9 Sprint Race Secretary</h1>
+        <p className="subtitle">
+          Offline app for running an official R.A.C.E. AOK9 Sprint Racing meet per Rule Book v3.0.
+        </p>
+      </div>
 
       <Section title="Get the app">
         <InstallApp />
@@ -62,20 +64,35 @@ export function HomeScreen() {
             "Continue" answers a question nobody asked. Show the first action
             instead, and keep the summary for when there is one to show. */}
         {started ? (
-          <div className="kv">
-            <span>Club</span>
-            <span>{state.info.clubName || '—'}</span>
-            <span>Meet ID</span>
-            <span>{state.info.meetId || '—'}</span>
-            <span>Date</span>
-            <span>{state.info.date}</span>
-            <span>Entries</span>
-            <span>{state.entries.length}</span>
-            <span>Divisions</span>
-            <span>{state.divisions.length}</span>
-            <span>Programs run</span>
-            <span>{programsRun(state)} / 3</span>
-          </div>
+          <>
+            <div className="kv">
+              <span>Club</span>
+              <span>{state.info.clubName || '—'}</span>
+              <span>Meet ID</span>
+              <span>{state.info.meetId || '—'}</span>
+              <span>Date</span>
+              <span>{state.info.date}</span>
+            </div>
+            {/* The three numbers that say how far along the meet is, set large
+                enough to read from across a table. */}
+            <div className="tiles">
+              <div className="tile">
+                <div className="tile-value">{state.entries.length}</div>
+                <div className="tile-label">Entries</div>
+              </div>
+              <div className="tile">
+                <div className="tile-value">{state.divisions.length}</div>
+                <div className="tile-label">Divisions</div>
+              </div>
+              <div className="tile">
+                <div className="tile-value">
+                  {programsRun(state)}
+                  <span className="tile-of">/3</span>
+                </div>
+                <div className="tile-label">Programs run</div>
+              </div>
+            </div>
+          </>
         ) : (
           <p>
             No meet loaded yet. Start a new one, open a meet you saved earlier, or load one of the

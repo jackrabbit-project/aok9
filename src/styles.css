@@ -1,102 +1,230 @@
+/* AOK9 Race Secretary — stylesheet.
+
+   Shares its design language with stats.gazehound.io (the Jackrabbit
+   Project's ASFA site): warm paper, ink, green for links, rust for the one
+   thing that is selected or special, Fraunces for titles, IBM Plex Mono for
+   labels and numbers. Body text is the system sans on both.
+
+   The one thing that governs the choices below: this app is operated at a
+   field, on a phone, in sunlight, by someone entering race results under
+   time pressure. Contrast stays high, targets stay big, and the four jacket
+   colours stay the only saturated hues inside a race card. */
+
+/* Fonts -- self-hosted (SIL OFL, see LICENSE) so they load offline from the
+   precache. Fraunces is a variable font; weights below pick from its axis. */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fonts/fraunces-latin-var.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/fonts/plex-mono-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  src: url('/fonts/plex-mono-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --bg: #fafbfc;
-  --card: #ffffff;
-  --ink: #1a2330;
-  --muted: #5b6a7d;
-  --line: #dfe4ea;
-  --primary: #171f2e;
-  --accent: #14532d;
-  --accent-2: #1d7a46;
-  --warn-bg: #fff4e0;
-  --warn-line: #e0a63a;
-  --danger: #c22a22;
+  /* Palette: the stats site's light tokens, as hex. Dark is deliberately
+     left out; add it by redefining these. */
+  --paper: #f7f5ef;        /* page canvas */
+  --panel: #e8efea;        /* tiles, hero band, row hover */
+  --surface: #fcfbf6;      /* cards, dropdowns */
+  --ink: #2b2a26;          /* text, primary buttons */
+  --ink-muted: #6e6c64;    /* captions, labels, idle nav */
+  --line: #dcd8cc;         /* hairlines */
+  --line-strong: #c9c4b6;  /* input borders, thead rule */
+  --green: #2c6e49;        /* links, done */
+  --green-hi: #1f4c33;
+  --rust: #a44a2f;         /* selected, active, focus ring, special */
+  --rust-hi: #7a3422;
+  --well: #22261f;         /* footer */
+  --well-ink: #f7f5ef;
+  /* Destructive and DQ/SCR. Deep and desaturated so it cannot be mistaken
+     for the red jacket (#c62828) sitting a few pixels away in a race card. */
+  --danger: #8e2c2c;
+
+  --badge-up-bg: #dcebe1;   --badge-up-ink: #1f4c33;
+  --badge-down-bg: #f3e0da; --badge-down-ink: #7a3422;
+  --badge-new-bg: #e8efea;  --badge-new-ink: #2c6e49;
+  --badge-flat-bg: #edece6; --badge-flat-ink: #6b675e;
+  --badge-prov-bg: #f8efd8; --badge-prov-ink: #775912;
+
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Names the rest of the app grew up with, kept as aliases. */
+  --bg: var(--paper);
+  --card: var(--surface);
+  --muted: var(--ink-muted);
+  --primary: var(--ink);
+  --accent: var(--rust);
+  --accent-2: var(--green);
+  --warn-bg: var(--badge-prov-bg);
+  --warn-line: #dcc283;
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--ink);
   font-size: 15px;
+  line-height: 1.45;
 }
 
-.app { min-height: 100vh; display: flex; flex-direction: column; }
-main { flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 16px; }
+h1, h2, h3 { font-family: var(--font-display); color: var(--ink); text-wrap: balance; }
+h1 { font-weight: 580; letter-spacing: -0.015em; line-height: 1.1; }
+h2 { font-weight: 560; letter-spacing: -0.005em; line-height: 1.2; }
+h3 { font-weight: 550; line-height: 1.25; }
+p { text-wrap: pretty; }
 
-/* Header */
+/* Type utilities */
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+.label, .eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+/* One focus treatment for everything, in the accent, offset so it never
+   hides a border. Keyboard users get it; mouse users do not see it flash. */
+:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+
+a {
+  color: var(--green);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+a:hover { color: var(--rust); text-decoration-thickness: 2px; }
+
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 20px 16px 28px; }
+
+/* Header ----------------------------------------------------------------- */
 .app-header {
-  background: #fff;
-  color: var(--ink);
+  background: var(--paper);
   border-bottom: 1px solid var(--line);
-  padding: 6px 18px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
   position: sticky;
   top: 0;
   z-index: 10;
 }
+.app-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 20px;
+}
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   background: none;
   border: none;
   color: var(--ink);
-  font-weight: 700;
-  font-size: 16px;
-  padding: 8px 10px 8px 0;
+  padding: 4px 0;
   cursor: pointer;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: 0;
 }
-.steps { display: flex; flex-wrap: wrap; gap: 2px; flex: 1; }
-.step {
-  background: transparent;
-  color: #33404f;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14.5px;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
+.brand:hover { background: none; border: none; }
+.brand .jackrabbit-mark { width: 30px; height: 30px; color: var(--rust); flex: none; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 19px;
+  white-space: nowrap;
 }
-/* Set back, so "4  Program 1" is not read as one number. Tabular figures keep
-   the digits the same width, which stops the row shifting between steps. */
-.step-n {
-  color: var(--muted);
-  font-size: 12.5px;
-  font-variant-numeric: tabular-nums;
-}
-.step-name { color: inherit; }
-.step:hover { background: #f0f3f6; }
-/* Bold alone was doing all the work of showing where you are, which is easy to
-   miss in a row of eight. The underline gives it a second, louder signal. */
-.step.active {
-  color: #000;
-  font-weight: 700;
-  box-shadow: inset 0 -2px 0 var(--accent);
-  border-radius: 6px 6px 0 0;
-}
-.step.active .step-n { color: var(--accent); font-weight: 700; }
-.save-status {
-  margin-left: auto;
-  color: var(--muted);
-  font-size: 13px;
+.brand-sub {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
   white-space: nowrap;
 }
 
-/* Step picker: the phone alternative to the eight step buttons above. */
-.steps-picker { display: none; flex: 1; min-width: 0; }
-.steps-picker select {
-  width: 100%;
-  max-width: 260px;
-  padding: 7px 10px;
-  font-size: 15px;
-  color: var(--ink);
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 6px;
+/* Steps: underline tabs, as on the stats site. The number is only position,
+   so it is set back; a done step swaps its number for a green check so the
+   header carries the meet's progress, not just its place. */
+/* The tabs get a row of their own under the brand and the save readout, as
+   the stats site's nav does. Eight mono-caps tabs beside a two-line brand and
+   a timestamp wrapped into two ragged rows even at 1280px; one clean row
+   under them costs 36px of height and reads as a progress bar. */
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2px;
+  order: 3;
+  flex-basis: 100%;
+  border-top: 1px solid var(--line);
+  margin-top: 4px;
 }
+.step {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  padding: 11px 9px 8px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  cursor: pointer;
+  transition: color 180ms, border-color 180ms;
+}
+.step:hover { color: var(--ink); background: transparent; border-bottom-color: var(--line-strong); }
+.step:active { transform: none; }
+.step-n { font-size: 10.5px; font-variant-numeric: tabular-nums; color: var(--ink-muted); min-width: 1.1em; }
+.step-name { color: inherit; }
+.step.done .step-n { color: var(--green); }
+.step.active { color: var(--ink); border-bottom-color: var(--rust); }
+.step.active .step-n { color: var(--rust); }
+.save-status {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+/* Step picker: the phone alternative to the eight tabs above. */
+.steps-picker { display: none; flex: 1; min-width: 0; }
+.steps-picker select { width: 100%; max-width: 260px; padding: 8px 10px; font-size: 15px; }
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
@@ -107,189 +235,313 @@ main { flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; padding: 16px; }
   border: 0;
 }
 
-/* Sections */
+/* Cards ------------------------------------------------------------------ */
 .section {
-  background: var(--card);
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 14px 16px;
+  padding: 18px 20px 20px;
+  margin-bottom: 16px;
+}
+.section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px 16px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 9px;
   margin-bottom: 14px;
 }
-.section-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-.section h2 { margin: 0 0 8px; font-size: 18px; }
-
-/* Forms */
-.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
-label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
-input, select {
-  padding: 8px 10px;
+.section h2 { margin: 0; font-size: 21px; }
+.section-right:empty { display: none; }
+/* A note that is part of the record -- tie decisions, a seasonal notice --
+   gets the rust rule down the left edge, the same cue as a selected chip. */
+.callout, .tie-box {
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  box-shadow: inset 3px 0 0 var(--rust);
+  padding: 10px 14px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+.tie-box ul { margin: 6px 0 0; padding-left: 20px; }
+.totals { margin-top: 12px; }
+
+/* Forms ------------------------------------------------------------------ */
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+}
+input, select, textarea {
+  font-family: var(--font-body);
   font-size: 15px;
   color: var(--ink);
-  background: #fff;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  padding: 9px 11px;
+  transition: border-color 180ms;
 }
-input.search { width: 100%; font-size: 16px; padding: 10px 12px; }
-
-/* Buttons */
-button {
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 9px 14px;
+input:hover, select:hover { border-color: var(--ink-muted); }
+input:focus, select:focus { border-color: var(--rust); outline-offset: 0; }
+input.search { width: 100%; font-size: 16px; padding: 11px 13px; }
+/* Checkbox rows are sentences, not labels. */
+.row-check {
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  font-family: var(--font-body);
   font-size: 14px;
-  cursor: pointer;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink);
 }
-button:disabled { opacity: 0.45; cursor: not-allowed; }
-button.secondary { background: #fff; color: var(--ink); border: 1px solid var(--line); }
-button.danger { background: var(--danger); }
-button.outline-danger { background: #fff; color: var(--danger); border: 1px solid var(--danger); }
-button.big { font-size: 17px; padding: 12px 22px; }
-button.sm { padding: 4px 8px; font-size: 12.5px; }
-.btn-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 8px 0; }
-.sticky-actions { position: sticky; bottom: 8px; background: var(--bg); padding: 8px; border-radius: 8px; }
+.row-check.sm { margin: 0; font-size: 13px; }
+.row-check input { accent-color: var(--rust); }
 
-/* Tables */
-.tbl { width: 100%; border-collapse: collapse; margin-top: 8px; }
-.tbl th, .tbl td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
-.tbl th { font-size: 12.5px; text-transform: uppercase; color: var(--muted); }
+/* Buttons ---------------------------------------------------------------- */
+button {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 180ms, border-color 180ms, color 180ms, transform 120ms;
+}
+button:hover { background: #45433c; border-color: #45433c; }
+button:active { transform: scale(0.98); }
+button:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+button.secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+button.secondary:hover { background: transparent; border-color: var(--ink); }
+button.quiet { background: transparent; color: var(--ink); border-color: transparent; }
+button.quiet:hover { border-color: var(--line-strong); background: rgba(232, 239, 234, 0.5); }
+button.danger { background: var(--danger); border-color: var(--danger); }
+button.danger:hover { background: #6f2222; border-color: #6f2222; }
+button.outline-danger { background: transparent; color: var(--danger); border-color: var(--danger); }
+button.outline-danger:hover { background: var(--badge-down-bg); }
+button.big { font-size: 13px; letter-spacing: 0.08em; padding: 14px 22px; }
+button.sm { padding: 6px 9px; font-size: 11px; }
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 10px 0 4px; }
+.sticky-actions {
+  position: sticky;
+  bottom: 8px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 10px;
+  margin-top: 8px;
+  box-shadow: 0 -8px 20px rgba(43, 42, 38, 0.06);
+}
+
+/* Tables ----------------------------------------------------------------- */
+/* Wide tables scroll inside their own box rather than stretching the page;
+   on a phone that is the difference between usable and zoomed-out. */
+.tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tbl { width: 100%; border-collapse: collapse; margin-top: 4px; }
+.tbl th, .tbl td { text-align: left; padding: 8px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.tbl th {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  border-bottom: 1px solid var(--line-strong);
+  white-space: nowrap;
+}
+.tbl tbody tr:hover { background: rgba(232, 239, 234, 0.55); }
+.tbl select, .tbl input:not(.award) { padding: 5px 8px; font-size: 14px; }
 tr.scratched td { opacity: 0.45; text-decoration: line-through; }
 .btn-cell { display: flex; gap: 6px; }
 
-/* Badges & chips */
+/* Badges & chips ---------------------------------------------------------- */
 .badge {
   display: inline-block;
   margin-left: 6px;
   padding: 2px 6px;
-  font-size: 11px;
-  font-weight: 700;
-  border-radius: 4px;
-  background: #e2e8f0;
-  color: #334;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--badge-flat-bg);
+  color: var(--badge-flat-ink);
   vertical-align: middle;
 }
-.badge.hp { background: #14532d; color: #fff; }
-.badge.fte { background: #eaddff; color: #4a2c82; }
-.badge.leftover { background: #ffe1bb; color: #7c4a00; }
+.badge.hp { background: var(--badge-new-bg); color: var(--badge-new-ink); }
+.badge.fte { background: var(--badge-flat-bg); color: var(--badge-flat-ink); }
+.badge.leftover { background: var(--badge-down-bg); color: var(--badge-down-ink); }
 
-/* Championship title toggles (editable — the guide only lets us guess) */
+/* Championship title toggles (editable -- the guide only lets us guess) */
 .title-toggles { white-space: nowrap; }
 .title-chip {
-  background: #eef1f5;
-  color: #8a94a2;
+  background: var(--surface);
+  color: var(--ink-muted);
   border: 1px solid var(--line);
-  font-weight: 700;
-  font-size: 11px;
-  padding: 3px 6px;
+  font-size: 10.5px;
+  padding: 4px 6px;
   margin-right: 3px;
 }
-.title-chip.on { background: var(--primary); color: #fff; border-color: var(--primary); }
+.title-chip:hover { background: var(--surface); border-color: var(--ink-muted); }
+.title-chip.on, .title-chip.on:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
+/* Jackets keep their four saturated colours and a soft corner: they stand for
+   a physical object, and nothing else in the app may borrow them. */
 .jacket {
   display: inline-flex;
   width: 30px;
   height: 30px;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 5px;
   border: 2px solid transparent;
-  font-weight: 800;
+  font-family: var(--font-mono);
+  font-weight: 500;
   font-size: 15px;
 }
-.jacket.unset { background: #eee; color: #999; border-color: #ccc; }
+.jacket.unset { background: var(--badge-flat-bg); color: var(--ink-muted); border-color: var(--line-strong); }
 
-/* Divisions */
-.division-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; margin-top: 10px; }
-.division-card { border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fbfcfe; }
+/* Divisions -------------------------------------------------------------- */
+.division-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; margin-top: 4px; }
+.division-card { border: 1px solid var(--line); padding: 12px; background: var(--paper); }
 .division-head { display: flex; gap: 6px; align-items: center; }
-.division-name { flex: 1; font-weight: 700; }
+.division-name { flex: 1; font-weight: 700; min-width: 0; }
 .dog-list { list-style: none; margin: 8px 0 0; padding: 0; }
 .dog-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 6px;
-  padding: 5px 4px;
-  border-bottom: 1px dashed var(--line);
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--line);
 }
 .dog-actions { display: flex; gap: 4px; align-items: center; }
-.row-check { flex-direction: row; align-items: center; gap: 6px; margin-top: 6px; font-size: 13.5px; }
-.row-check.sm { margin: 0; font-size: 12.5px; }
 
-/* Races */
-.race-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; margin-top: 8px; }
-.race-card { border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fbfcfe; }
-.race-card.done { border-color: var(--accent-2); box-shadow: inset 3px 0 0 var(--accent-2); }
+/* Races ------------------------------------------------------------------ */
+.race-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; margin-top: 4px; }
+.race-card { border: 1px solid var(--line); padding: 12px; background: var(--paper); }
+.race-card.done { border-color: var(--green); box-shadow: inset 3px 0 0 var(--green); }
 .race-head { display: flex; justify-content: space-between; align-items: center; gap: 6px; flex-wrap: wrap; }
+.race-head > b { font-family: var(--font-display); font-weight: 560; font-size: 17px; }
 .race-flags { display: flex; gap: 8px; align-items: center; }
-.race-tbl td { border-bottom: 1px dashed var(--line); }
+.race-tbl td { border-bottom: 1px solid var(--line); }
 .post-cell { width: 36px; }
 .outcome-cell { display: flex; gap: 3px; flex-wrap: wrap; }
-.outcome-cell .pl { background: #e8edf2; color: var(--ink); min-width: 30px; }
-/* Navy, not the accent green: these chips are numbered 1..4 and sit inches
-   from the jacket chips, which are also numbered 1..4 and include a green 4.
-   A green "3" here read as a jacket. Navy is what .title-chip.on already uses
-   for a chosen value, so selection stays one colour across the app and none of
-   the four jacket colours is spent on meaning something else. */
-.outcome-cell .pl.on { background: var(--primary); color: #fff; }
-.outcome-cell .st { background: #f3e8e8; color: #7a2e2e; }
-.outcome-cell .st.on { background: var(--danger); color: #fff; }
-.pts-cell { font-weight: 700; white-space: nowrap; }
-.race-foot { display: flex; gap: 8px; margin-top: 8px; }
+.outcome-cell .pl { background: var(--panel); color: var(--ink); border-color: var(--line); min-width: 30px; }
+.outcome-cell .pl:hover { background: var(--panel); border-color: var(--ink-muted); }
+.outcome-cell .st:hover { background: var(--badge-down-bg); }
+.tile-of { font-size: 18px; color: var(--ink-muted); margin-left: 2px; }
+/* Ink, not a colour: these chips are numbered 1..4 and sit inches from the
+   jacket chips, which are also numbered 1..4. A coloured "3" here reads as a
+   jacket. Ink is what every other chosen value in the app uses. */
+.outcome-cell .pl.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.outcome-cell .st { background: transparent; color: var(--danger); border-color: var(--danger); }
+.outcome-cell .st.on { background: var(--danger); color: var(--paper); }
+.pts-cell { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+.race-foot { display: flex; gap: 8px; margin-top: 10px; }
 .race-foot .note { flex: 1; }
 .swap-target { cursor: pointer; }
-tr.picked td { background: #fff3c4; }
+tr.picked td { background: var(--badge-prov-bg); }
 
-.tie-box { background: #eef4ff; border: 1px solid #b9cdf3; border-radius: 8px; padding: 8px 12px; margin: 8px 0; font-size: 14px; }
-.tie-box ul { margin: 6px 0 0; padding-left: 20px; }
-.totals { margin-top: 10px; }
+/* Results ---------------------------------------------------------------- */
+input.award { width: 66px; padding: 5px 6px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+input.award.overridden { border-color: var(--rust); box-shadow: inset 3px 0 0 var(--rust); }
+.trophies { margin-top: 12px; font-size: 14.5px; }
+.explain { font-size: 13.5px; color: var(--ink-muted); }
+.flags { color: var(--danger); font-family: var(--font-mono); font-size: 11.5px; }
 
-/* Results */
-input.award { width: 64px; padding: 4px 6px; }
-input.award.overridden { border-color: var(--warn-line); background: var(--warn-bg); }
-.trophies { margin-top: 10px; font-size: 14.5px; }
-.explain { font-size: 13.5px; color: var(--muted); }
-.flags { color: var(--danger); font-size: 12.5px; }
-
-/* Footer */
+/* Footer: the dark well, as on the stats site. ---------------------------- */
 .app-footer {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 16px 16px 24px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
+  background: var(--well);
+  color: rgba(247, 245, 239, 0.85);
   font-size: 13px;
+  padding: 22px 16px 28px;
+  margin-top: 28px;
 }
-.footer-inner.narrow { max-width: 1000px; margin: 0 auto; }
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-inner.narrow { max-width: 1000px; }
+.app-footer a { color: var(--well-ink); }
+.app-footer a:hover { color: var(--well-ink); text-decoration-thickness: 2px; }
 .jackrabbit-link { white-space: nowrap; }
 /* Stays an inline link so its text keeps the footer's baseline; only the mark
    is shifted, -3px centring the 15px mark against 13px text. */
 .jackrabbit-link .jackrabbit-mark { height: 15px; width: 15px; margin-right: 5px; vertical-align: -3px; }
 
-/* Landing page */
+/* Landing page ----------------------------------------------------------- */
 .landing { max-width: 1000px; margin: 0 auto; }
-.landing h1 { font-size: 34px; margin: 22px 0 4px; }
-.landing .subtitle { color: var(--muted); font-size: 17px; margin: 0 0 20px; }
+.hero {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 26px 24px 22px;
+  margin-bottom: 16px;
+}
+.landing h1 { font-size: 36px; margin: 0 0 6px; }
+.landing .subtitle { color: var(--ink-muted); font-size: 16px; margin: 0; }
+/* The loaded meet at a glance: numbers set in the display face, labels in
+   mono, the stats site's stat tile. */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 6px 0 14px; }
+.tile { background: var(--panel); border: 1px solid var(--line); padding: 12px 14px 11px; }
+.tile-value {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--ink);
+}
+.tile-label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  opacity: 0.7;
+  margin-top: 6px;
+}
 .kv {
   display: grid;
   grid-template-columns: minmax(140px, 320px) 1fr;
-  row-gap: 10px;
+  row-gap: 8px;
   margin: 8px 0 16px;
-  font-size: 15.5px;
+  font-size: 15px;
 }
-.kv > span:nth-child(odd) { color: var(--muted); }
+.kv > span:nth-child(odd) {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  align-self: center;
+}
 .howto { margin: 8px 0; padding-left: 22px; }
 .howto li { margin: 7px 0; }
 /* What each bundled sample meet contains, so the choice between the two
    buttons below is made before pressing one rather than after. */
 .sample-list { margin: 8px 0 12px; padding-left: 22px; font-size: 14px; }
 .sample-list li { margin: 6px 0; line-height: 1.5; }
-.muted { color: var(--muted); }
+.muted { color: var(--ink-muted); }
 .small { font-size: 13.5px; }
-a { color: #14548a; }
-a:hover { color: #0d3a61; }
 .links { margin: 8px 0; padding-left: 22px; }
 .links li { margin: 7px 0; }
 /* Share buttons */
@@ -298,32 +550,37 @@ a:hover { color: #0d3a61; }
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 8px 13px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: #fff;
+  padding: 8px 12px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
   color: var(--ink);
-  font-size: 14px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   text-decoration: none;
   cursor: pointer;
+  transition: border-color 180ms;
 }
-.share-btn:hover { background: #f0f3f6; color: var(--ink); }
-.share-btn svg { width: 17px; height: 17px; fill: currentColor; }
+.share-btn:hover { border-color: var(--ink); color: var(--ink); background: transparent; }
+.share-btn svg { width: 16px; height: 16px; fill: currentColor; }
 
-.disclaimer summary { cursor: pointer; color: #14548a; margin-top: 4px; }
-.disclaimer p { font-size: 14px; color: #33404f; line-height: 1.55; }
-.howto-details summary { cursor: pointer; color: #14548a; margin: 2px 0 4px; }
+.disclaimer summary { cursor: pointer; color: var(--green); margin-top: 4px; }
+.disclaimer p { font-size: 14px; color: var(--ink); line-height: 1.55; }
+.howto-details summary { cursor: pointer; color: var(--green); margin: 2px 0 4px; }
 
-/* Notices */
+/* Notices ---------------------------------------------------------------- */
 .warn {
-  background: var(--warn-bg);
+  background: var(--badge-prov-bg);
   border: 1px solid var(--warn-line);
-  border-radius: 6px;
-  padding: 8px 12px;
+  box-shadow: inset 3px 0 0 var(--badge-prov-ink);
+  color: var(--ink);
+  padding: 9px 13px;
   margin: 8px 0;
   font-size: 14px;
 }
-.hint { color: var(--muted); font-size: 13.5px; margin: 8px 0; }
+.hint { color: var(--ink-muted); font-size: 13.5px; margin: 8px 0; }
 
 /* Update prompt -- pinned so it is noticed, sized so it never blocks the page.
    Wraps rather than overflowing on a phone. */
@@ -340,17 +597,16 @@ a:hover { color: #0d3a61; }
   gap: 8px 16px;
   max-width: 640px;
   margin: 0 auto;
-  background: var(--card);
-  border: 1px solid var(--warn-line);
-  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: inset 3px 0 0 var(--rust), 0 8px 24px rgba(43, 42, 38, 0.18);
   padding: 10px 14px;
-  box-shadow: 0 6px 20px rgba(23, 31, 46, 0.18);
   font-size: 14px;
 }
 .update-prompt-text { display: flex; flex-direction: column; min-width: 0; }
-.update-prompt-note { color: var(--muted); font-size: 12.5px; }
+.update-prompt-note { color: var(--ink-muted); font-size: 12.5px; }
 .update-prompt-actions { display: flex; gap: 8px; flex-shrink: 0; }
-.update-prompt-actions button { padding: 6px 14px; font-size: 14px; }
+.update-prompt-actions button { padding: 7px 14px; font-size: 11.5px; }
 
 
 /* Small screens ----------------------------------------------------------
@@ -364,16 +620,23 @@ a:hover { color: #0d3a61; }
 @media (max-width: 640px) {
   /* Still wraps, so the save line drops to its own row beneath the brand and
      picker, which share row one. */
-  .app-header { padding: 6px 12px; gap: 4px 8px; }
-  .brand { font-size: 15px; padding: 6px 8px 6px 0; white-space: nowrap; }
+  .app-header-inner { padding: 6px 12px; gap: 4px 10px; }
+  .brand { gap: 8px; }
+  .brand .jackrabbit-mark { width: 24px; height: 24px; }
+  .brand-name { font-size: 16px; }
+  .brand-sub { display: none; }
   .steps { display: none; }
   .steps-picker { display: block; }
   .save-status {
     flex-basis: 100%;
     margin-left: 0;
-    font-size: 12px;
+    font-size: 10.5px;
     white-space: normal;
   }
+  main { padding: 14px 12px 24px; }
+  .section { padding: 14px 14px 16px; }
+  .hero { padding: 20px 16px 18px; }
+  .landing h1 { font-size: 29px; }
   /* A 140px minimum label left too little for the value: club names broke
      across three lines and dates read "2026-" / "07-20". */
   .kv { grid-template-columns: minmax(88px, 38%) 1fr; column-gap: 12px; }

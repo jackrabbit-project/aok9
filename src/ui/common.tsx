@@ -33,6 +33,23 @@ export function Section({
   );
 }
 
+/** A data table that scrolls inside its own box when it is wider than the
+    screen. Without the wrapper a ten-column table stretches the whole page
+    to its width, and on a phone the app renders zoomed out. */
+export function Table({
+  className = '',
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="tbl-wrap">
+      <table className={`tbl ${className}`.trim()}>{children}</table>
+    </div>
+  );
+}
+
 const JACKET_CSS: Record<number, { bg: string; fg: string; border?: string }> = {
   1: { bg: '#c62828', fg: '#fff' },
   2: { bg: '#1565c0', fg: '#fff' },

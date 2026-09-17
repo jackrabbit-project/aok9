@@ -9,27 +9,14 @@ import { ProgramScreen } from './ui/ProgramScreen';
 import { ResultsScreen } from './ui/ResultsScreen';
 import { ExportScreen } from './ui/ExportScreen';
 import { RELEASES_URL } from './ui/common';
+import { STEPS, stepStatus } from './ui/steps';
 import type { Phase } from './domain/types';
 import { JackrabbitMark } from './ui/JackrabbitMark';
-
-/* Number and name are separate so the tab can style them differently.
-   "4. Program 1" puts two unrelated numbers side by side -- the step's place
-   in the sequence and the program's own number -- and they read as one. The
-   step number is only position, so it is set back and the name leads. */
-const STEPS: { phase: Phase; n: number; name: string }[] = [
-  { phase: 'setup', n: 1, name: 'Meet setup' },
-  { phase: 'entries', n: 2, name: 'Entries' },
-  { phase: 'divisions', n: 3, name: 'Divisions' },
-  { phase: 'program1', n: 4, name: 'Program 1' },
-  { phase: 'program2', n: 5, name: 'Program 2' },
-  { phase: 'program3', n: 6, name: 'Program 3' },
-  { phase: 'results', n: 7, name: 'Results' },
-  { phase: 'export', n: 8, name: 'Export' },
-];
 
 function Shell() {
   const { state, dispatch, lastSaved } = useMeet();
   const phase = state.phase;
+  const progress = stepStatus(state);
   const status = [
     state.info.meetId || null,
     `${state.entries.length} dogs`,
@@ -40,43 +27,59 @@ function Shell() {
   return (
     <div className="app">
       <header className="app-header">
-        <button className="brand" onClick={() => dispatch({ type: 'setPhase', phase: 'home' })}>
-          AOK9 Race Secretary
-        </button>
-        <nav className="steps">
-          {STEPS.map((s) => (
-            <button
-              key={s.phase}
-              className={`step ${phase === s.phase ? 'active' : ''}`}
-              // Two spans with a CSS gap read as "4Program 1" to a screen
-              // reader, so spell the name out and mark which one is current.
-              aria-label={`Step ${s.n}: ${s.name}`}
-              aria-current={phase === s.phase ? 'step' : undefined}
-              onClick={() => dispatch({ type: 'setPhase', phase: s.phase })}
+        <div className="app-header-inner">
+          <button className="brand" onClick={() => dispatch({ type: 'setPhase', phase: 'home' })}>
+            <JackrabbitMark />
+            <span className="brand-text">
+              <span className="brand-name">AOK9 Race Secretary</span>
+              <span className="brand-sub">Sprint meets · Rule Book v3.0</span>
+            </span>
+          </button>
+          {/* Number and name are separate so the tab can style them differently.
+              "4. Program 1" puts two unrelated numbers side by side -- the step's
+              place in the sequence and the program's own number -- and they read
+              as one. The number is only position, so it is set back and the name
+              leads; a finished step shows a check in its place instead. */}
+          <nav className="steps">
+            {STEPS.map((s) => {
+              const st = progress[s.phase];
+              return (
+                <button
+                  key={s.phase}
+                  className={`step ${st === 'current' ? 'active' : ''} ${st === 'done' ? 'done' : ''}`}
+                  // Two spans with a CSS gap read as "4Program 1" to a screen
+                  // reader, so spell the name out and mark which one is current.
+                  aria-label={`Step ${s.n}: ${s.name}${st === 'done' ? ' (done)' : ''}`}
+                  aria-current={st === 'current' ? 'step' : undefined}
+                  onClick={() => dispatch({ type: 'setPhase', phase: s.phase })}
+                >
+                  <span className="step-n" aria-hidden="true">
+                    {st === 'done' ? '✓' : s.n}
+                  </span>
+                  <span className="step-name">{s.name}</span>
+                </button>
+              );
+            })}
+          </nav>
+          {/* Phones get a picker instead. Eight buttons wrap to three rows there,
+              and the header is sticky, so the nav was holding a third to nearly
+              half of the screen permanently. CSS swaps which of the two shows. */}
+          <label className="steps-picker">
+            <span className="sr-only">Go to step</span>
+            <select
+              value={phase}
+              onChange={(e) => dispatch({ type: 'setPhase', phase: e.target.value as Phase })}
             >
-              <span className="step-n">{s.n}</span>
-              <span className="step-name">{s.name}</span>
-            </button>
-          ))}
-        </nav>
-        {/* Phones get a picker instead. Eight buttons wrap to three rows there,
-            and the header is sticky, so the nav was holding a third to nearly
-            half of the screen permanently. CSS swaps which of the two shows. */}
-        <label className="steps-picker">
-          <span className="sr-only">Go to step</span>
-          <select
-            value={phase}
-            onChange={(e) => dispatch({ type: 'setPhase', phase: e.target.value as Phase })}
-          >
-            <option value="home">Home</option>
-            {STEPS.map((s) => (
-              <option key={s.phase} value={s.phase}>
-                {s.n}. {s.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <span className="save-status">{status}</span>
+              <option value="home">Home</option>
+              {STEPS.map((s) => (
+                <option key={s.phase} value={s.phase}>
+                  {progress[s.phase] === 'done' ? '✓' : s.n}. {s.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <span className="save-status">{status}</span>
+        </div>
       </header>
       <main>
         {phase === 'home' && <HomeScreen />}
