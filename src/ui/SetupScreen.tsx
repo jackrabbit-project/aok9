@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useMeet } from '../store/meetStore';
 import { useGuide } from '../guide';
-import { Hint, Section } from './common';
+import { Hint, Section, Warn } from './common';
 
 export function SetupScreen() {
   const { state, dispatch } = useMeet();
@@ -91,7 +91,9 @@ export function SetupScreen() {
             e.target.value = '';
           }}
         />
-        {msg && <Hint>{msg}</Hint>}
+        {/* A refused guide is the one message here that matters -- the layout
+            guard naming a column that moved -- so it must not read as an aside. */}
+        {msg && (msg.startsWith('Error') ? <Warn>{msg}</Warn> : <Hint>{msg}</Hint>)}
       </Section>
 
       <div className="btn-row sticky-actions">

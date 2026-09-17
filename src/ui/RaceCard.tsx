@@ -3,10 +3,17 @@ import { useMeet } from '../store/meetStore';
 import { scoreRace, validatePlaces } from '../domain/points';
 import { redrawPosts } from '../domain/draw';
 import { Jacket, Warn } from './common';
+import { pts } from './fmt';
 import type { Division, Entry, Race, RaceOutcome } from '../domain/types';
 
 const STATUSES = ['OC', 'DNF', 'DQ', 'ABS'] as const;
 const STATUS_LABEL: Record<string, string> = { OC: 'OC', DNF: 'DNF', DQ: 'DQ', ABS: 'SCR' };
+const STATUS_TITLE: Record<string, string> = {
+  OC: 'Off course',
+  DNF: 'Did not finish',
+  DQ: 'Disqualified — out of the meet',
+  ABS: 'Scratched / did not run',
+};
 
 export function RaceCard({
   race,
@@ -114,38 +121,49 @@ export function RaceCard({
                   <Jacket post={slot.post} />
                 </td>
                 <td
-                  className={swapMode && !locked ? 'swap-target' : ''}
+                  className={`dog-cell ${swapMode && !locked ? 'swap-target' : ''}`}
                   onClick={() => swapMode && !locked && onSwapPick(slot.entryId)}
                 >
                   <b>{e.callName}</b> <small>{e.breed}</small>
                 </td>
+                {points && <td className="pts-cell">{pts(points[slot.entryId])} pts</td>}
                 {locked && (
+                  /* Two rows of big targets rather than seven small chips: the
+                     placement row fills the card's width, and this is the one
+                     control that gets used with cold hands at a lure. */
                   <td className="outcome-cell">
-                    {race.slots.map((_, i) => i + 1).map((p) => (
-                      <button
-                        key={p}
-                        className={`pl sm ${oc?.kind === 'placed' && oc.place === p ? 'on' : ''}`}
-                        onClick={() =>
-                          setOutcome(slot.entryId, oc?.kind === 'placed' && oc.place === p ? null : { kind: 'placed', place: p })
-                        }
-                      >
-                        {p}
-                      </button>
-                    ))}
-                    {STATUSES.map((s) => (
-                      <button
-                        key={s}
-                        className={`st sm ${oc?.kind === s ? 'on' : ''}`}
-                        title={s === 'ABS' ? 'Scratched / did not run' : s}
-                        onClick={() => setOutcome(slot.entryId, oc?.kind === s ? null : ({ kind: s } as RaceOutcome))}
-                      >
-                        {STATUS_LABEL[s]}
-                      </button>
-                    ))}
+                    <div className="seg" role="group" aria-label={`${e.callName}: placement`}>
+                      {race.slots.map((_, i) => i + 1).map((p) => {
+                        const on = oc?.kind === 'placed' && oc.place === p;
+                        return (
+                          <button
+                            key={p}
+                            className={`pl ${on ? 'on' : ''}`}
+                            aria-pressed={on}
+                            onClick={() => setOutcome(slot.entryId, on ? null : { kind: 'placed', place: p })}
+                          >
+                            {p}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <div className="seg seg-status" role="group" aria-label={`${e.callName}: did not place`}>
+                      {STATUSES.map((s) => {
+                        const on = oc?.kind === s;
+                        return (
+                          <button
+                            key={s}
+                            className={`st ${on ? 'on' : ''}`}
+                            aria-pressed={on}
+                            title={STATUS_TITLE[s]}
+                            onClick={() => setOutcome(slot.entryId, on ? null : ({ kind: s } as RaceOutcome))}
+                          >
+                            {STATUS_LABEL[s]}
+                          </button>
+                        );
+                      })}
+                    </div>
                   </td>
-                )}
-                {points && (
-                  <td className="pts-cell">{points[slot.entryId] ?? 0} pts</td>
                 )}
               </tr>
             );

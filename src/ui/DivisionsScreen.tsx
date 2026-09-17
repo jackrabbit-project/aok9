@@ -115,11 +115,12 @@ export function DivisionsScreen() {
                     <option value="mixed">Mixed</option>
                   </select>
                   <button
-                    className="danger sm"
+                    className="outline-danger sm"
                     disabled={locked}
+                    aria-label={`Delete division ${d.name}`}
                     onClick={() => setDivisions(state.divisions.filter((x) => x.id !== d.id))}
                   >
-                    ✕
+                    Remove
                   </button>
                 </div>
                 <label className="row-check">
@@ -144,9 +145,10 @@ export function DivisionsScreen() {
                       <span className="dog-actions">
                         {d.type === 'breed' && (
                           <button
-                            className="secondary sm"
+                            className={`title-chip sm ${d.leftoverIds.includes(e.id) ? 'on' : ''}`}
                             disabled={locked}
-                            title="Leftover dog: competes for mixed (MRC) points only (4.1.7)"
+                            aria-pressed={d.leftoverIds.includes(e.id)}
+                            title="Leftover: a dog of another breed running here, competing for mixed (MRC) points only (4.1.7)"
                             onClick={() =>
                               dispatch({
                                 type: 'updateDivision',
@@ -159,7 +161,7 @@ export function DivisionsScreen() {
                               })
                             }
                           >
-                            L
+                            Leftover
                           </button>
                         )}
                         <select

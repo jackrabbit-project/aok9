@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { buildDivisionDraw, buildProgramDraws, useMeet } from '../store/meetStore';
 import { raceOf, totalsThrough } from '../domain/rotation';
 import { entryGrade } from '../domain/draw';
+import { pts as fmtPts, wave } from './fmt';
 import { JACKET_COLORS } from '../domain/types';
 import type { ProgramDraw } from '../domain/types';
 import { Hint, Section, Warn } from './common';
@@ -169,7 +170,7 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                       {ranked.map(([id, pts]) => (
                         <tr key={id}>
                           <td>{entryMap.get(id)?.callName}</td>
-                          <td>{pts} pts</td>
+                          <td className="num">{fmtPts(pts)} pts</td>
                         </tr>
                       ))}
                     </tbody>
@@ -266,11 +267,11 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                               <td>
                                 {program === 1
                                   ? `${entryGrade(e, division)} / ${
-                                      (division.type === 'mixed' || division.leftoverIds.includes(e.id)
-                                        ? e.mwave
-                                        : e.bwave) ?? 'FTE'
+                                      division.type === 'mixed' || division.leftoverIds.includes(e.id)
+                                        ? e.mwave === null ? 'FTE' : wave(e.mwave)
+                                        : e.bwave === null ? 'FTE' : wave(e.bwave)
                                     }`
-                                  : `${priorTotals[slot.entryId] ?? 0}`}
+                                  : fmtPts(priorTotals[slot.entryId])}
                               </td>
                             </tr>
                           );

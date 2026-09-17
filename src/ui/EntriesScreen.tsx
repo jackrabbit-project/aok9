@@ -2,7 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { blankFteEntry, entryFromGuide, useMeet } from '../store/meetStore';
 import { useGuide } from '../guide';
 import { gradeForWave } from '../domain/wave';
-import { Hint, Section, Warn } from './common';
+import { Hint, Section, Table, Warn } from './common';
+import { wave } from './fmt';
 import type { Entry, Grade, Sex } from '../domain/types';
 
 export function EntriesScreen() {
@@ -46,33 +47,41 @@ export function EntriesScreen() {
       <Section title={`Entries (${state.entries.length})`}>
         {state.entries.length === 0 && <Hint>No dogs entered yet. Search the guide below or add an FTE dog.</Hint>}
         {state.entries.length > 0 && (
-          <table className="tbl">
+          /* On a phone the reg number, WAVEs and owner leave the columns and
+             ride under the dog's name (.col-wide / .subline); the controls a
+             secretary edits -- sex, grade, titles, scratch -- stay as columns. */
+          <Table>
             <thead>
               <tr>
-                <th>Reg#</th>
+                <th className="col-wide">Reg#</th>
                 <th>Call name</th>
                 <th>Breed</th>
                 <th>Sex</th>
-                <th>BWAVE</th>
-                <th>MWAVE</th>
+                <th className="col-wide num">BWAVE</th>
+                <th className="col-wide num">MWAVE</th>
                 <th>Grade</th>
                 <th>Titles</th>
-                <th>Owner</th>
+                <th className="col-wide">Owner</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {state.entries.map((e) => (
                 <tr key={e.id} className={e.preScratched ? 'scratched' : ''}>
-                  <td>{e.regNo ?? <i>FTE</i>}</td>
+                  <td className="col-wide mono">{e.regNo ?? <i>FTE</i>}</td>
                   <td>
                     <b>{e.callName}</b>
                     {e.fte && <span className="badge fte">FTE</span>}
+                    <span className="subline">
+                      {e.regNo ?? 'FTE'} · B {wave(e.bwave)} · M {wave(e.mwave)}
+                      {e.owner ? ` · ${e.owner}` : ''}
+                    </span>
                   </td>
                   <td>{e.breed}</td>
                   <td>
                     <select
                       value={e.sex}
+                      aria-label={`${e.callName}: sex`}
                       onChange={(ev) =>
                         dispatch({ type: 'updateEntry', id: e.id, patch: { sex: ev.target.value as Sex } })
                       }
@@ -82,12 +91,13 @@ export function EntriesScreen() {
                       <option value="F">F</option>
                     </select>
                   </td>
-                  <td>{e.bwave ?? '—'}</td>
-                  <td>{e.mwave ?? '—'}</td>
+                  <td className="col-wide num">{wave(e.bwave)}</td>
+                  <td className="col-wide num">{wave(e.mwave)}</td>
                   <td>
                     {e.fte ? (
                       <select
                         value={e.fteGrade}
+                        aria-label={`${e.callName}: FTE grade`}
                         title="FTE insertion grade (4.3.1.3): D default, C via schooling, B max from oval record"
                         onChange={(ev) =>
                           dispatch({
@@ -102,7 +112,7 @@ export function EntriesScreen() {
                         <option value="B">B</option>
                       </select>
                     ) : (
-                      gradeForWave(e.bwave ?? e.mwave)
+                      <span className="mono">{gradeForWave(e.bwave ?? e.mwave)}</span>
                     )}
                   </td>
                   <td className="title-toggles">
@@ -110,6 +120,7 @@ export function EntriesScreen() {
                       <button
                         key={t.key}
                         className={`title-chip sm ${e[t.key] ? 'on' : ''}`}
+                        aria-pressed={e[t.key]}
                         title={`${e[t.key] ? 'Remove' : 'Mark as'} ${t.label} champion of record`}
                         onClick={() =>
                           dispatch({ type: 'updateEntry', id: e.id, patch: { [t.key]: !e[t.key] } })
@@ -119,7 +130,7 @@ export function EntriesScreen() {
                       </button>
                     ))}
                   </td>
-                  <td>{e.owner ?? ''}</td>
+                  <td className="col-wide">{e.owner ?? ''}</td>
                   <td className="btn-cell">
                     <button
                       className="secondary sm"
@@ -131,7 +142,8 @@ export function EntriesScreen() {
                       {e.preScratched ? 'Unscratch' : 'Scratch'}
                     </button>
                     <button
-                      className="danger sm"
+                      className="outline-danger sm"
+                      aria-label={`Remove ${e.callName}`}
                       onClick={() => dispatch({ type: 'removeEntry', id: e.id })}
                     >
                       Remove
@@ -140,7 +152,7 @@ export function EntriesScreen() {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table>
         )}
         {state.entries.some((e) => !e.sex && !e.preScratched) && (
           <Warn>Some dogs have no sex recorded — needed for the High Score Opposite Sex award.</Warn>
@@ -158,22 +170,25 @@ export function EntriesScreen() {
         <input
           className="search"
           placeholder="Search by call name, reg#, breed or owner (min 2 letters)…"
+          aria-label="Search the Grading Guide"
           value={q}
           onChange={(e) => setQ(e.target.value)}
         />
         {results.length > 0 && (
-          <table className="tbl">
+          <Table>
             <tbody>
               {results.map((d) => {
                 const entered = enteredRegNos.has(d.regNo);
                 return (
                   <tr key={d.regNo}>
-                    <td>{d.regNo}</td>
+                    <td className="mono">{d.regNo}</td>
                     <td>
                       <b>{d.callName}</b>
                     </td>
                     <td>{d.breed}</td>
-                    <td>B:{d.bwave ?? '—'} M:{d.mwave ?? '—'}</td>
+                    <td className="mono">
+                      B {wave(d.bwave)} · M {wave(d.mwave)}
+                    </td>
                     <td>{d.owner}</td>
                     <td>
                       <button
@@ -188,7 +203,7 @@ export function EntriesScreen() {
                 );
               })}
             </tbody>
-          </table>
+          </Table>
         )}
       </Section>
 

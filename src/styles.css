@@ -609,6 +609,73 @@ input.award.overridden { border-color: var(--rust); box-shadow: inset 3px 0 0 va
 .update-prompt-actions button { padding: 7px 14px; font-size: 11.5px; }
 
 
+/* Race results: two rows of big targets ------------------------------------
+   Placements 1..n fill the width of the card as one segmented row; the four
+   ways of not placing sit beneath. 40px tall, for a thumb, not a cursor. */
+.outcome-cell { flex-direction: column; gap: 5px; min-width: 200px; }
+.seg { display: flex; gap: 4px; }
+.seg button { flex: 1; min-height: 40px; padding: 6px 4px; font-size: 13.5px; letter-spacing: 0.04em; }
+.seg-status button { font-size: 11px; min-height: 36px; }
+.dog-cell { min-width: 0; }
+.dog-cell small { display: block; color: var(--ink-muted); font-size: 12px; }
+
+/* Facts a phone cannot fit as columns ride under the dog's name instead. One
+   source of truth per row: the subline is always rendered, and CSS decides
+   whether it or the columns show. */
+.subline {
+  display: none;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-top: 3px;
+  white-space: nowrap;
+}
+
+/* Results: an award reads as a number until you touch it. An edited one is
+   marked, so a computed value and an override never look alike. */
+input.award {
+  width: 66px;
+  padding: 5px 6px;
+  border-color: transparent;
+  background: transparent;
+  -moz-appearance: textfield;
+}
+input.award::-webkit-inner-spin-button, input.award::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input.award:hover { border-color: var(--line-strong); }
+input.award:focus { border-color: var(--rust); background: var(--surface); }
+input.award.overridden { background: var(--badge-down-bg); box-shadow: inset 3px 0 0 var(--rust); border-color: transparent; }
+.edited {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rust);
+  margin-left: 3px;
+  vertical-align: middle;
+}
+
+@media (max-width: 640px) {
+  .col-wide { display: none; }
+  .subline { display: block; }
+  /* A race row becomes a small grid: jacket, dog and points on the first
+     line, the result controls full-width beneath. Cells stay cells for
+     everything but layout, so the markup is one table on every screen. */
+  .race-tbl, .race-tbl tbody { display: block; }
+  .race-tbl tr {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+    column-gap: 6px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .race-tbl td { border-bottom: 0; padding: 1px 0; }
+  .race-tbl .outcome-cell { grid-column: 1 / -1; min-width: 0; margin-top: 4px; }
+  .race-foot { flex-direction: column; }
+  .race-foot button { width: 100%; min-height: 44px; }
+}
+
 /* Small screens ----------------------------------------------------------
    The app is for use on a phone at a field, so below this width the sticky
    header has to stop being the main event: eight wrapped step buttons were

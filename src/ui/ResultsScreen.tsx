@@ -3,7 +3,8 @@ import { useMeet } from '../store/meetStore';
 import { computeDivisionResults, divisionTrophies } from '../domain/championship';
 import { projectWaves } from '../domain/update';
 import { entryGrade } from '../domain/draw';
-import { Section, Warn } from './common';
+import { Section, Table, Warn } from './common';
+import { pts, wave } from './fmt';
 import type { ChampAward } from '../domain/types';
 
 const AWARD_KEYS: (keyof Omit<ChampAward, 'notes'>)[] = ['brc', 'nbrc', 'mrc', 'nmrc', 'trc'];
@@ -51,17 +52,19 @@ export function ResultsScreen() {
               </>
             }
           >
-            <table className="tbl">
+            <Table>
               <thead>
                 <tr>
-                  <th>Place</th>
+                  <th className="num">Place</th>
                   <th>Dog</th>
-                  <th>Score</th>
+                  <th className="num">Score</th>
                   {AWARD_KEYS.map((k) => (
-                    <th key={k}>{AWARD_LABEL[k]}</th>
+                    <th key={k} className="num">
+                      {AWARD_LABEL[k]}
+                    </th>
                   ))}
-                  <th>New WAVE</th>
-                  <th>Flags</th>
+                  <th className="col-wide num">New WAVE</th>
+                  <th className="col-wide">Flags</th>
                 </tr>
               </thead>
               <tbody>
@@ -69,31 +72,45 @@ export function ResultsScreen() {
                   const e = entryMap.get(s.entryId)!;
                   const computed = res.awards[s.entryId];
                   const ov = state.overrides[s.entryId] ?? {};
-                  const wave = waves.find((w) => w.entryId === s.entryId);
+                  const w = waves.find((x) => x.entryId === s.entryId);
+                  const flags = [
+                    !s.completedMeet && 'incomplete',
+                    !s.finishedAllRaces && s.completedMeet && 'OC/DNF',
+                  ]
+                    .filter(Boolean)
+                    .join(' ');
                   return (
                     <tr key={s.entryId}>
-                      <td>{s.place}</td>
+                      <td className="num">{s.place}</td>
                       <td>
                         <b>{e.callName}</b>
                         {division.leftoverIds.includes(s.entryId) && (
                           <span className="badge leftover">LEFTOVER</span>
                         )}
+                        {/* New WAVE and flags leave the columns on a phone and
+                            ride here instead. */}
+                        <span className="subline">
+                          WAVE {wave(w?.newWave)}
+                          {w && w.oldWave !== null ? ` (was ${wave(w.oldWave)})` : ''}
+                          {flags ? ` · ${flags}` : ''}
+                        </span>
                       </td>
-                      <td>
-                        <b>{s.total}</b>
+                      <td className="num">
+                        <b>{pts(s.total)}</b>
                       </td>
                       {AWARD_KEYS.map((k) => {
                         const val = (ov[k] ?? computed[k]) as number;
                         const overridden = ov[k] !== undefined && ov[k] !== computed[k];
                         return (
-                          <td key={k}>
+                          <td key={k} className="num">
                             <input
                               className={`award ${overridden ? 'overridden' : ''}`}
                               type="number"
                               step="0.25"
                               min="0"
                               value={val}
-                              title={overridden ? `computed: ${computed[k]}` : 'computed value (editable)'}
+                              aria-label={`${e.callName}: ${AWARD_LABEL[k]} points`}
+                              title={overridden ? `edited — computed: ${computed[k]}` : 'computed value (editable)'}
                               onChange={(ev) => {
                                 const num = Number(ev.target.value);
                                 dispatch({
@@ -103,24 +120,20 @@ export function ResultsScreen() {
                                 });
                               }}
                             />
+                            {overridden && <span className="edited">edited</span>}
                           </td>
                         );
                       })}
-                      <td>
-                        {wave?.newWave ?? '—'}
-                        {wave && wave.oldWave !== null && (
-                          <small> (was {wave.oldWave})</small>
-                        )}
+                      <td className="col-wide num">
+                        {wave(w?.newWave)}
+                        {w && w.oldWave !== null && <small> (was {wave(w.oldWave)})</small>}
                       </td>
-                      <td className="flags">
-                        {!s.completedMeet && 'incomplete '}
-                        {!s.finishedAllRaces && s.completedMeet && 'OC/DNF '}
-                      </td>
+                      <td className="col-wide flags">{flags}</td>
                     </tr>
                   );
                 })}
               </tbody>
-            </table>
+            </Table>
             <div className="trophies">
               <b>Trophies (5.1):</b> High Score: <b>{trophies.highScore ?? '—'}</b>
               {' · '}High Score Opposite Sex: <b>{trophies.highScoreOppositeSex ?? '—'}</b>
