@@ -359,8 +359,10 @@ export function HomeScreen() {
           </p>
           <p>
             <b>Your data.</b> Everything you enter stays in this browser on this computer. Nothing
-            is uploaded; there is no account, server or cloud backup — which also means nobody can
-            recover a lost meet for you. Use <b>Save Meet to File</b> to keep your own copies.
+            is uploaded unless you choose to publish a meet&rsquo;s results page, and then only what
+            the paddock board shows — call names, breeds and results. There is no account or cloud
+            backup — which also means nobody can recover a lost meet for you. Use{' '}
+            <b>Save Meet to File</b> to keep your own copies.
           </p>
           <p>
             <b>No warranty.</b> This software is provided “as is”, without warranty of any kind,

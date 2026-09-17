@@ -5,6 +5,7 @@ import { downloadReport } from '../io/reportExport';
 import { downloadBackup } from '../io/backup';
 import { Hint, Section } from './common';
 import { pts } from './fmt';
+import { PrintQr } from './Qr';
 
 export function ExportScreen() {
   const { state } = useMeet();
@@ -50,6 +51,7 @@ export function ExportScreen() {
           {state.info.clubName} — {state.info.meetId} — {state.info.date}
         </h1>
         <h2>Official Meet Results</h2>
+        <PrintQr />
         {state.divisions.map((division) => {
           const res = computeDivisionResults(division, state.draws, entryMap);
           if (res.standings.length === 0) return null;

@@ -2,7 +2,11 @@ import React, { useMemo } from 'react';
 import { useMeet } from '../store/meetStore';
 import { fteFraction, newId, suggestDivisions, ungradedSuggested } from '../domain/divisions';
 import { MAX_CHART_DOGS } from '../domain/chart';
+import { entryGrade } from '../domain/draw';
 import { Hint, Section, Warn } from './common';
+import { wave } from './fmt';
+import { PrintQr } from './Qr';
+import { PublishPanel } from './PublishPanel';
 import type { Division } from '../domain/types';
 
 export function DivisionsScreen() {
@@ -205,6 +209,8 @@ export function DivisionsScreen() {
 
       {/* Mirrors what ProgramScreen requires before Draw Program 1, so a
           blocker surfaces here instead of after a wasted trip forward. */}
+      <PublishPanel />
+
       <div className="btn-row sticky-actions">
         <button
           className="big"
@@ -213,11 +219,71 @@ export function DivisionsScreen() {
         >
           Continue to Program 1 →
         </button>
+        <button
+          className="secondary"
+          disabled={state.divisions.length === 0}
+          onClick={() => window.print()}
+        >
+          Print divisions
+        </button>
         {state.divisions.length === 0 && <Hint>Create at least one division first.</Hint>}
         {state.divisions.length > 0 && unassigned.length > 0 && (
           <Hint>Assign every active dog to a division before drawing.</Hint>
         )}
       </div>
+
+      {/* Print-only divisions sheet: the first thing pinned to the board, and
+          the one that carries the QR code for the rest of the day. */}
+      {state.divisions.length > 0 && (
+        <div className="print-only">
+          <h1>
+            {state.info.clubName} — {state.info.meetId} — {state.info.date}
+          </h1>
+          <h2>Divisions</h2>
+          <PrintQr />
+          {state.divisions.map((d) => {
+            const dogs = d.entryIds.map((id) => entryMap.get(id)!).filter((e) => e && !e.preScratched);
+            return (
+              <div key={d.id} className="print-division">
+                <h3>
+                  {d.type === 'breed' ? 'Breed' : 'Mixed'} Division: {d.name}
+                  {d.ungraded ? ' (ungraded)' : ''} — {dogs.length} dogs
+                </h3>
+                <table className="print-tbl">
+                  <thead>
+                    <tr>
+                      <th>Dog</th>
+                      <th>Breed</th>
+                      <th>Grade / WAVE</th>
+                      <th>Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dogs.map((e) => {
+                      const asMixed = d.type === 'mixed' || d.leftoverIds.includes(e.id);
+                      const w = asMixed ? e.mwave : e.bwave;
+                      return (
+                        <tr key={e.id}>
+                          <td>{e.callName}</td>
+                          <td>{e.breed}</td>
+                          <td>
+                            {entryGrade(e, d)} / {w === null ? 'FTE' : wave(w)}
+                          </td>
+                          <td>
+                            {[d.leftoverIds.includes(e.id) && 'Leftover', e.fte && 'FTE']
+                              .filter(Boolean)
+                              .join(', ')}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

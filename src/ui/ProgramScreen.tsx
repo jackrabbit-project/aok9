@@ -7,6 +7,7 @@ import { JACKET_COLORS } from '../domain/types';
 import type { ProgramDraw } from '../domain/types';
 import { Hint, Section, Warn } from './common';
 import { RaceCard } from './RaceCard';
+import { PrintQr } from './Qr';
 
 const placeLabel = (n: number): string =>
   n === 1 ? '1st' : n === 2 ? '2nd' : n === 3 ? '3rd' : `${n}th`;
@@ -216,6 +217,7 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
             {state.info.clubName} — {state.info.meetId} — {state.info.date}
           </h1>
           <h2>Program {program} race sheet</h2>
+          <PrintQr />
           {state.divisions.map((division) => {
             const draw = draws.find((d) => d.divisionId === division.id);
             if (!draw) return null;
