@@ -268,6 +268,7 @@ const meet: MeetState = {
   divisions,
   draws,
   overrides: {},
+  publish: null,
 };
 
 // Only meet 2 is generated. sample-meet-1.json is an older capture from the

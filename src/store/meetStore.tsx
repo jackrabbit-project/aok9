@@ -12,6 +12,7 @@ import type {
   MeetState,
   Phase,
   ProgramDraw,
+  PublishConfig,
   Race,
   RaceOutcome,
   Rng,
@@ -32,6 +33,7 @@ export function emptyMeet(): MeetState {
     divisions: [],
     draws: [],
     overrides: {},
+    publish: null,
   };
 }
 
@@ -58,6 +60,9 @@ export function normalizeMeet(parsed: Partial<MeetState>): MeetState {
     divisions: parsed.divisions ?? [],
     draws: parsed.draws ?? [],
     overrides: parsed.overrides ?? {},
+    // A backup carries the keys, so a meet restored on another laptop keeps
+    // updating the same page. A file from before publishing existed has none.
+    publish: parsed.publish ?? null,
     // Never drop the secretary into a mid-meet screen: a restored file has to
     // show which meet it is before anything else happens.
     phase: 'home',
@@ -113,6 +118,8 @@ export type Action =
   | { type: 'setRaceResult'; raceId: string; outcomes: Record<string, RaceOutcome>; finished: boolean }
   | { type: 'setRaceFlags'; raceId: string; rerun?: boolean; splitAllPoints?: boolean; note?: string }
   | { type: 'setOverride'; entryId: string; patch: Partial<ChampAward> | null }
+  | { type: 'setPublish'; publish: PublishConfig | null }
+  | { type: 'markPublished'; at: string }
   | { type: 'importState'; state: MeetState }
   | { type: 'reset' };
 
@@ -216,6 +223,10 @@ export function reducer(state: MeetState, action: Action): MeetState {
       else overrides[action.entryId] = { ...overrides[action.entryId], ...action.patch };
       return { ...state, overrides };
     }
+    case 'setPublish':
+      return { ...state, publish: action.publish };
+    case 'markPublished':
+      return state.publish ? { ...state, publish: { ...state.publish, lastPublishedAt: action.at } } : state;
     case 'importState':
       return normalizeMeet(action.state);
     case 'reset':

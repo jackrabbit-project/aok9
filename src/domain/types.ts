@@ -127,6 +127,20 @@ export type Phase =
   | 'results'
   | 'export';
 
+/**
+ * The meet's public results page, once the secretary has turned it on.
+ *
+ * Two keys because the read key is printed on paper as a QR code in the
+ * paddock: whatever is in the QR cannot also be what authorises an update.
+ * The write key never leaves the app except inside a publish request.
+ */
+export interface PublishConfig {
+  readKey: string;
+  writeKey: string;
+  enabled: boolean;
+  lastPublishedAt: string | null;
+}
+
 export interface MeetState {
   info: MeetInfo;
   phase: Phase;
@@ -135,6 +149,8 @@ export interface MeetState {
   draws: ProgramDraw[]; // one per division per program once drawn
   /** Manual championship point overrides applied on the results screen. */
   overrides: Record<string, Partial<ChampAward>>;
+  /** Null until the secretary publishes the meet. */
+  publish: PublishConfig | null;
 }
 
 /** Final standing of one dog within its division. */
