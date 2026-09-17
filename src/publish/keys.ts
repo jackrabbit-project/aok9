@@ -23,7 +23,19 @@ export function randomKey(length: number): string {
   return out;
 }
 
-/** The page's address: what goes in the QR code and on the sheets. */
+/**
+ * The page's address: what goes in the QR code and on the sheets.
+ *
+ * Built from the origin the app is running on -- the opposite decision from
+ * the share links in ShareLinks.tsx, which point at APP_URL on purpose. A
+ * meet's page is served by the deployment that stored its snapshot, the one
+ * this app posted to, so the link has to name that deployment. On the live
+ * site that is APP_URL anyway; on a branch preview it is the preview, which
+ * is the only way the feature can be tried there before it is merged.
+ * Outside a browser (tests, scripts) there is no origin, so APP_URL it is.
+ */
 export function publicUrl(readKey: string): string {
-  return `${APP_URL}r/${readKey}`;
+  const here = typeof location === 'undefined' ? '' : location.origin;
+  const origin = here.startsWith('http://') || here.startsWith('https://') ? here : new URL(APP_URL).origin;
+  return `${origin}/r/${readKey}`;
 }
