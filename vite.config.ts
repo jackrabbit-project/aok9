@@ -46,6 +46,13 @@ export default defineConfig({
         // Single-page app: any unknown path resolves to the shell, mirroring
         // the `/*  /index.html  200` rule in public/_redirects.
         navigateFallback: 'index.html',
+        // ...except the results pages and the API, which the Pages Functions in
+        // functions/ answer. A worker that hands back the app shell for
+        // /r/<key> shows the app (or, with relative asset paths, a blank page)
+        // instead of the meet -- in every browser that has ever opened the app,
+        // which includes the secretary's own. Navigations only: the app's
+        // fetch() calls to /api/ never matched this route, but say so.
+        navigateFallbackDenylist: [/^\/r\//, /^\/api\//],
         // The bundle is ~1.1 MB, over Workbox's 2 MiB default only if it grows
         // a lot, but be explicit so a future dependency does not silently drop
         // the main chunk from the precache.
