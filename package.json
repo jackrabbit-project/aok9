@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && tsc -p functions --noEmit && vite build",
+    "typecheck:functions": "tsc -p functions --noEmit",
     "preview": "vite preview",
     "test": "vitest run",
     "convert-guide": "node scripts/convert-grading-guide.mjs",
