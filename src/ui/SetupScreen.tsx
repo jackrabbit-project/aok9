@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useMeet } from '../store/meetStore';
 import { useGuide } from '../guide';
 import { Hint, Section, Warn } from './common';
+import { PublishPanel } from './PublishPanel';
 
 export function SetupScreen() {
   const { state, dispatch } = useMeet();
@@ -95,6 +96,8 @@ export function SetupScreen() {
             guard naming a column that moved -- so it must not read as an aside. */}
         {msg && (msg.startsWith('Error') ? <Warn>{msg}</Warn> : <Hint>{msg}</Hint>)}
       </Section>
+
+      <PublishPanel />
 
       <div className="btn-row sticky-actions">
         <button className="big" onClick={() => dispatch({ type: 'setPhase', phase: 'entries' })}>

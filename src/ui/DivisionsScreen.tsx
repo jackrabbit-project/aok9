@@ -6,7 +6,6 @@ import { entryGrade } from '../domain/draw';
 import { Hint, Section, Warn } from './common';
 import { wave } from './fmt';
 import { PrintQr } from './Qr';
-import { PublishPanel } from './PublishPanel';
 import type { Division } from '../domain/types';
 
 export function DivisionsScreen() {
@@ -209,8 +208,6 @@ export function DivisionsScreen() {
 
       {/* Mirrors what ProgramScreen requires before Draw Program 1, so a
           blocker surfaces here instead of after a wasted trip forward. */}
-      <PublishPanel />
-
       <div className="btn-row sticky-actions">
         <button
           className="big"
@@ -229,6 +226,9 @@ export function DivisionsScreen() {
         {state.divisions.length === 0 && <Hint>Create at least one division first.</Hint>}
         {state.divisions.length > 0 && unassigned.length > 0 && (
           <Hint>Assign every active dog to a division before drawing.</Hint>
+        )}
+        {state.divisions.length > 0 && !state.publish?.enabled && (
+          <Hint>Results online is off, so the sheet prints without a QR code. Turn it on in Setup.</Hint>
         )}
       </div>
 

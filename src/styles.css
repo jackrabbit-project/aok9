@@ -684,6 +684,10 @@ input.award.overridden { background: var(--badge-down-bg); box-shadow: inset 3px
 /* Results online ---------------------------------------------------------- */
 .publish-row { display: flex; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
 .publish-info { flex: 1; min-width: 240px; }
+/* The one-line form on Results: status, address, copy. */
+.publish-line { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: 4px 0 12px; }
+.publish-line .publish-url { padding: 5px 8px; color: var(--ink); text-decoration: none; }
+.publish-line .publish-url:hover { border-color: var(--ink); }
 .publish-url {
   font-family: var(--font-mono);
   font-size: 13px;

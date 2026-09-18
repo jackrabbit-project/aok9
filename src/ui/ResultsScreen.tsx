@@ -4,6 +4,7 @@ import { computeDivisionResults, divisionTrophies } from '../domain/championship
 import { projectWaves } from '../domain/update';
 import { entryGrade } from '../domain/draw';
 import { Section, Table, Warn } from './common';
+import { PublishLine } from './PublishPanel';
 import { pts, wave } from './fmt';
 import type { ChampAward } from '../domain/types';
 
@@ -154,6 +155,8 @@ export function ResultsScreen() {
           </Section>
         );
       })}
+
+      <PublishLine />
 
       <div className="btn-row sticky-actions">
         <button className="big" onClick={() => dispatch({ type: 'setPhase', phase: 'export' })}>

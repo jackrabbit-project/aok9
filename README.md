@@ -107,14 +107,15 @@ afterwards, or just upload the xlsx in the app's Setup screen — no rebuild nee
 
 ## Publishing results (optional)
 
-On the Divisions screen, **Publish this meet** creates a page at `aok9rms.gazehound.io/r/<key>`
-that anyone can open from the link or the QR code. The QR code goes on the printed divisions
-sheet and in the corner of every program sheet, so people scan it once and follow the meet from
-there: divisions now, each program's draw when it is locked, results as they are saved, final
-standings. The app pushes an update a few seconds after each change, whenever it has signal, and
-queues one while it does not. **Stop publishing** takes the page down. The page lives on the same
-deployment as the app that made it, so a branch preview publishes to its own preview address and
-the feature can be tried there before it is merged.
+On the Setup screen, **Publish this meet** creates a page at `aok9rms.gazehound.io/r/<key>` that
+anyone can open from the link or the QR code. The QR code goes on the printed divisions sheet and
+in the corner of every program sheet, so people scan it once and follow the meet from there:
+divisions now, each program's draw when it is locked, results as they are saved, final standings.
+The app pushes an update a few seconds after each change, whenever it has signal, and queues one
+while it does not. **Stop publishing** takes the page down. The Results screen repeats the address
+in one line, with the button to turn publishing on for a meet that was scored without it. The page
+lives on the same deployment as the app that made it, so a branch preview publishes to its own
+preview address and the feature can be tried there before it is merged.
 
 What is sent is exactly `buildSnapshot()` in `src/publish/snapshot.ts` — call names, breeds,
 posts, results and points. Owners, registration numbers, WAVEs, sex and notes are not in it, and
