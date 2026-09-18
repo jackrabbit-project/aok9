@@ -32,6 +32,7 @@ h1{font-family:'Fraunces',Georgia,serif;font-weight:580;letter-spacing:-.015em;l
 h2{font-family:'Fraunces',Georgia,serif;font-weight:560;font-size:20px;margin:0}
 h3{font-family:'Fraunces',Georgia,serif;font-weight:550;font-size:16px;margin:16px 0 6px}
 .kicker{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.state.done{color:var(--green)}.state.live{color:var(--rust)}
 .status{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;margin-top:8px}
 .status b{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--rust)}
 main{padding:14px 16px 32px}
@@ -69,7 +70,7 @@ function raceTable(r: PublicRace): string {
 }
 
 function programBlock(p: PublicProgram): string {
-  return `<div class="program"><div class="kicker">Program ${esc(p.program)}${p.complete ? ' · complete' : ' · in progress'}</div>${p.races.map(raceTable).join('')}</div>`;
+  return `<div class="program"><div class="kicker">Program ${esc(p.program)} · <span class="state ${p.complete ? 'done' : 'live'}">${p.complete ? 'complete' : 'in progress'}</span></div>${p.races.map(raceTable).join('')}</div>`;
 }
 
 function divisionCard(d: PublicDivision): string {

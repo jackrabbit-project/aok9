@@ -82,3 +82,16 @@ describe('render', () => {
     expect(renderNotFound()).toContain('No results at this address');
   });
 });
+
+describe('program state', () => {
+  it('marks a finished program done and a running one live, in words as well as colour', () => {
+    const live = JSON.parse(JSON.stringify(snapshot)) as typeof snapshot;
+    const division = live.divisions[0];
+    division.programs[division.programs.length - 1].complete = false;
+    const html = renderMeet(live);
+    expect(html).toContain('<span class="state done">complete</span>');
+    expect(html).toContain('<span class="state live">in progress</span>');
+    expect(html).toContain('.state.done{color:var(--green)}');
+    expect(html).toContain('.state.live{color:var(--rust)}');
+  });
+});
