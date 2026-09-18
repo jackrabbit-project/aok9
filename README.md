@@ -164,7 +164,7 @@ is how you get a demo that disagrees with the rules it is demonstrating.
 
 ## Tests
 
-`npm test` — 103 unit tests covering Figure 8.1 (all rows), points tables 8.2A/8.2B, dead-heat
+`npm test` — 104 unit tests covering Figure 8.1 (all rows), points tables 8.2A/8.2B, dead-heat
 splitting, DQ redistribution, WAVE formulas, rotation tie chain, and every worked example in the
 rule book (TRC examples 5.7 #1–2, the eligible-entry example in 5.2), plus a Grading Guide layout
 check, a report-export test, assertions run over both bundled example meets, the header's
