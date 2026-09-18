@@ -50,7 +50,7 @@ On the Setup screen, **Publish this meet** creates a page at `aok9rms.gazehound.
 anyone can open from the link or the QR code. The QR code goes on the printed divisions sheet and
 in the corner of every program sheet, so people scan it once and follow the meet from there:
 divisions now, each program's draw when it is locked, results as they are saved, final standings.
-The app pushes an update a few seconds after each change, whenever it has signal, and queues one
+No more crowding the board or photographing the sheets. The app pushes an update a few seconds after each change, whenever it has signal, and queues one
 while it does not. **Stop publishing** takes the page down. The Results screen repeats the address
 in one line, with the button to turn publishing on for a meet that was scored without it.
 
