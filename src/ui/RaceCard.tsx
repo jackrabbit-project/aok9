@@ -3,7 +3,7 @@ import { useMeet } from '../store/meetStore';
 import { scoreRace, validatePlaces } from '../domain/points';
 import { redrawPosts } from '../domain/draw';
 import { Jacket, Warn } from './common';
-import { pts } from './fmt';
+import { ordinal, pts } from './fmt';
 import type { Division, Entry, Race, RaceOutcome } from '../domain/types';
 
 const STATUSES = ['OC', 'DNF', 'DQ', 'ABS'] as const;
@@ -142,7 +142,7 @@ export function RaceCard({
                             aria-pressed={on}
                             onClick={() => setOutcome(slot.entryId, on ? null : { kind: 'placed', place: p })}
                           >
-                            {p}
+                            {ordinal(p)}
                           </button>
                         );
                       })}

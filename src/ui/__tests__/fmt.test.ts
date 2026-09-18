@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { pts, wave } from '../fmt';
+import { ordinal, pts, wave } from '../fmt';
 
 describe('wave', () => {
   it('shows one decimal, always, so a column lines up', () => {
@@ -27,5 +27,14 @@ describe('pts', () => {
   it('treats nothing as zero points', () => {
     expect(pts(null)).toBe('0');
     expect(pts(0)).toBe('0');
+  });
+});
+
+describe('ordinal', () => {
+  it('labels the four places of a race', () => {
+    expect([1, 2, 3, 4].map(ordinal)).toEqual(['1st', '2nd', '3rd', '4th']);
+  });
+  it('gets the teens right, should a race ever need them', () => {
+    expect([11, 12, 13, 21, 22, 23, 111].map(ordinal)).toEqual(['11th', '12th', '13th', '21st', '22nd', '23rd', '111th']);
   });
 });

@@ -16,3 +16,12 @@ export function pts(n: number | null | undefined): string {
   if (n === null || n === undefined || Number.isNaN(n)) return '0';
   return String(Math.round(n * 1000) / 1000);
 }
+
+/** A finishing place as people say it: 1st, 2nd, 3rd, 4th. A row of bare
+    digits next to a dog could be posts or points; these can only be places. */
+export function ordinal(n: number): string {
+  const tens = n % 100;
+  if (tens >= 11 && tens <= 13) return `${n}th`;
+  const suffix = n % 10 === 1 ? 'st' : n % 10 === 2 ? 'nd' : n % 10 === 3 ? 'rd' : 'th';
+  return `${n}${suffix}`;
+}

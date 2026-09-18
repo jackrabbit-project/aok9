@@ -95,6 +95,17 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
         </Section>
       )}
 
+      {/* The one control used with cold hands gets its instructions here, once
+          per program, from the first Lock until the last race is saved. The
+          status buttons are explained here too: their hover titles never show
+          on a phone. */}
+      {drawn && !allFinished && draws.some((d) => d.locked) && (
+        <Hint>
+          Tap the place each dog finished; the same place on two dogs is a dead heat. OC off
+          course · DNF did not finish · DQ disqualified · SCR scratched. Save each race.
+        </Hint>
+      )}
+
       {drawn &&
         state.divisions.map((division) => {
           const draw = draws.find((d) => d.divisionId === division.id);
