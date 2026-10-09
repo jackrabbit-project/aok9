@@ -67,6 +67,8 @@ to open; the app itself still works with none.
 2. **Entries** — search the guide by call name / reg# / breed / owner and enter with one click
    (WAVEs, grades and championship titles come along). Add FTE dogs with the form
    (initial grade D, or C/B per 4.3.1.3). Record each dog's sex for High Score Opposite Sex.
+   Scratch or remove an entry here until Program 1 is drawn; after that a dog that cannot run
+   is marked **SCR** in its race.
 3. **Divisions** — *Auto-suggest* builds breed divisions (2+ same breed; mix types are their own
    "breed") and pools the rest as mixed. Move dogs between divisions, mark a dog **Leftover** in a
    breed division (competes for MRC only, per 4.1.7), or flip a division to ungraded. **Print
@@ -75,7 +77,8 @@ to open; the app itself still works with none.
    (click two) if the committee adjusts groups, redraw posts, then **Lock** and print the program
    sheet. Enter each race's result with the big buttons: places 1–4 (tap the same place on two
    dogs for a dead heat), OC, DNF, DQ, SCR. A DQ'd dog is left out of the placements — place the
-   others as if it had not run (6.1.3).
+   others as if it had not run (6.1.3). Until the first result is saved, the draw can still be
+   **unlocked** to swap dogs or redraw posts, or **discarded** to change entries or divisions.
 5. **Programs 2–3** — one click regroups by points per 4.3.4 with every tie decision explained
    on screen (audit trail for protests), new random posts.
 6. **Results** — final standings per 4.3.5, trophies (5.1), BRC/MRC/National/TRC points

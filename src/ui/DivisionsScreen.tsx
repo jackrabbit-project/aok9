@@ -15,6 +15,7 @@ export function DivisionsScreen() {
   const assigned = new Set(state.divisions.flatMap((d) => d.entryIds));
   const unassigned = active.filter((e) => !assigned.has(e.id));
   const locked = state.draws.length > 0;
+  const anyResults = state.draws.some((d) => d.races.some((r) => r.finished));
 
   const setDivisions = (divisions: Division[]) => dispatch({ type: 'setDivisions', divisions });
 
@@ -36,8 +37,9 @@ export function DivisionsScreen() {
     <div>
       {locked && (
         <Warn>
-          Racing has started — divisions are locked. Start a new draw of Program 1 only if you
-          really need to change them (results will be kept but may no longer match).
+          {anyResults
+            ? 'Racing has started — divisions are locked for the rest of the meet. A dog that cannot run is marked SCR in its race.'
+            : 'Program 1 has been drawn, so divisions are locked. To change them, go to Program 1 and discard the draw — possible until the first result is saved — then draw again.'}
         </Warn>
       )}
       <Section

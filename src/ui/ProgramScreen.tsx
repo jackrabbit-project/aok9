@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { buildDivisionDraw, buildProgramDraws, useMeet } from '../store/meetStore';
+import { programCanBeReopened, buildDivisionDraw, buildProgramDraws, useMeet } from '../store/meetStore';
 import { raceOf, totalsThrough } from '../domain/rotation';
 import { entryGrade } from '../domain/draw';
 import { pts as fmtPts, wave } from './fmt';
@@ -39,6 +39,28 @@ function previousResult(
     : `${outcome.kind} (${where})`;
 }
 
+/** Throws a program's draw away so entries and divisions open up again.
+    Offered only while nothing in the program has been scored. */
+function DiscardDraw({ program }: { program: 1 | 2 | 3 }) {
+  const { dispatch } = useMeet();
+  return (
+    <button
+      className="outline-danger"
+      onClick={() => {
+        if (
+          confirm(
+            `Discard the draw of Program ${program}? Nothing has been scored, so nothing is lost: entries and divisions open up again, and you draw the program afresh when ready.`
+          )
+        ) {
+          dispatch({ type: 'discardProgram', program });
+        }
+      }}
+    >
+      Discard draw
+    </button>
+  );
+}
+
 export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
   const { state, dispatch } = useMeet();
   const entryMap = useMemo(() => new Map(state.entries.map((e) => [e.id, e])), [state.entries]);
@@ -51,6 +73,7 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
   const drawn = draws.length > 0;
   const locked = drawn && draws.every((d) => d.locked);
   const allFinished = drawn && draws.every((d) => d.races.every((r) => r.finished));
+  const canReopen = programCanBeReopened(state, program);
 
   const unassigned = state.entries.filter(
     (e) => !e.preScratched && !state.divisions.some((d) => d.entryIds.includes(e.id))
@@ -198,6 +221,7 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
           <button className="big" onClick={() => dispatch({ type: 'lockProgram', program })}>
             Lock Program {program} & print / enter results
           </button>
+          {canReopen && <DiscardDraw program={program} />}
         </div>
       )}
       {locked && (
@@ -205,6 +229,18 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
           <button className="secondary" onClick={() => window.print()}>
             Print program sheet
           </button>
+          {canReopen && (
+            <>
+              <button className="secondary" onClick={() => dispatch({ type: 'unlockProgram', program })}>
+                Unlock Program {program}
+              </button>
+              <DiscardDraw program={program} />
+              <Hint>
+                Nothing is scored yet, so the draw can still be unlocked to swap dogs or redraw
+                posts, or discarded to change entries or divisions.
+              </Hint>
+            </>
+          )}
           {allFinished && program < 3 && (
             <button
               className="big"

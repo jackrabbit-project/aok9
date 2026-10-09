@@ -49,6 +49,20 @@ export function emptyMeet(): MeetState {
  * added to MeetState does not break every backup written before it.
  */
 export function normalizeMeet(parsed: Partial<MeetState>): MeetState {
+  const entries = parsed.entries ?? [];
+  const known = new Set(entries.map((e) => e.id));
+  // A draw that names a dog no longer on the entry list cannot be rendered,
+  // and a file saved by a version that allowed removing a drawn dog has
+  // exactly that. Prune on the way in so the meet opens, that slot gone.
+  const divisions = (parsed.divisions ?? []).map((d) => ({
+    ...d,
+    entryIds: d.entryIds.filter((id) => known.has(id)),
+    leftoverIds: d.leftoverIds.filter((id) => known.has(id)),
+  }));
+  let draws = parsed.draws ?? [];
+  const orphans = new Set<string>();
+  for (const d of draws) for (const r of d.races) for (const s of r.slots) if (!known.has(s.entryId)) orphans.add(s.entryId);
+  for (const id of orphans) draws = withoutEntry(draws, id);
   return {
     info: {
       clubName: parsed.info?.clubName ?? '',
@@ -56,9 +70,9 @@ export function normalizeMeet(parsed: Partial<MeetState>): MeetState {
       date: parsed.info?.date ?? '',
       fteThreshold: parsed.info?.fteThreshold ?? 0.75,
     },
-    entries: parsed.entries ?? [],
-    divisions: parsed.divisions ?? [],
-    draws: parsed.draws ?? [],
+    entries,
+    divisions,
+    draws,
     overrides: parsed.overrides ?? {},
     // A backup carries the keys, so a meet restored on another laptop keeps
     // updating the same page. A file from before publishing existed has none.
@@ -115,6 +129,8 @@ export type Action =
   | { type: 'setRace'; race: Race }
   | { type: 'swapDogs'; program: 1 | 2 | 3; divisionId: string; a: string; b: string }
   | { type: 'lockProgram'; program: 1 | 2 | 3 }
+  | { type: 'unlockProgram'; program: 1 | 2 | 3 }
+  | { type: 'discardProgram'; program: 1 | 2 | 3 }
   | { type: 'setRaceResult'; raceId: string; outcomes: Record<string, RaceOutcome>; finished: boolean }
   | { type: 'setRaceFlags'; raceId: string; rerun?: boolean; splitAllPoints?: boolean; note?: string }
   | { type: 'setOverride'; entryId: string; patch: Partial<ChampAward> | null }
@@ -128,6 +144,32 @@ function mapRace(draws: ProgramDraw[], raceId: string, fn: (r: ProgramDraw['race
     ...d,
     races: d.races.map((r) => (r.id === raceId ? fn(r) : r)),
   }));
+}
+
+/** Drop a dog from every race it was drawn into, and any result it had. A
+    race left with nobody in it goes too. */
+function withoutEntry(draws: ProgramDraw[], entryId: string): ProgramDraw[] {
+  return draws.map((d) => ({
+    ...d,
+    races: d.races
+      .map((r) => {
+        if (!r.slots.some((s) => s.entryId === entryId)) return r;
+        const outcomes = { ...r.outcomes };
+        delete outcomes[entryId];
+        return { ...r, slots: r.slots.filter((s) => s.entryId !== entryId), outcomes };
+      })
+      .filter((r) => r.slots.length > 0),
+  }));
+}
+
+/**
+ * A program's draw can be unlocked or discarded only while nothing in it has
+ * been scored. Once a result is saved the draw is the record of what ran, and
+ * a dog that cannot run is marked SCR in its race instead.
+ */
+export function programCanBeReopened(state: MeetState, program: 1 | 2 | 3): boolean {
+  const draws = state.draws.filter((d) => d.program === program);
+  return draws.length > 0 && !draws.some((d) => d.races.some((r) => r.finished));
 }
 
 export function reducer(state: MeetState, action: Action): MeetState {
@@ -152,6 +194,9 @@ export function reducer(state: MeetState, action: Action): MeetState {
           entryIds: d.entryIds.filter((id) => id !== action.id),
           leftoverIds: d.leftoverIds.filter((id) => id !== action.id),
         })),
+        // The Entries screen refuses this once a draw exists, but a draw must
+        // never name a dog that is gone: the Program screen cannot render it.
+        draws: withoutEntry(state.draws, action.id),
       };
     case 'setDivisions':
       return { ...state, divisions: action.divisions };
@@ -198,6 +243,15 @@ export function reducer(state: MeetState, action: Action): MeetState {
         ...state,
         draws: state.draws.map((d) => (d.program === action.program ? { ...d, locked: true } : d)),
       };
+    case 'unlockProgram':
+      if (!programCanBeReopened(state, action.program)) return state;
+      return {
+        ...state,
+        draws: state.draws.map((d) => (d.program === action.program ? { ...d, locked: false } : d)),
+      };
+    case 'discardProgram':
+      if (!programCanBeReopened(state, action.program)) return state;
+      return { ...state, draws: state.draws.filter((d) => d.program !== action.program) };
     case 'setRaceResult':
       return {
         ...state,

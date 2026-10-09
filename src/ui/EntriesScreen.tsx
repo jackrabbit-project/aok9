@@ -8,6 +8,9 @@ import type { Entry, Grade, Sex } from '../domain/types';
 
 export function EntriesScreen() {
   const { state, dispatch } = useMeet();
+  // Once a program is drawn the entry list is what the draw was made from;
+  // a dog that cannot run is marked SCR in its race, not taken off the list.
+  const drawn = state.draws.length > 0;
   const { guide } = useGuide();
   const [q, setQ] = useState('');
   const [fte, setFte] = useState<Entry | null>(null);
@@ -134,6 +137,7 @@ export function EntriesScreen() {
                   <td className="btn-cell">
                     <button
                       className="secondary sm"
+                      disabled={drawn}
                       title="Scratch before racing (fees per 1.9)"
                       onClick={() =>
                         dispatch({ type: 'updateEntry', id: e.id, patch: { preScratched: !e.preScratched } })
@@ -143,6 +147,7 @@ export function EntriesScreen() {
                     </button>
                     <button
                       className="outline-danger sm"
+                      disabled={drawn}
                       aria-label={`Remove ${e.callName}`}
                       onClick={() => dispatch({ type: 'removeEntry', id: e.id })}
                     >
@@ -153,6 +158,13 @@ export function EntriesScreen() {
               ))}
             </tbody>
           </Table>
+        )}
+        {drawn && (
+          <Hint>
+            Program 1 is drawn, so entries can no longer be scratched or removed here. A dog that
+            cannot run is marked SCR in its race. To change the entry list, discard the draw on the
+            Program 1 screen first — possible until the first result is saved.
+          </Hint>
         )}
         {state.entries.some((e) => !e.sex && !e.preScratched) && (
           <Warn>Some dogs have no sex recorded — needed for the High Score Opposite Sex award.</Warn>
