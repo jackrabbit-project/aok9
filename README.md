@@ -34,10 +34,11 @@ programs run).
 
 Under **Downloads** (shown once a meet has something in it):
 
-- **Save Meet to File (.json)** — the whole meet as a file, named with the date and time, e.g.
+- **Save a backup of this meet** — the whole meet as one file, named with the date and time, e.g.
   `aok9-meet-backup-2026-A01-20260802-143207.json`, so repeated saves during a meet never
   overwrite each other and the newest is obvious. Use it as a spare copy or to move a meet to
-  another machine, and reopen it with *Open Meet from File*.
+  another machine, and reopen it with *Open Meet from File*. It opens only in this app; no other
+  program is needed.
 - **Meet Report (.xlsx)** — the official NRD report.
 - **Print results** — opens the Export screen, where the printable results live.
 
@@ -112,8 +113,8 @@ a **bug** and for a **scoring or rule question**, both of which ask for the vers
 at the bottom of the app, so a report can be traced to the exact code that produced it. If you do
 not have a GitHub account, email <info@gazehound.io> instead.
 
-Attaching the `.json` from *Save Meet to File* makes a problem reproducible, but note that issues are
-public and the file contains the dog and owner names from your meet.
+Attaching the backup file from *Save a backup of this meet* makes a problem reproducible, but note
+that issues are public and the file contains the dog and owner names from your meet.
 
 ## Developing it
 
@@ -234,8 +235,9 @@ AOK9 rules, forms, or publications, **the official AOK9 materials shall govern**
 **Your data.** Everything entered stays in your own browser on your own computer. Nothing is
 uploaded unless you choose to publish a meet's results page (see *Results online* above), and then
 only what the paddock board shows. There is no account or cloud backup, which is also why the app
-works with no internet. That means nobody can recover a lost meet for you: use *Save Meet to File*
-to keep your own copies, and keep one from part-way through a long meet, not just at the end.
+works with no internet. That means nobody can recover a lost meet for you: use *Save a backup of
+this meet* to keep your own copies, and keep one from part-way through a long meet, not just at
+the end.
 
 **No warranty.** This software is provided "as is", without warranty of any kind, express or implied.
 See [LICENSE](LICENSE).

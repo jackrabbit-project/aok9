@@ -27,10 +27,10 @@ export function ExportScreen() {
         <p>Full state backup — reopen later or share with another laptop.</p>
         <div className="btn-row">
           <button className="secondary" onClick={() => downloadBackup(state)}>
-            Save Meet to File
+            Save a backup of this meet
           </button>
         </div>
-        <p className="muted small">Saves a .json file holding the whole meet.</p>
+        <p className="muted small">One file holding the whole meet. It opens only in this app, with Open Meet from File on the home page.</p>
 
         <p>Paper copy of the final scoring sheet for the paddock board.</p>
         <div className="btn-row">

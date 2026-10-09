@@ -4,6 +4,7 @@ import { useGuide } from '../guide';
 import { gradeForWave } from '../domain/wave';
 import { Hint, Section, Table, Warn } from './common';
 import { wave } from './fmt';
+import { searchGuide } from './guideSearch';
 import type { Entry, Grade, Sex } from '../domain/types';
 
 export function EntriesScreen() {
@@ -20,19 +21,9 @@ export function EntriesScreen() {
     [state.entries]
   );
 
-  const results = useMemo(() => {
-    const term = q.trim().toLowerCase();
-    if (term.length < 2) return [];
-    return guide.dogs
-      .filter(
-        (d) =>
-          d.callName.toLowerCase().includes(term) ||
-          d.regNo.toLowerCase().includes(term) ||
-          (d.breed ?? '').toLowerCase().includes(term) ||
-          (d.owner ?? '').toLowerCase().includes(term)
-      )
-      .slice(0, 25);
-  }, [q, guide]);
+  const SHOW = 25;
+  const matches = useMemo(() => searchGuide(guide.dogs, q), [q, guide]);
+  const results = matches.slice(0, SHOW);
 
   // Title status is guessed from the guide's accumulated points, which cannot
   // always distinguish "earned 12 points" from "holds the title". A wrong value
@@ -216,6 +207,11 @@ export function EntriesScreen() {
               })}
             </tbody>
           </Table>
+        )}
+        {matches.length > SHOW && (
+          <Hint>
+            Showing the first {SHOW} of {matches.length} matches — keep typing to narrow it down.
+          </Hint>
         )}
       </Section>
 

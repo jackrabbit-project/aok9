@@ -121,7 +121,7 @@ export function HomeScreen() {
           )}
         </div>
         <p className="muted small">
-          <b>Open Meet from File</b> takes a .json saved from this app — use it to move a meet
+          <b>Open Meet from File</b> takes a backup saved from this app — use it to move a meet
           between laptops, or to restore a spare copy alongside the automatic browser save.
         </p>
         <input
@@ -150,7 +150,7 @@ export function HomeScreen() {
         <Section title="Downloads">
           <div className="btn-row">
             <button className="secondary" onClick={() => downloadBackup(state)}>
-              Save Meet to File (.json)
+              Save a backup of this meet
             </button>
             <button className="secondary" onClick={() => downloadReport(state)}>
               Meet Report (.xlsx)
@@ -162,9 +162,9 @@ export function HomeScreen() {
             </button>
           </div>
           <p className="muted small">
-            The .json is the whole meet, for backup or moving between laptops. The .xlsx is the
-            official results report. Printing opens the Export screen, where the printable results
-            live.
+            The backup is the whole meet in one file. It opens only in this app, with{' '}
+            <b>Open Meet from File</b> above — no other program is needed. The .xlsx is the official
+            results report. Printing opens the Export screen, where the printable results live.
           </p>
         </Section>
       )}
@@ -362,7 +362,7 @@ export function HomeScreen() {
             is uploaded unless you choose to publish a meet&rsquo;s results page, and then only what
             the paddock board shows — call names, breeds and results. There is no account or cloud
             backup — which also means nobody can recover a lost meet for you. Use{' '}
-            <b>Save Meet to File</b> to keep your own copies.
+            <b>Save a backup of this meet</b> to keep your own copies.
           </p>
           <p>
             <b>No warranty.</b> This software is provided “as is”, without warranty of any kind,
