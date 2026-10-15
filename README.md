@@ -141,6 +141,12 @@ first — big targets for entering results, tables that scroll inside their own 
 for reading. There is no dark theme; the tokens at the top of `src/styles.css` are laid out so one
 can be added by redefining them.
 
+The rabbit is the Jackrabbit Project mark, from the set at
+<https://github.com/jackrabbit-project/jackrabbit> (`assets/`). The header and footer mark is the
+single-colour path from its `mark-mono.svg`; the favicons and PWA icons are rasterised from
+`mark.svg` by `node scripts/make-icons.mjs` (needs `npm i --no-save sharp`). When the mark changes,
+regenerate from the set rather than editing the files.
+
 ### Updating the bundled Grading Guide
 
 ```
