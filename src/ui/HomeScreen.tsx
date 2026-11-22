@@ -8,6 +8,7 @@ import sampleMeet1 from '../data/sample-meet-1.json';
 import sampleMeet2 from '../data/sample-meet-2.json';
 import { ShareLinks } from './ShareLinks';
 import type { MeetState, Phase } from '../domain/types';
+import { Icon } from './icons';
 
 /** True once the secretary has entered anything worth protecting. */
 function hasWork(state: MeetState): boolean {
@@ -104,6 +105,7 @@ export function HomeScreen() {
             {started ? 'Continue' : 'Start a new meet'}
           </button>
           <button className="secondary" onClick={() => restoreRef.current?.click()}>
+            <Icon name="open" />
             Open Meet from File
           </button>
           {/* Nothing to reset before a meet exists. */}
@@ -150,14 +152,17 @@ export function HomeScreen() {
         <Section title="Downloads">
           <div className="btn-row">
             <button className="secondary" onClick={() => downloadBackup(state)}>
+              <Icon name="backup" />
               Save a backup of this meet
             </button>
             <button className="secondary" onClick={() => downloadReport(state)}>
+              <Icon name="report" />
               Meet Report (.xlsx)
             </button>
             {/* Printing needs the results markup, which only the Export screen
                 renders -- printing from here would produce a blank page. */}
             <button className="secondary" onClick={() => dispatch({ type: 'setPhase', phase: 'export' })}>
+              <Icon name="print" />
               Print results →
             </button>
           </div>

@@ -6,6 +6,7 @@ import { downloadBackup } from '../io/backup';
 import { Hint, Section } from './common';
 import { pts } from './fmt';
 import { PrintQr } from './Qr';
+import { Icon } from './icons';
 
 export function ExportScreen() {
   const { state } = useMeet();
@@ -20,6 +21,7 @@ export function ExportScreen() {
         </p>
         <div className="btn-row">
           <button onClick={() => downloadReport(state)}>
+            <Icon name="report" />
             Download AOK9 Race Meet Report (.xlsx)
           </button>
         </div>
@@ -27,6 +29,7 @@ export function ExportScreen() {
         <p>Full state backup — reopen later or share with another laptop.</p>
         <div className="btn-row">
           <button className="secondary" onClick={() => downloadBackup(state)}>
+            <Icon name="backup" />
             Save a backup of this meet
           </button>
         </div>
@@ -35,6 +38,7 @@ export function ExportScreen() {
         <p>Paper copy of the final scoring sheet for the paddock board.</p>
         <div className="btn-row">
           <button className="secondary" onClick={() => window.print()}>
+            <Icon name="print" />
             Print scoring sheet
           </button>
         </div>

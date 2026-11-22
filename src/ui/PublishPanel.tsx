@@ -4,6 +4,7 @@ import { publicUrl, randomKey } from '../publish/keys';
 import { publishStatusText, usePublish } from '../publish/usePublisher';
 import { Hint, Section, Warn } from './common';
 import { Qr } from './Qr';
+import { Icon } from './icons';
 
 const SHARE_TEXT = 'Live results for the AOK9 meet:';
 
@@ -35,6 +36,7 @@ function CopyLink({ url, className }: { url: string; className: string }) {
         }
       }}
     >
+      <Icon name={copied ? 'check' : 'link'} />
       {copied ? 'Copied' : 'Copy link'}
     </button>
   );
@@ -66,7 +68,10 @@ export function PublishPanel() {
           results and points. No owners, registration numbers or WAVEs.
         </p>
         <div className="btn-row">
-          <button onClick={() => publishMeet(dispatch)}>Publish this meet</button>
+          <button onClick={() => publishMeet(dispatch)}>
+            <Icon name="publish" />
+            Publish this meet
+          </button>
         </div>
         <Hint>
           Nothing leaves this device until you press it. You can stop publishing at any time and
@@ -90,6 +95,7 @@ export function PublishPanel() {
             <CopyLink url={url} className="secondary" />
             {/* Person to person, from this phone's own messaging app. */}
             <a className="share-btn" href={`sms:?&body=${encoded}`}>
+              <Icon name="text" />
               Text the link
             </a>
             <a
@@ -98,15 +104,18 @@ export function PublishPanel() {
               target="_blank"
               rel="noopener noreferrer"
             >
+              <Icon name="whatsapp" />
               WhatsApp
             </a>
             <a
               className="share-btn"
               href={`mailto:?subject=${encodeURIComponent('AOK9 meet — live results')}&body=${encoded}`}
             >
+              <Icon name="email" />
               Email
             </a>
             <a className="share-btn" href={url} target="_blank" rel="noopener noreferrer">
+              <Icon name="openPage" />
               Open the page
             </a>
           </div>
@@ -118,6 +127,7 @@ export function PublishPanel() {
           {pub.error && <Warn>{pub.error} The app will keep trying.</Warn>}
           <div className="btn-row">
             <button className="secondary sm" onClick={() => void pub.publishNow()}>
+              <Icon name="refresh" />
               Publish now
             </button>
             <button
@@ -128,6 +138,7 @@ export function PublishPanel() {
                 }
               }}
             >
+              <Icon name="stop" />
               Stop publishing
             </button>
           </div>
@@ -152,6 +163,7 @@ export function PublishLine() {
       <div className="publish-line">
         <span className="publish-status">Results online: off</span>
         <button className="secondary sm" onClick={() => publishMeet(dispatch)}>
+          <Icon name="publish" />
           Publish this meet
         </button>
         <span className="muted small">

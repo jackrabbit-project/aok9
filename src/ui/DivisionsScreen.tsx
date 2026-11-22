@@ -7,6 +7,7 @@ import { Hint, Section, Warn } from './common';
 import { wave } from './fmt';
 import { PrintQr } from './Qr';
 import type { Division } from '../domain/types';
+import { Icon } from './icons';
 
 export function DivisionsScreen() {
   const { state, dispatch } = useMeet();
@@ -223,6 +224,7 @@ export function DivisionsScreen() {
           disabled={state.divisions.length === 0}
           onClick={() => window.print()}
         >
+          <Icon name="print" />
           Print divisions
         </button>
         {state.divisions.length === 0 && <Hint>Create at least one division first.</Hint>}

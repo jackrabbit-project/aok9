@@ -48,3 +48,7 @@ which are included under separate terms:
    typeface (Copyright 2017 IBM Corp.), each licensed under the SIL Open
    Font License, Version 1.1 (https://openfontlicense.org), not the MIT
    license above.
+
+4. ICONS — the button icons come from Phosphor Icons
+   (Copyright (c) 2020 Phosphor Icons, https://phosphoricons.com), used
+   under the MIT license through the "@phosphor-icons/react" package.

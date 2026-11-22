@@ -568,6 +568,9 @@ input.award.overridden { border-color: var(--rust); box-shadow: inset 3px 0 0 va
 }
 .share-btn:hover { border-color: var(--ink); color: var(--ink); background: transparent; }
 .share-btn svg { width: 16px; height: 16px; fill: currentColor; }
+/* Phosphor icons beside button labels (src/ui/icons.tsx). */
+.btn-icon { flex: none; margin: -2px 0; }
+.share-btn .btn-icon { width: 1.35em; height: 1.35em; }
 
 .disclaimer summary { cursor: pointer; color: var(--green); margin-top: 4px; }
 .disclaimer p { font-size: 14px; color: var(--ink); line-height: 1.55; }

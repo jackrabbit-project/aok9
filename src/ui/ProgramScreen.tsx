@@ -8,6 +8,7 @@ import type { ProgramDraw } from '../domain/types';
 import { Hint, Section, Warn } from './common';
 import { RaceCard } from './RaceCard';
 import { PrintQr } from './Qr';
+import { Icon } from './icons';
 
 const placeLabel = (n: number): string =>
   n === 1 ? '1st' : n === 2 ? '2nd' : n === 3 ? '3rd' : `${n}th`;
@@ -56,6 +57,7 @@ function DiscardDraw({ program }: { program: 1 | 2 | 3 }) {
         }
       }}
     >
+      <Icon name="discard" />
       Discard draw
     </button>
   );
@@ -219,6 +221,7 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
       {drawn && !locked && (
         <div className="btn-row sticky-actions">
           <button className="big" onClick={() => dispatch({ type: 'lockProgram', program })}>
+            <Icon name="lock" />
             Lock Program {program} & print / enter results
           </button>
           {canReopen && <DiscardDraw program={program} />}
@@ -227,11 +230,13 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
       {locked && (
         <div className="btn-row sticky-actions">
           <button className="secondary" onClick={() => window.print()}>
+            <Icon name="print" />
             Print program sheet
           </button>
           {canReopen && (
             <>
               <button className="secondary" onClick={() => dispatch({ type: 'unlockProgram', program })}>
+                <Icon name="unlock" />
                 Unlock Program {program}
               </button>
               <DiscardDraw program={program} />
