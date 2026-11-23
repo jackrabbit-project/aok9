@@ -315,17 +315,17 @@ export function HomeScreen() {
         <ul className="links">
           <li>
             <a
-              href="https://github.com/jackrabbit-project/aok9"
+              href="https://github.com/jackrabbit-project/aok9-RMS-app"
               target="_blank"
               rel="noopener noreferrer"
             >
               GitHub repository
             </a>{' '}
-            — github.com/jackrabbit-project/aok9
+            — github.com/jackrabbit-project/aok9-RMS-app
           </li>
           <li>
             <a
-              href="https://github.com/jackrabbit-project/aok9/issues/new/choose"
+              href="https://github.com/jackrabbit-project/aok9-RMS-app/issues/new/choose"
               target="_blank"
               rel="noopener noreferrer"
             >

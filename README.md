@@ -108,7 +108,7 @@ to open; the app itself still works with none.
 
 ## Reporting a problem
 
-Open an [issue](https://github.com/jackrabbit-project/aok9/issues/new/choose) — there are templates for
+Open an [issue](https://github.com/jackrabbit-project/aok9-RMS-app/issues/new/choose) — there are templates for
 a **bug** and for a **scoring or rule question**, both of which ask for the version and build shown
 at the bottom of the app, so a report can be traced to the exact code that produced it. If you do
 not have a GitHub account, email <info@gazehound.io> instead.
