@@ -30,7 +30,7 @@ describe('NRD report workbook', () => {
     expect(bcHeaderIdx).toBeGreaterThan(0);
     expect(rows[bcHeaderIdx + 1]).toEqual([
       'ARN*', 'PLACE', 'CALL NAME', 'OWNER NAME', 'SCORE',
-      'BRC', 'NBRC', 'MRC', 'NMRC', 'TRC', 'NAT', 'NOTES (DQ, SCR, OC)',
+      'BRC', 'NBRC', 'MRC', 'NMRC', 'TRC', 'NAT', 'NOTES (DQ, SCR, OC)', 'BREED',
     ]);
 
     // Standings: Chili & Critter 19 (dead heat), Akira 12, Creek 11, Atari 11, Ambush 9
@@ -53,13 +53,24 @@ describe('NRD report workbook', () => {
       ['Henry', 20, 1], ['Pixel', 18, 0.5], ['Bentley', 7, null],
     ]);
     expect(mx[2][11]).toContain('OC P1');
-    // FTE without reg number is flagged with breed
-    expect(mx[1][0]).toBe('PENDING (LABRADOR RETRIEVER)');
+    // FTE without reg number: PENDING, with its breed in the BREED column
+    expect(mx[1][0]).toBe('PENDING');
+    expect(mx[1][12]).toBe('Labrador Retriever');
+    expect(bc[0][12]).toBe('Border Collie');
   });
 
   it('RBR sheet lays out race-by-race blocks for all three programs', () => {
     const rows = sheetRows(wb, 'RBR');
     expect(rows[1][0]).toBe('RACE BY RACE RESULTS');
+    // Template positions: DATE label in E1, the date beside it.
+    expect(rows[0][4]).toBe('DATE');
+    expect(rows[0][6]).toBe('2026-07-19');
+    // Division label in column B, as in the template.
+    expect(rows.some((r) => r[1] === 'DIVISION (BREED OR MIXED): BREED - BORDER COLLIE')).toBe(true);
+    // The app's internal "did not run" code never reaches the report.
+    expect(rows.flat().includes('ABS')).toBe(false);
+    // Notes key at the foot of the sheet.
+    expect(rows.some((r) => r[1] === 'PSCR - paddock scratch')).toBe(true);
     const header = rows.find((r) => typeof r[1] === 'string' && (r[1] as string).startsWith('Program 1, Race 1'));
     expect(header).toBeTruthy();
     // HP race header carries the (HP) marker
