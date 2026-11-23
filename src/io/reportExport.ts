@@ -1,5 +1,11 @@
 // Builds the official "AOK9 Race Meet Report" workbook (Summary + RBR sheets)
 // from the finished meet, plus an unofficial WAVE projection sheet.
+//
+// Layout follows the sprint / oval template AOK9 published in November 2026
+// (Google Sheet 1CdKhZCDa0pOIT3pQ4QOEk3rjNYFrRBeRwAKH_-p3ymk): the Summary gains
+// a BREED column (M), and the RBR tab keeps three races across per block with
+// the notes key DQ, SCR, PSCR, OC, DNF. The template's Registry tab and its
+// lookup formulas are left out -- the app fills every value itself.
 
 import * as XLSX from 'xlsx';
 import { computeDivisionResults } from '../domain/championship';
@@ -9,16 +15,22 @@ import type { ChampAward, Division, Entry, MeetState, ProgramDraw } from '../dom
 
 type Row = (string | number | null)[];
 
+/** The template's notes key. The app's "did not run" outcome is SCR. */
+const NOTE_CODE: Record<string, string> = { OC: 'OC', DNF: 'DNF', DQ: 'DQ', ABS: 'SCR' };
+
+/** Breed as the template's lookup prints it: PROPER(), e.g. "Border Collie". */
+function properCase(s: string | null | undefined): string {
+  return (s ?? '').toLowerCase().replace(/(^|[^a-z'])([a-z])/g, (_, a: string, b: string) => a + b.toUpperCase());
+}
+
 function outcomesNote(division: Division, draws: ProgramDraw[], entryId: string): string {
   const notes: string[] = [];
   for (const draw of draws.filter((d) => d.divisionId === division.id)) {
     for (const race of draw.races) {
       const oc = race.outcomes[entryId];
       if (!oc) continue;
-      if (oc.kind === 'OC') notes.push(`OC P${draw.program}`);
-      if (oc.kind === 'DNF') notes.push(`DNF P${draw.program}`);
-      if (oc.kind === 'DQ') notes.push(`DQ P${draw.program}`);
-      if (oc.kind === 'ABS') notes.push(`SCR P${draw.program}`);
+      const code = NOTE_CODE[oc.kind];
+      if (code) notes.push(`${code} P${draw.program}`);
     }
   }
   return notes.join(', ');
@@ -44,8 +56,9 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
     [`CLUB NAME: ${state.info.clubName}`],
     ['MEET TYPE: SPRINT'],
     [`DATE: ${state.info.date}`],
+    // Row 4 holds the template's how-to note; the meet ID goes there instead,
+    // so each division block starts on row 5 as in the template.
     [`MEET ID: ${state.info.meetId}`],
-    [],
   ];
   for (const division of state.divisions) {
     const res = computeDivisionResults(division, state.draws, entryMap);
@@ -66,13 +79,14 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
       'TRC',
       'NAT',
       'NOTES (DQ, SCR, OC)',
+      'BREED',
     ]);
     for (const s of res.standings) {
       const e = entryMap.get(s.entryId)!;
       const a = awards[s.entryId];
       const leftover = division.leftoverIds.includes(s.entryId) ? ' (LEFTOVER)' : '';
       summary.push([
-        e.regNo ?? `PENDING (${e.breed})`,
+        e.regNo ?? 'PENDING',
         s.place,
         e.callName + leftover,
         e.owner ?? '',
@@ -84,6 +98,9 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
         a.trc || null,
         (a.nbrc || 0) + (a.nmrc || 0) || null,
         outcomesNote(division, state.draws, s.entryId),
+        // The template's rule: a dog with pending registration MUST carry
+        // its breed. Every row carries one, as the template's lookup does.
+        properCase(e.breed),
       ]);
     }
     summary.push(['*Any dogs with pending registration MUST have breed indicated']);
@@ -92,16 +109,22 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
   const wsSummary = XLSX.utils.aoa_to_sheet(summary);
   wsSummary['!cols'] = [
     { wch: 18 }, { wch: 7 }, { wch: 22 }, { wch: 22 }, { wch: 7 },
-    { wch: 6 }, { wch: 6 }, { wch: 6 }, { wch: 6 }, { wch: 6 }, { wch: 6 }, { wch: 24 },
+    { wch: 6 }, { wch: 6 }, { wch: 6 }, { wch: 6 }, { wch: 6 }, { wch: 6 }, { wch: 24 }, { wch: 22 },
   ];
   XLSX.utils.book_append_sheet(wb, wsSummary, 'Summary');
 
   // ---------- RBR (race-by-race) sheet ----------
-  const rbr: Row[] = [[`DATE: ${state.info.date}`], ['RACE BY RACE RESULTS'], []];
+  // Row 1: the template's DATE label sits in E1:F1, the date beside it.
+  const rbr: Row[] = [[null, null, null, null, 'DATE', null, state.info.date], ['RACE BY RACE RESULTS'], []];
+  const rbrMerges: XLSX.Range[] = [
+    { s: { r: 0, c: 4 }, e: { r: 0, c: 5 } },
+    { s: { r: 1, c: 0 }, e: { r: 1, c: 9 } },
+  ];
   for (const division of state.divisions) {
     const label =
       division.type === 'breed' ? `BREED - ${division.name}` : `MIXED - ${division.name}`;
-    rbr.push([`DIVISION (BREED OR MIXED): ${label}`]);
+    rbrMerges.push({ s: { r: rbr.length, c: 1 }, e: { r: rbr.length, c: 8 } });
+    rbr.push([null, `DIVISION (BREED OR MIXED): ${label}${division.ungraded ? ' (UNGRADED)' : ''}`]);
     const draws = ([1, 2, 3] as const).map((p) =>
       state.draws.find((d) => d.divisionId === division.id && d.program === p)
     );
@@ -131,7 +154,7 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
           const oc = race!.outcomes[slot.entryId];
           const name = entryMap.get(slot.entryId)?.callName ?? '';
           const placeLabel =
-            oc?.kind === 'placed' ? oc.place : oc ? oc.kind : '-';
+            oc?.kind === 'placed' ? oc.place : oc ? NOTE_CODE[oc.kind] ?? oc.kind : '-';
           rows[i].push(placeLabel as string | number, name, pts[slot.entryId] ?? null);
         }
       }
@@ -139,7 +162,16 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
     }
     rbr.push([]);
   }
+  // The template's key to the codes in the Place columns.
+  rbr.push(
+    [null, 'DQ - disqualified'],
+    [null, 'OC - Off Course'],
+    [null, 'SCR - scratch'],
+    [null, 'PSCR - paddock scratch'],
+    [null, 'DNF - did not finish']
+  );
   const wsRbr = XLSX.utils.aoa_to_sheet(rbr);
+  wsRbr['!merges'] = rbrMerges;
   wsRbr['!cols'] = Array.from({ length: 9 }, (_, i) => (i % 3 === 1 ? { wch: 26 } : { wch: 8 }));
   XLSX.utils.book_append_sheet(wb, wsRbr, 'RBR');
 
