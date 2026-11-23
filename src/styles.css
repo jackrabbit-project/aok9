@@ -309,12 +309,14 @@ input.search { width: 100%; font-size: 16px; padding: 11px 13px; }
 .row-check input { accent-color: var(--rust); }
 
 /* Buttons ---------------------------------------------------------------- */
+/* Labels are read with cold hands in daylight: the body face, sentence case,
+   15 px. Mono stays for numbers, times, reg numbers and short codes. */
 button {
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: none;
+  letter-spacing: 0;
   color: var(--paper);
   background: var(--ink);
   border: 1px solid var(--ink);
@@ -340,8 +342,8 @@ button.danger { background: var(--danger); border-color: var(--danger); }
 button.danger:hover { background: #6f2222; border-color: #6f2222; }
 button.outline-danger { background: transparent; color: var(--danger); border-color: var(--danger); }
 button.outline-danger:hover { background: var(--badge-down-bg); }
-button.big { font-size: 13px; letter-spacing: 0.08em; padding: 14px 22px; }
-button.sm { padding: 6px 9px; font-size: 11px; }
+button.big { font-size: 16px; padding: 13px 22px; }
+button.sm { padding: 6px 10px; font-size: 13.5px; }
 .btn-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 10px 0 4px; }
 .sticky-actions {
   position: sticky;
@@ -398,6 +400,10 @@ tr.scratched td { opacity: 0.45; text-decoration: line-through; }
 /* Championship title toggles (editable -- the guide only lets us guess) */
 .title-toggles { white-space: nowrap; }
 .title-chip {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   background: var(--surface);
   color: var(--ink-muted);
   border: 1px solid var(--line);
@@ -469,6 +475,8 @@ tr.picked td { background: var(--badge-prov-bg); }
 /* Results ---------------------------------------------------------------- */
 input.award { width: 66px; padding: 5px 6px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
 input.award.overridden { border-color: var(--rust); box-shadow: inset 3px 0 0 var(--rust); }
+/* A zero award is shown as a faint dash, so the points a dog did earn stand out. */
+input.award::placeholder { color: var(--line-strong); opacity: 1; }
 .trophies { margin-top: 12px; font-size: 14.5px; }
 .explain { font-size: 13.5px; color: var(--ink-muted); }
 .flags { color: var(--danger); font-family: var(--font-mono); font-size: 11.5px; }
@@ -557,11 +565,11 @@ input.award.overridden { border-color: var(--rust); box-shadow: inset 3px 0 0 va
   border: 1px solid var(--line-strong);
   background: transparent;
   color: var(--ink);
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 11.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14.5px;
+  text-transform: none;
+  letter-spacing: 0;
   text-decoration: none;
   cursor: pointer;
   transition: border-color 180ms;
@@ -612,7 +620,7 @@ input.award.overridden { border-color: var(--rust); box-shadow: inset 3px 0 0 va
 .update-prompt-text { display: flex; flex-direction: column; min-width: 0; }
 .update-prompt-note { color: var(--ink-muted); font-size: 12.5px; }
 .update-prompt-actions { display: flex; gap: 8px; flex-shrink: 0; }
-.update-prompt-actions button { padding: 7px 14px; font-size: 11.5px; }
+.update-prompt-actions button { padding: 7px 14px; font-size: 14px; }
 
 
 /* Race results: two rows of big targets ------------------------------------
@@ -636,8 +644,8 @@ input.award.overridden { border-color: var(--rust); box-shadow: inset 3px 0 0 va
 .race-tbl td { border-bottom: 0; padding: 1px 0; }
 .race-tbl .outcome-cell { grid-column: 1 / -1; margin-top: 4px; }
 .seg { display: flex; gap: 4px; }
-.seg button { flex: 1; min-height: 40px; padding: 6px 4px; font-size: 13.5px; letter-spacing: 0.04em; }
-.seg-status button { font-size: 11px; min-height: 36px; }
+.seg button { flex: 1; min-height: 42px; padding: 6px 4px; font-size: 16px; }
+.seg-status button { font-family: var(--font-mono); font-weight: 500; font-size: 13px; letter-spacing: 0.04em; min-height: 38px; }
 .dog-cell { min-width: 0; }
 .dog-cell small { display: block; color: var(--ink-muted); font-size: 12px; }
 

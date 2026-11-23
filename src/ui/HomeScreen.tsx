@@ -3,7 +3,7 @@ import { useMeet } from '../store/meetStore';
 import { downloadBackup, parseBackup } from '../io/backup';
 import { downloadReport } from '../io/reportExport';
 import { Hint, Section } from './common';
-import { InstallApp } from './InstallApp';
+import { InstallApp, isStandalone } from './InstallApp';
 import sampleMeet1 from '../data/sample-meet-1.json';
 import sampleMeet2 from '../data/sample-meet-2.json';
 import { ShareLinks } from './ShareLinks';
@@ -46,19 +46,30 @@ export function HomeScreen() {
   // Captured once, so loading the sample meet mid-read does not snap the
   // "How it works" list shut under the person reading it.
   const [startedOnLoad] = useState(started);
+  // An installed app has nothing to gain from install instructions.
+  const [installed] = useState(isStandalone);
+  const getTheApp = !installed && (
+    <Section title="Get the app">
+      <InstallApp />
+    </Section>
+  );
 
   return (
     <div className="landing">
-      <div className="hero">
-        <h1>AOK9 Sprint Race Secretary</h1>
-        <p className="subtitle">
-          Offline app for running an official R.A.C.E. AOK9 Sprint Racing meet per Rule Book v3.0.
-        </p>
-      </div>
-
-      <Section title="Get the app">
-        <InstallApp />
-      </Section>
+      {/* With a meet loaded the header already names the app, and the
+          secretary came back for the meet: show it first. The title band and
+          install card are for someone arriving with nothing loaded. */}
+      {!started && (
+        <>
+          <div className="hero">
+            <h1>AOK9 Sprint Race Secretary</h1>
+            <p className="subtitle">
+              Offline app for running an official R.A.C.E. AOK9 Sprint Racing meet per Rule Book v3.0.
+            </p>
+          </div>
+          {getTheApp}
+        </>
+      )}
 
       <Section title={started ? 'Current meet' : 'Start here'}>
         {/* With nothing entered, the summary is six dashes and zeros and
@@ -173,6 +184,8 @@ export function HomeScreen() {
           </p>
         </Section>
       )}
+
+      {started && getTheApp}
 
       <Section title="Try it out">
         <p>

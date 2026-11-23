@@ -109,7 +109,8 @@ export function ResultsScreen() {
                               type="number"
                               step="0.25"
                               min="0"
-                              value={val}
+                              value={val === 0 ? '' : val}
+                              placeholder="—"
                               aria-label={`${e.callName}: ${AWARD_LABEL[k]} points`}
                               title={overridden ? `edited — computed: ${computed[k]}` : 'computed value (editable)'}
                               onChange={(ev) => {
