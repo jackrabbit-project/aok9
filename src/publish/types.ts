@@ -22,6 +22,8 @@ export interface PublicRace {
   raceNo: number;
   isHP: boolean;
   finished: boolean;
+  /** marked rerun on the race card (6.5: results show which races were rerun) */
+  rerun?: boolean;
   slots: PublicSlot[];
 }
 

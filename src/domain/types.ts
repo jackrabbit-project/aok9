@@ -171,9 +171,13 @@ export interface Standing {
   started: boolean;
   /** ran and finished every race of all three programs (no OC/DNF/DQ/ABS) */
   finishedAllRaces: boolean;
-  /** completed all three programs (ran in each) */
+  /** completed all three programs: ran in each, and was not disqualified in any
+      (6.1.3: a DQ'd dog is placed as if it had not participated) */
   completedMeet: boolean;
   defeatedSomeone: boolean;
+  /** defeated a dog other than a leftover. Breed points are distributed "as if
+      the 'left over' dog had not run" (5.2), so beating only it does not count. */
+  defeatedBreedDog: boolean;
   isLeftover: boolean;
 }
 

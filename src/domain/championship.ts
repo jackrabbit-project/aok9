@@ -23,10 +23,15 @@ interface Row extends Standing {
 }
 
 /** Basic Chapter V eligibility: finished every race, not last in the list, defeated somebody. */
-function eligible(row: Row, isLast: boolean): { ok: boolean; why: string | null } {
+function eligible(row: Row, isLast: boolean, breedPoints = false): { ok: boolean; why: string | null } {
   if (!row.finishedAllRaces) return { ok: false, why: 'did not finish all races' };
   if (isLast) return { ok: false, why: 'finished last in the division' };
-  if (!row.defeatedSomeone) return { ok: false, why: 'did not defeat at least one dog' };
+  if (!(breedPoints ? row.defeatedBreedDog : row.defeatedSomeone)) {
+    return {
+      ok: false,
+      why: breedPoints ? 'did not defeat a dog of the breed (the leftover does not count, 5.2)' : 'did not defeat at least one dog',
+    };
+  }
   return { ok: true, why: null };
 }
 
@@ -56,7 +61,7 @@ export function eligibleEntry(rows: Row[], isTitled: (e: Entry) => boolean): num
 function distribute(
   rows: Row[],
   values: number[],
-  opts: { consumes: (r: Row) => boolean; receives: (r: Row) => boolean },
+  opts: { consumes: (r: Row) => boolean; receives: (r: Row) => boolean; breedPoints?: boolean },
   label: string,
   explanations: string[]
 ): Record<string, number> {
@@ -67,11 +72,19 @@ function distribute(
   const slotted: { row: Row; slot: number; receives: boolean }[] = [];
   let slot = 0;
   for (const r of rows) {
-    if (slot >= values.length) break;
     if (!opts.consumes(r)) continue;
+    // Past the last award slot, keep only dogs tied on points with the last
+    // slotted dog: "If there is a tie in racing points for placements which are
+    // to receive ... points, the ... points are to be split equally among the
+    // racers with the tied points" (5.2/5.3/5.6), so a 5th dog level with the
+    // 4th shares the 4th place's points.
+    if (slot >= values.length) {
+      const prev = slotted[slotted.length - 1];
+      if (!prev || prev.row.total !== r.total) break;
+    }
     let receives = opts.receives(r);
     if (receives) {
-      const el = eligible(r, r.place === lastPlace);
+      const el = eligible(r, r.place === lastPlace, opts.breedPoints);
       if (!el.ok) {
         explanations.push(`${r.entry.callName}: no ${label} points — ${el.why}.`);
         receives = false;
@@ -153,14 +166,14 @@ export function computeDivisionResults(
     const brc = distribute(
       breedRows,
       chartRow(eligibleBreed),
-      { consumes: (r) => !breedTitled(r.entry), receives: (r) => !breedTitled(r.entry) },
+      { consumes: (r) => !breedTitled(r.entry), receives: (r) => !breedTitled(r.entry), breedPoints: true },
       'BRC',
       explanations
     );
     const nat = distribute(
       breedRows,
       chartRow(starters),
-      { consumes: () => true, receives: () => true },
+      { consumes: () => true, receives: () => true, breedPoints: true },
       'National Breed',
       explanations
     );

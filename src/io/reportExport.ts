@@ -52,7 +52,16 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
   const wb = XLSX.utils.book_new();
 
   // ---------- Summary sheet ----------
+  // 4.1.3: a meet is official only when every planned program is complete.
+  // A report downloaded before that says so in its first line.
+  const unfinished =
+    state.divisions.length === 0 ||
+    state.divisions.some((d) => {
+      const p3 = state.draws.filter((x) => x.divisionId === d.id && x.program === 3);
+      return p3.length === 0 || p3.some((x) => x.races.some((r) => !r.finished));
+    });
   const summary: Row[] = [
+    ...(unfinished ? [['PROVISIONAL — the meet is not finished; programs remain to be run (4.1.3).'] as Row] : []),
     [`CLUB NAME: ${state.info.clubName}`],
     ['MEET TYPE: SPRINT'],
     [`DATE: ${state.info.date}`],
@@ -97,7 +106,8 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
         a.nmrc || null,
         a.trc || null,
         (a.nbrc || 0) + (a.nmrc || 0) || null,
-        outcomesNote(division, state.draws, s.entryId),
+        // 2.2.1(4): first time entered dogs are listed as such.
+        [e.fte ? 'FTE' : '', outcomesNote(division, state.draws, s.entryId)].filter(Boolean).join(', '),
         // The template's rule: a dog with pending registration MUST carry
         // its breed. Every row carries one, as the template's lookup does.
         properCase(e.breed),
@@ -134,7 +144,10 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
       const rows: Row[] = [[], [], [], []];
       for (const draw of draws) {
         const race = draw?.races.find((r) => r.raceNo === rn);
-        header.push('Place', race ? `Program ${draw!.program}, Race ${rn}${race.isHP ? ' (HP)' : ''}` : '', 'Score');
+        // 2.2.1(5) and 6.5: the results indicate which races were rerun, and a
+        // race whose points were split under 6.5.1(b).
+        const flags = race ? [race.isHP && 'HP', race.rerun && 'RERUN', race.splitAllPoints && 'POINTS SPLIT'].filter(Boolean) : [];
+        header.push('Place', race ? `Program ${draw!.program}, Race ${rn}${flags.length ? ` (${flags.join(', ')})` : ''}` : '', 'Score');
         const pts = race && race.finished && draw ? scoreRace(race, division.ungraded) : {};
         const ordered = race
           ? [...race.slots].sort((a, b) => {

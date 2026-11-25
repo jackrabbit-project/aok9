@@ -80,7 +80,23 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
   const unassigned = state.entries.filter(
     (e) => !e.preScratched && !state.divisions.some((d) => d.entryIds.includes(e.id))
   );
-  const canDraw = state.divisions.length > 0 && unassigned.length === 0 && prevComplete;
+  // A division with nobody left to run cannot be drawn (Figure 8.1 starts at one dog).
+  const emptyDivisions = state.divisions.filter(
+    (d) => !d.entryIds.some((id) => entryMap.get(id) && !entryMap.get(id)!.preScratched)
+  );
+  const canDraw = state.divisions.length > 0 && unassigned.length === 0 && prevComplete && emptyDivisions.length === 0;
+
+  // Once the next program has been drawn from these results, changing one
+  // would leave that draw grouped by points that no longer hold (4.3.4), and a
+  // placement is not reversed once final (3.6.1.1).
+  const frozenReason = (divisionId: string): string | null => {
+    if (program === 3) return null;
+    const next = state.draws.find((d) => d.program === program + 1 && d.divisionId === divisionId);
+    if (!next) return null;
+    return next.races.some((r) => r.finished)
+      ? `Program ${program + 1} has been run from these results, so they are final (3.6.1.1).`
+      : `Program ${program + 1} was drawn from these results. To correct one, discard Program ${program + 1}'s draw first — possible until its first result is saved.`;
+  };
 
   const handleSwapPick = (divisionId: string) => (entryId: string) => {
     if (!swapPick || swapPick.divisionId !== divisionId) {
@@ -99,6 +115,12 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
         <Section title={`Program ${program} — Draw`}>
           {!prevComplete && <Warn>Finish all races of Program {program - 1} first.</Warn>}
           {unassigned.length > 0 && <Warn>Assign all dogs to divisions first.</Warn>}
+          {emptyDivisions.length > 0 && (
+            <Warn>
+              No dogs to run in {emptyDivisions.map((d) => d.name || 'an unnamed division').join(', ')} —
+              remove it on the Divisions screen first.
+            </Warn>
+          )}
           <p>
             {program === 1
               ? 'Groups each division by WAVE (graded) or random draw (ungraded), splits races per Figure 8.1 and draws post positions.'
@@ -194,7 +216,10 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                     division={division}
                     entryMap={entryMap}
                     locked={draw.locked}
-                    swapMode={!draw.locked}
+                    // Program 1 groups may be adjusted by the committee (4.3.1); programs 2
+                    // and 3 are grouped strictly by points (4.3.4), so no swaps there.
+                    swapMode={!draw.locked && program === 1}
+                    frozen={frozenReason(division.id)}
                     onSwapPick={handleSwapPick(division.id)}
                     swapPick={swapPick?.divisionId === division.id ? swapPick.entryId : null}
                   />
@@ -313,6 +338,8 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                               <td>{slot.post ? JACKET_COLORS[slot.post] : ''}</td>
                               <td>
                                 {e.callName} ({e.breed})
+                                {/* 3.2(b): the program names each dog's owner. */}
+                                {e.owner && <small> · {e.owner}</small>}
                               </td>
                               {program > 1 && (
                                 <td>

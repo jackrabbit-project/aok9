@@ -55,7 +55,13 @@ function slot(v: unknown): PublicSlot {
 
 function race(v: unknown): PublicRace {
   const o = obj(v);
-  return { raceNo: num(o.raceNo), isHP: bool(o.isHP), finished: bool(o.finished), slots: list(o.slots, 8, slot) };
+  return {
+    raceNo: num(o.raceNo),
+    isHP: bool(o.isHP),
+    finished: bool(o.finished),
+    ...(o.rerun === true ? { rerun: true } : {}),
+    slots: list(o.slots, 8, slot),
+  };
 }
 
 function program(v: unknown): PublicProgram {

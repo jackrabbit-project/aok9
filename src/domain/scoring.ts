@@ -22,14 +22,27 @@ function finishedRace(draws: ProgramDraw[], divisionId: string, program: number,
   return !!oc && oc.kind === 'placed';
 }
 
-/** Did the dog defeat at least one other dog in at least one race? (Ch. V) */
-function defeatedSomeone(division: Division, draws: ProgramDraw[], entryId: string): boolean {
+/** Ran its race in a program and was not disqualified from it (6.1.3). */
+function ranCleanly(draws: ProgramDraw[], divisionId: string, program: number, entryId: string): boolean {
+  const race = raceOf(draws, divisionId, program, entryId);
+  const oc = race?.outcomes[entryId];
+  return startedProgram(draws, divisionId, program, entryId) && oc?.kind !== 'DQ';
+}
+
+/** Did the dog defeat at least one other dog in at least one race? (Ch. V)
+    `ignore` lists dogs that do not count as defeated (leftovers, for breed points). */
+function defeatedSomeone(
+  division: Division,
+  draws: ProgramDraw[],
+  entryId: string,
+  ignore: ReadonlySet<string> = new Set()
+): boolean {
   for (const draw of draws.filter((d) => d.divisionId === division.id)) {
     for (const race of draw.races) {
       const mine = race.outcomes[entryId];
       if (!mine || mine.kind !== 'placed') continue;
       for (const slot of race.slots) {
-        if (slot.entryId === entryId) continue;
+        if (slot.entryId === entryId || ignore.has(slot.entryId)) continue;
         const other = race.outcomes[slot.entryId];
         if (!other) continue;
         if (other.kind === 'placed' ? other.place > mine.place : other.kind !== 'DQ') {
@@ -58,7 +71,7 @@ export function computeStandings(
   const starters = division.entryIds.filter((id) => startedProgram(draws, division.id, 1, id));
 
   const rows = starters.map((id) => {
-    const completedMeet = [1, 2, 3].every((p) => startedProgram(draws, division.id, p, id));
+    const completedMeet = [1, 2, 3].every((p) => ranCleanly(draws, division.id, p, id));
     const finishedAllRaces = [1, 2, 3].every((p) => finishedRace(draws, division.id, p, id));
     return {
       entryId: id,
@@ -66,6 +79,7 @@ export function computeStandings(
       completedMeet,
       finishedAllRaces,
       defeated: defeatedSomeone(division, draws, id),
+      defeatedBreedDog: defeatedSomeone(division, draws, id, new Set(division.leftoverIds)),
     };
   });
 
@@ -98,6 +112,7 @@ export function computeStandings(
     finishedAllRaces: r.finishedAllRaces,
     completedMeet: r.completedMeet,
     defeatedSomeone: r.defeated,
+    defeatedBreedDog: r.defeatedBreedDog,
     isLeftover: division.leftoverIds.includes(r.entryId),
   }));
 }

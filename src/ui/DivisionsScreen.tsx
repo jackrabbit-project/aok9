@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useMeet } from '../store/meetStore';
-import { fteFraction, newId, suggestDivisions, ungradedSuggested } from '../domain/divisions';
+import { fteFraction, meetsThreshold, newId, suggestDivisions, ungradedSuggested } from '../domain/divisions';
 import { MAX_CHART_DOGS } from '../domain/chart';
 import { entryGrade } from '../domain/draw';
 import { Hint, Section, Warn } from './common';
@@ -94,7 +94,14 @@ export function DivisionsScreen() {
         <div className="division-grid">
           {state.divisions.map((d) => {
             const dogs = d.entryIds.map((id) => entryMap.get(id)!).filter(Boolean);
+            // Counts below are of dogs that will run: a dog scratched before
+            // racing stays listed but is not drawn.
+            const runners = dogs.filter((x) => !x.preScratched);
             const frac = fteFraction(d, entryMap);
+            const allowedUngraded = meetsThreshold(frac, state.info.fteThreshold);
+            const breedDogs = runners.filter((x) => !d.leftoverIds.includes(x.id));
+            const mainBreed = breedDogs[0]?.breed;
+            const sameBreedLeftover = runners.some((x) => d.leftoverIds.includes(x.id) && x.breed === mainBreed);
             return (
               <div className="division-card" key={d.id}>
                 <div className="division-head">
@@ -139,7 +146,7 @@ export function DivisionsScreen() {
                     }
                   />
                   Ungraded races ({Math.round(frac * 100)}% FTE
-                  {frac >= state.info.fteThreshold ? ' — allowed per 4.4' : ' — below threshold'})
+                  {allowedUngraded ? ' — allowed per 4.4' : ' — below threshold'})
                 </label>
                 <ul className="dog-list">
                   {dogs.map((e) => (
@@ -147,6 +154,7 @@ export function DivisionsScreen() {
                       <span>
                         <b>{e.callName}</b> <small>({e.breed})</small>
                         {d.leftoverIds.includes(e.id) && <span className="badge leftover">LEFTOVER</span>}
+                        {e.preScratched && <span className="badge">SCRATCHED</span>}
                       </span>
                       <span className="dog-actions">
                         {d.type === 'breed' && (
@@ -185,17 +193,39 @@ export function DivisionsScreen() {
                     </li>
                   ))}
                 </ul>
-                {dogs.length === 1 && (
+                {d.ungraded && !allowedUngraded && (
+                  <Warn>
+                    Marked ungraded, but only {Math.round(frac * 100)}% of the dogs are first-time
+                    entered. 4.4 allows ungraded races when at least{' '}
+                    {state.info.fteThreshold >= 0.75 ? '¾' : '⅔'} are.
+                  </Warn>
+                )}
+                {runners.length === 0 && dogs.length > 0 && (
+                  <Warn>Every dog here is scratched — remove the division or move dogs into it before drawing.</Warn>
+                )}
+                {runners.length === 1 && (
                   <Warn>
                     Single dog: runs alone — no championship points; schooling meet if it runs all
                     three programs alone (4.2.2.4).
                   </Warn>
                 )}
-                {dogs.length > MAX_CHART_DOGS && (
+                {runners.length > MAX_CHART_DOGS && (
                   <Warn>Over {MAX_CHART_DOGS} dogs — Figure 8.1 has no row for this size.</Warn>
                 )}
-                {d.type === 'breed' && new Set(dogs.filter((x) => !d.leftoverIds.includes(x.id)).map((x) => x.breed)).size > 1 && (
-                  <Warn>Breed division contains multiple breeds — mark extras as Leftover (L) or make it mixed.</Warn>
+                {d.type === 'breed' && new Set(breedDogs.map((x) => x.breed)).size > 1 && (
+                  <Warn>Breed division contains multiple breeds — mark extras as Leftover or make it mixed.</Warn>
+                )}
+                {d.type === 'breed' && breedDogs.length === 1 && runners.length > 1 && (
+                  <Warn>
+                    Only one dog of the breed — a breed division needs at least two (4.1.5). Run it
+                    as a mixed division, or move the leftover elsewhere.
+                  </Warn>
+                )}
+                {d.type === 'breed' && sameBreedLeftover && (
+                  <Warn>
+                    A dog of the division's own breed is marked Leftover. A leftover is a dog of a
+                    different breed (4.1.7) — clear the mark so it earns breed points.
+                  </Warn>
                 )}
               </div>
             );
@@ -258,6 +288,8 @@ export function DivisionsScreen() {
                     <tr>
                       <th>Dog</th>
                       <th>Breed</th>
+                      {/* 3.2(b): the program lists entries by breed, WAVE, name of dog and owner. */}
+                      <th>Owner</th>
                       <th>Grade / WAVE</th>
                       <th>Notes</th>
                     </tr>
@@ -270,6 +302,7 @@ export function DivisionsScreen() {
                         <tr key={e.id}>
                           <td>{e.callName}</td>
                           <td>{e.breed}</td>
+                          <td>{e.owner ?? ''}</td>
                           <td>
                             {entryGrade(e, d)} / {w === null ? 'FTE' : wave(w)}
                           </td>

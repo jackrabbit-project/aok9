@@ -102,6 +102,16 @@ to open; the app itself still works with none.
 - **Beating a scratched dog counts** as defeating a dog for Chapter V eligibility. A dog that
   finished ahead of a no-show (ABS) has defeated someone; only a DQ is scored as if the dog had
   never run (6.1.3).
+- A dog **disqualified in any program has not completed the meet** (6.1.3: placed as if it had not
+  participated), so it ranks below dogs level with it on points and its meet counts as incomplete.
+- **Breed points ignore the leftover dog** (5.2): beating only the leftover does not count as
+  defeating a dog for BRC or National Breed points. It still counts for the leftover's own MRC.
+- A **tie on points for the last paying place is split among every tied dog** (5.2/5.3/5.6), even
+  when the tie runs past the fourth place.
+- Program 1 groups may be adjusted by swapping dogs (4.3.1); **programs 2 and 3 are grouped by
+  points only** (4.3.4), so swaps are not offered there. Once the next program has been drawn from a
+  program's results, those results are frozen; discard the next draw (possible until its first
+  result) to correct one, and once it has been run they are final (3.6.1.1).
 - Point totals are held to **three decimals**. A three-way dead heat splits 5 points as 1.666…,
   which no computer stores exactly; without rounding, two dogs who are level on paper can differ
   by a fifteenth decimal place and fail to split an award value they are both entitled to.

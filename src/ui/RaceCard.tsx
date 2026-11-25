@@ -24,6 +24,7 @@ export function RaceCard({
   swapMode,
   onSwapPick,
   swapPick,
+  frozen = null,
 }: {
   race: Race;
   division: Division;
@@ -32,6 +33,8 @@ export function RaceCard({
   swapMode: boolean;
   onSwapPick: (entryId: string) => void;
   swapPick: string | null;
+  /** Why this race's result can no longer change, or null when it can. */
+  frozen?: string | null;
 }) {
   const { dispatch } = useMeet();
   const [draft, setDraft] = useState<Record<string, RaceOutcome> | null>(null);
@@ -41,6 +44,7 @@ export function RaceCard({
   const points = race.finished ? scoreRace(race, division.ungraded) : null;
 
   const setOutcome = (entryId: string, oc: RaceOutcome | null) => {
+    if (frozen) return;
     const next = { ...(draft ?? race.outcomes) };
     if (oc === null) delete next[entryId];
     else next[entryId] = oc;
@@ -101,6 +105,7 @@ export function RaceCard({
                 <input
                   type="checkbox"
                   checked={race.splitAllPoints}
+                  disabled={!!frozen}
                   onChange={(e) =>
                     dispatch({ type: 'setRaceFlags', raceId: race.id, splitAllPoints: e.target.checked })
                   }
@@ -141,6 +146,7 @@ export function RaceCard({
                             key={p}
                             className={`pl ${on ? 'on' : ''}`}
                             aria-pressed={on}
+                            disabled={!!frozen}
                             onClick={() => setOutcome(slot.entryId, on ? null : { kind: 'placed', place: p })}
                           >
                             {ordinal(p)}
@@ -157,6 +163,7 @@ export function RaceCard({
                             className={`st ${on ? 'on' : ''}`}
                             aria-pressed={on}
                             title={STATUS_TITLE[s]}
+                            disabled={!!frozen}
                             onClick={() => setOutcome(slot.entryId, on ? null : ({ kind: s } as RaceOutcome))}
                           >
                             {STATUS_LABEL[s]}
@@ -179,12 +186,13 @@ export function RaceCard({
             value={race.note}
             onChange={(e) => dispatch({ type: 'setRaceFlags', raceId: race.id, note: e.target.value })}
           />
-          <button onClick={save} disabled={draft === null && race.finished}>
+          <button onClick={save} disabled={!!frozen || (draft === null && race.finished)}>
             {race.finished ? (draft ? 'Save changes' : 'Saved ✓') : 'Save race result'}
           </button>
         </div>
       )}
       {err && <Warn>{err}</Warn>}
+      {frozen && locked && <p className="hint">{frozen}</p>}
     </div>
   );
 }

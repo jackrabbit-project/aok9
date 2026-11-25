@@ -52,9 +52,10 @@ export function suggestDivisions(entries: Entry[]): Division[] {
   return divisions;
 }
 
-/** Fraction of FTE dogs in a division (used for the ungraded suggestion, 4.4). */
+/** Fraction of FTE dogs among a division's runners (the ungraded test, 4.4).
+    A dog scratched before racing is not drawn, so it does not count. */
 export function fteFraction(division: Division, entries: Map<string, Entry>): number {
-  const dogs = division.entryIds.map((id) => entries.get(id)!).filter(Boolean);
+  const dogs = division.entryIds.map((id) => entries.get(id)!).filter((e) => e && !e.preScratched);
   if (dogs.length === 0) return 0;
   return dogs.filter((d) => d.fte).length / dogs.length;
 }
@@ -65,7 +66,13 @@ export function ungradedSuggested(
   entries: Map<string, Entry>,
   threshold: number
 ): boolean {
-  return fteFraction(division, entries) >= threshold;
+  return meetsThreshold(fteFraction(division, entries), threshold);
+}
+
+/** The threshold is stored to four places (0.6667 for 2/3), so compare with a
+    small allowance: 2 of 3 dogs is exactly the 2/3 the option means. */
+export function meetsThreshold(fraction: number, threshold: number): boolean {
+  return fraction >= threshold - 0.001;
 }
 
 /** The WAVE relevant to a dog inside a division (Breed WAVE in breed divisions

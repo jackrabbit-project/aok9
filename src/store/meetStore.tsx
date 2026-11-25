@@ -347,6 +347,11 @@ export const TITLE_THRESHOLDS = {
 
 /** Create an Entry from a Grading Guide dog. */
 export function entryFromGuide(dog: import('../domain/types').GuideDog): Entry {
+  // A registered dog with no WAVE and no meet in the guide has never raced at
+  // AOK9: it "starts in Grade D" or C from schooling (4.2.1) and counts as
+  // first-time entered for the ungraded test (4.4) and High Score FTE (5.1).
+  const noRecord =
+    dog.bwave === null && dog.mwave === null && dog.breedMeets.length === 0 && dog.mixedMeets.length === 0;
   return {
     id: newId('entry'),
     regNo: dog.regNo,
@@ -355,7 +360,7 @@ export function entryFromGuide(dog: import('../domain/types').GuideDog): Entry {
     breed: dog.breed ?? 'UNKNOWN',
     sex: '',
     owner: dog.owner,
-    fte: false,
+    fte: noRecord,
     bwave: dog.bwave,
     mwave: dog.mwave,
     fteGrade: 'D',

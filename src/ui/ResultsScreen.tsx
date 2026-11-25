@@ -140,6 +140,7 @@ export function ResultsScreen() {
               <b>Trophies (5.1):</b> High Score: <b>{trophies.highScore ?? '—'}</b>
               {' · '}High Score Opposite Sex: <b>{trophies.highScoreOppositeSex ?? '—'}</b>
               {' · '}High Score FTE: <b>{trophies.highScoreFTE ?? '—'}</b>
+              {' · '}Top five: <b>{trophies.topFive.join(', ') || '—'}</b>
               {' · '}Per grade:{' '}
               {Object.entries(trophies.highScorePerGrade)
                 .map(([g, n]) => `${g}: ${n}`)

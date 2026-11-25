@@ -29,6 +29,7 @@ function programOf(draw: ProgramDraw, division: Division, entries: Map<string, E
         raceNo: race.raceNo,
         isHP: race.isHP,
         finished: race.finished,
+        ...(race.rerun ? { rerun: true } : {}),
         slots: [...race.slots]
           .sort((a, b) => (a.post ?? 9) - (b.post ?? 9))
           .map((slot) => {
