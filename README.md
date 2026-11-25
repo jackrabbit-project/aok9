@@ -87,7 +87,7 @@ to open; the app itself still works with none.
    are editable if the secretary needs to override a corner case. The results page's address is
    repeated here.
 7. **Report** — *Download AOK9 Race Meet Report (.xlsx)* produces the official template layout
-   (Summary + race-by-race + an unofficial WAVE-projection sheet) for emailing to the NRD
+   (Summary + race-by-race) for emailing to the NRD
    within 48 hours (2.2). Print buttons produce paddock-ready program sheets and results.
 
 ## Rule interpretations encoded
@@ -95,8 +95,10 @@ to open; the app itself still works with none.
 - **Figure 8.1 is encoded verbatim**, including the rows that do not divide evenly and would be
   wrong if the split were worked out arithmetically (9 dogs → 4/2/3; 5 dogs → a 3-dog HP race).
 - Ungraded trigger is **¾ FTE** per rule 4.4 (a 2/3 option exists in Setup).
-- Award slots: titled champions above the line don't consume High-Score slots (per the 5.2/5.7
-  worked examples); ordinary ineligible dogs do. Dogs tied on race points split award values.
+- **Points drop up past a dog that cannot take them.** Neither a titled champion nor a dog that
+  did not finish all races, finished last or defeated no dog occupies a paying place: its points
+  pass to the next dog that can take them. 5.7 says TRC points, "unlike regular championship
+  points", do not drop up. Dogs tied on race points split award values.
 - A leftover dog's MRC award corresponds to its actual placement among the whole division.
 - Dogs running alone: single non-HP race, no championship points, WAVE unchanged (4.2.2.4).
 - **Beating a scratched dog counts** as defeating a dog for Chapter V eligibility. A dog that

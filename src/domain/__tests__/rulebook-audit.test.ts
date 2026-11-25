@@ -242,3 +242,27 @@ describe('4.2.2: a dog is graded on its record of the other kind when it has non
     expect(entryGrade(own, mixed)).toBe('C'); // its own mixed WAVE still governs
   });
 });
+
+describe('5.7: regular championship points drop up past a dog that cannot take them', () => {
+  // 8 dogs, chart 3 / 1.5 / 0.5 / 0. A is 2nd on points but went off course in
+  // program 2, so it did not finish all races and cannot take points.
+  const ids = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+  const entries = ids.map((id, i) => mkEntry({ id, callName: id.toUpperCase(), bwave: 20 - i }));
+  const division = mkDivision(ids);
+  const low = (p: 1 | 2 | 3) => mkRace('div1', p, 1, false, ['e', 'f', 'g', 'h']);
+  const draws = [
+    draw('div1', 1, [low(1), mkRace('div1', 1, 2, true, ['a', 'b', 'c', 'd'])]),
+    draw('div1', 2, [low(2), mkRace('div1', 2, 2, true, ['b', 'c', 'd'], { a: { kind: 'OC' } })]),
+    draw('div1', 3, [low(3), mkRace('div1', 3, 2, true, ['a', 'b', 'c', 'd'])]),
+  ];
+
+  it("passes A's place to the dogs below it", () => {
+    const res = computeDivisionResults(division, draws, entryMap(entries));
+    expect(res.standings.slice(0, 4).map((s) => s.entryId)).toEqual(['b', 'a', 'e', 'c']);
+    expect(res.awards.a.brc).toBe(0);
+    expect(res.awards.b.brc).toBe(3);
+    expect(res.awards.e.brc).toBe(1.5); // would have been 0.5 without the drop
+    expect(res.awards.c.brc).toBe(0.5); // would have been 0
+    expect(res.awards.e.nbrc).toBe(1.5);
+  });
+});

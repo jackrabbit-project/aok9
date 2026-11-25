@@ -1,5 +1,6 @@
 // Builds the official "AOK9 Race Meet Report" workbook (Summary + RBR sheets)
-// from the finished meet, plus an unofficial WAVE projection sheet.
+// from the finished meet. Nothing else: neither AOK9 template has a third
+// sheet, and projected WAVEs stay on the Results screen.
 //
 // Layout follows the sprint / oval template AOK9 published in November 2026
 // (Google Sheet 1CdKhZCDa0pOIT3pQ4QOEk3rjNYFrRBeRwAKH_-p3ymk): the Summary gains
@@ -10,7 +11,6 @@
 import * as XLSX from 'xlsx';
 import { computeDivisionResults } from '../domain/championship';
 import { scoreRace } from '../domain/points';
-import { projectWaves } from '../domain/update';
 import type { ChampAward, Division, Entry, MeetState, ProgramDraw } from '../domain/types';
 
 type Row = (string | number | null)[];
@@ -209,29 +209,6 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
   wsRbr['!cols'] = Array.from({ length: 9 }, (_, i) => (i % 3 === 1 ? { wch: 26 } : { wch: 8 }));
   XLSX.utils.book_append_sheet(wb, wsRbr, 'RBR');
 
-  // ---------- WAVE projection (unofficial helper) ----------
-  const waveRows: Row[] = [
-    ['PROJECTED WAVES AFTER THIS MEET (unofficial — NRD maintains the official guide)'],
-    ['REG#', 'CALL NAME', 'DIVISION', 'TYPE', 'MEET SCORE', 'COMPLETE', 'OLD WAVE', 'NEW WAVE'],
-  ];
-  for (const division of state.divisions) {
-    for (const p of projectWaves(division, state.draws, entryMap)) {
-      const e = entryMap.get(p.entryId)!;
-      waveRows.push([
-        e.regNo ?? 'PENDING',
-        e.callName,
-        division.name,
-        p.kind === 'breed' ? 'BWAVE' : 'MWAVE',
-        p.meetScore,
-        p.complete ? 'YES' : 'NO',
-        p.oldWave,
-        p.newWave,
-      ]);
-    }
-  }
-  const wsWave = XLSX.utils.aoa_to_sheet(waveRows);
-  wsWave['!cols'] = [{ wch: 12 }, { wch: 22 }, { wch: 18 }, { wch: 8 }, { wch: 10 }, { wch: 9 }, { wch: 9 }, { wch: 9 }];
-  XLSX.utils.book_append_sheet(wb, wsWave, 'WAVE Projection');
 
   return wb;
 }

@@ -48,10 +48,12 @@ export function eligibleEntry(rows: Row[], isTitled: (e: Entry) => boolean): num
 /**
  * Distribute an award row down a placement list.
  *
- * Slot model (derived from the 5.2/5.7 worked examples): titled champions
- * placing above the line do NOT consume an award slot (the first non-titled
- * dog IS the "High Score Dog" for point purposes), while ordinary competitors
- * occupy their high-score positions even when individually ineligible.
+ * Slot model: a dog that cannot take the points does not occupy a paying
+ * place, so the points "drop up" to the next dog that can. That holds for
+ * titled champions (5.2/5.3 eligible entry, 5.7 example #1) and for a dog
+ * that did not finish all races, finished last or defeated no dog: 5.7 says
+ * "Unlike regular championship points, TRC points ... do not 'drop up'",
+ * which is to say regular points do.
  *
  * - `consumes`: whether a row occupies an award slot as it passes.
  * - `receives`: whether a row may actually be awarded points.
@@ -82,12 +84,13 @@ function distribute(
       const prev = slotted[slotted.length - 1];
       if (!prev || prev.row.total !== r.total) break;
     }
-    let receives = opts.receives(r);
+    const receives = opts.receives(r);
     if (receives) {
       const el = eligible(r, r.place === lastPlace, opts.breedPoints);
       if (!el.ok) {
-        explanations.push(`${r.entry.callName}: no ${label} points — ${el.why}.`);
-        receives = false;
+        // Not slotted: its place's points drop up to the next dog that can take them.
+        explanations.push(`${r.entry.callName}: no ${label} points — ${el.why}; the points pass to the next dog.`);
+        continue;
       }
     }
     slotted.push({ row: r, slot, receives });

@@ -4,6 +4,7 @@
 import { describe, expect, it } from 'vitest';
 import * as XLSX from 'xlsx';
 import { buildReportWorkbook } from '../reportExport';
+import { projectWaves } from '../../domain/update';
 import fixture from './fixture-meet.json';
 import type { MeetState } from '../../domain/types';
 
@@ -16,8 +17,8 @@ function sheetRows(wb: XLSX.WorkBook, name: string): (string | number | null)[][
 describe('NRD report workbook', () => {
   const wb = buildReportWorkbook(state);
 
-  it('has the official template sheets plus the WAVE helper', () => {
-    expect(wb.SheetNames).toEqual(['Summary', 'RBR', 'WAVE Projection']);
+  it('has exactly the official template sheets', () => {
+    expect(wb.SheetNames).toEqual(['Summary', 'RBR']);
   });
 
   it('Summary sheet follows the template layout with correct standings', () => {
@@ -77,13 +78,13 @@ describe('NRD report workbook', () => {
     expect(rows.some((r) => typeof r[1] === 'string' && (r[1] as string).includes('Race 2 (HP)'))).toBe(true);
   });
 
-  it('WAVE projection recomputes per the 4.2.2 formulas', () => {
-    const rows = sheetRows(wb, 'WAVE Projection');
-    const chili = rows.find((r) => r[1] === 'Chili')!;
+  it('WAVE projection (now on the Results screen only) recomputes per the 4.2.2 formulas', () => {
+    const entries = new Map(state.entries.map((e) => [e.id, e]));
+    const all = state.divisions.flatMap((d) => projectWaves(d, state.draws, entries));
+    const byName = (n: string) => all.find((p) => entries.get(p.entryId)!.callName === n)!;
     // meet score 19, history 16, 11 (last three: [19, 16, 11] all complete)
-    expect(chili[4]).toBe(19);
-    expect(chili[7]).toBeCloseTo((19 + 0.7 * 16 + 0.5 * 11) / 2.2, 3);
-    const pixel = rows.find((r) => r[1] === 'Pixel')!;
-    expect(pixel[7]).toBe(18); // FTE first meet: WAVE = that score
+    expect(byName('Chili').meetScore).toBe(19);
+    expect(byName('Chili').newWave).toBeCloseTo((19 + 0.7 * 16 + 0.5 * 11) / 2.2, 3);
+    expect(byName('Pixel').newWave).toBe(18); // FTE first meet: WAVE = that score
   });
 });
