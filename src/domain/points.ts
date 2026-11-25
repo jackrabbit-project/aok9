@@ -2,6 +2,7 @@
 // DQ handling (6.1.3: a disqualified dog is scored as if it had not run).
 
 import type { Race, RaceOutcome } from './types';
+import { isScratch } from './types';
 
 /** Points by finishing place (index 0 = 1st) — Figure 8.2A, graded races. */
 const GRADED: Record<number, { hp: number[]; other: number[] }> = {
@@ -36,7 +37,7 @@ export function hpExists(ungraded: boolean, program: 1 | 2 | 3): boolean {
 /**
  * Score one race: returns entryId -> points earned.
  *
- * - OC / DNF / ABS score 0 (4.3.5).
+ * - OC / DNF / ABS / PSCR score 0 (4.3.5).
  * - DQ: points and placings are distributed as if the dog had not participated
  *   (6.1.3) — callers must already have entered the other dogs' places 1..n
  *   ignoring the DQ'd dog; the DQ'd dog itself scores 0 here.
@@ -52,7 +53,7 @@ export function scoreRace(race: Race, ungraded: boolean): Record<string, number>
   if (race.splitAllPoints) {
     const participants = race.slots.filter((s) => {
       const oc = race.outcomes[s.entryId];
-      return oc && oc.kind !== 'ABS' && oc.kind !== 'DQ';
+      return oc && !isScratch(oc) && oc.kind !== 'DQ';
     });
     let sum = 0;
     for (let p = 1; p <= participants.length; p++) {
@@ -62,7 +63,7 @@ export function scoreRace(race: Race, ungraded: boolean): Record<string, number>
     for (const slot of race.slots) {
       const oc = race.outcomes[slot.entryId];
       if (!oc) continue;
-      out[slot.entryId] = oc.kind === 'ABS' || oc.kind === 'DQ' ? 0 : share;
+      out[slot.entryId] = isScratch(oc) || oc.kind === 'DQ' ? 0 : share;
     }
     return out;
   }

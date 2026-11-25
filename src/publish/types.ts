@@ -7,7 +7,7 @@
 // draw, results and points. What is deliberately not here: owners, reg
 // numbers, WAVEs, sex, and anything the secretary typed into a note.
 
-export type PublicResult = '1st' | '2nd' | '3rd' | '4th' | 'OC' | 'DNF' | 'DQ' | 'SCR';
+export type PublicResult = '1st' | '2nd' | '3rd' | '4th' | 'OC' | 'DNF' | 'DQ' | 'SCR' | 'PSCR';
 
 export interface PublicSlot {
   post: number | null;

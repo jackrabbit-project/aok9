@@ -5,6 +5,7 @@ import { scoreRace, effectivePlace, roundPoints } from './points';
 import { relevantWave } from './divisions';
 import { buildRaces } from './draw';
 import type { Division, Entry, ProgramDraw, Race, Rng, TieDecision } from './types';
+import { isScratch } from './types';
 
 /** All races of a division up to and including `throughProgram`. */
 function racesThrough(draws: ProgramDraw[], divisionId: string, throughProgram: number): Race[] {
@@ -52,7 +53,7 @@ export function activeForNextProgram(
     if (!race) continue;
     const oc = race.outcomes[id];
     if (!oc) continue; // no result recorded -> treat as not started
-    if (oc.kind === 'DQ' || oc.kind === 'ABS') continue; // dismissed / out (6.1.4, 4.1.3)
+    if (oc.kind === 'DQ' || isScratch(oc)) continue; // dismissed / out (6.1.4, 4.1.3)
     out.push(id);
   }
   return out;

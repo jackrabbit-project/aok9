@@ -4,13 +4,14 @@
 import { scoreRace, effectivePlace, roundPoints } from './points';
 import { raceOf, totalsThrough } from './rotation';
 import type { Division, Entry, ProgramDraw, Standing } from './types';
+import { isScratch } from './types';
 
-/** Did `entryId` start (have a recorded outcome other than ABS) in a program? */
+/** Did `entryId` start (have a recorded outcome other than a scratch) in a program? */
 function startedProgram(draws: ProgramDraw[], divisionId: string, program: number, entryId: string): boolean {
   const race = raceOf(draws, divisionId, program, entryId);
   if (!race) return false;
   const oc = race.outcomes[entryId];
-  return !!oc && oc.kind !== 'ABS';
+  return !!oc && !isScratch(oc);
 }
 
 /** A dog "finished" a race only with a placement (OC/DNF/DQ/ABS are not finishes). */

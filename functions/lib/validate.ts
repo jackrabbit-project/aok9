@@ -17,7 +17,7 @@ import type {
 export const KEY_PATTERN = /^[a-z0-9]{12,48}$/;
 export const MAX_BODY_BYTES = 256 * 1024;
 
-const RESULTS = new Set<PublicResult>(['1st', '2nd', '3rd', '4th', 'OC', 'DNF', 'DQ', 'SCR']);
+const RESULTS = new Set<PublicResult>(['1st', '2nd', '3rd', '4th', 'OC', 'DNF', 'DQ', 'SCR', 'PSCR']);
 
 class Invalid extends Error {}
 

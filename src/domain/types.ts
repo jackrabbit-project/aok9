@@ -10,7 +10,16 @@ export type RaceOutcome =
   | { kind: 'OC' } // off course: scores 0
   | { kind: 'DNF' } // did not finish: scores 0
   | { kind: 'DQ' } // disqualified (intentional foul): scored as if absent, dismissed from meet
-  | { kind: 'ABS' }; // did not run its assigned race (scratch/no-show): 0, out of meet
+  | { kind: 'ABS' } // did not run its assigned race (scratch/no-show): 0, out of meet
+  // Paddock scratch: withdrawn at the paddock. Scored exactly as ABS -- 0,
+  // out of the meet -- and kept apart only because the meet report and its
+  // notes key (DQ, SCR, PSCR, OC, DNF) record the two separately.
+  | { kind: 'PSCR' };
+
+/** A dog that did not run its race: a scratch or a paddock scratch. */
+export function isScratch(oc: RaceOutcome | undefined): boolean {
+  return oc?.kind === 'ABS' || oc?.kind === 'PSCR';
+}
 
 export interface GuideMeet {
   meet: string | null;

@@ -127,7 +127,8 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
       {drawn && !allFinished && draws.some((d) => d.locked) && (
         <Hint>
           Tap the place each dog finished; the same place on two dogs is a dead heat. OC off
-          course · DNF did not finish · DQ disqualified · SCR scratched. Save each race.
+          course · DNF did not finish · DQ disqualified · SCR scratched · PSCR paddock scratch.
+          Save each race.
         </Hint>
       )}
 

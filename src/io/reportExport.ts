@@ -16,7 +16,7 @@ import type { ChampAward, Division, Entry, MeetState, ProgramDraw } from '../dom
 type Row = (string | number | null)[];
 
 /** The template's notes key. The app's "did not run" outcome is SCR. */
-const NOTE_CODE: Record<string, string> = { OC: 'OC', DNF: 'DNF', DQ: 'DQ', ABS: 'SCR' };
+const NOTE_CODE: Record<string, string> = { OC: 'OC', DNF: 'DNF', DQ: 'DQ', ABS: 'SCR', PSCR: 'PSCR' };
 
 /** Breed as the template's lookup prints it: PROPER(), e.g. "Border Collie". */
 function properCase(s: string | null | undefined): string {
