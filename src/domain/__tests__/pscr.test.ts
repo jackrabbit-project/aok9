@@ -65,9 +65,11 @@ describe('PSCR in what the app writes out', () => {
     expect(rbr.flat()).toContain('PSCR');
   });
 
-  it('shows PSCR on the results page, and the server accepts it', () => {
-    const snap = buildSnapshot(normalizeMeet(state), new Date('2026-11-25T12:00:00Z'), 'test');
-    expect(JSON.stringify(snap)).toContain('"result":"PSCR"');
+  it('reads a PSCR saved by 1.5.9 as SCR, the only scratch the app records now', () => {
+    const loaded = normalizeMeet(state);
+    expect(loaded.draws.flatMap((d) => d.races).some((r) => Object.values(r.outcomes).some((o) => o.kind === 'PSCR'))).toBe(false);
+    const snap = buildSnapshot(loaded, new Date('2026-11-25T12:00:00Z'), 'test');
+    expect(JSON.stringify(snap)).not.toContain('PSCR');
     expect(validateSnapshot(snap)).not.toBeNull();
   });
 });

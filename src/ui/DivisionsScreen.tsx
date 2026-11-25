@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useMeet } from '../store/meetStore';
-import { fteFraction, meetsThreshold, newId, suggestDivisions, ungradedSuggested } from '../domain/divisions';
+import { fteFraction, meetsThreshold, newId, seedingWave, suggestDivisions, ungradedSuggested } from '../domain/divisions';
 import { MAX_CHART_DOGS } from '../domain/chart';
 import { entryGrade } from '../domain/draw';
 import { Hint, Section, Warn } from './common';
@@ -296,8 +296,7 @@ export function DivisionsScreen() {
                   </thead>
                   <tbody>
                     {dogs.map((e) => {
-                      const asMixed = d.type === 'mixed' || d.leftoverIds.includes(e.id);
-                      const w = asMixed ? e.mwave : e.bwave;
+                      const w = seedingWave(e, d);
                       return (
                         <tr key={e.id}>
                           <td>{e.callName}</td>

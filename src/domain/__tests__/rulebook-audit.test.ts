@@ -187,3 +187,58 @@ describe('a division with every dog scratched or disqualified', () => {
     expect(p2.races).toEqual([]);
   });
 });
+
+describe('6.4: an owner scratch between programs', () => {
+  it('leaves the dog out of the regrouping and reports it SCR for that program', async () => {
+    const { rotationOrder } = await import('../rotation');
+    const XLSX = await import('xlsx');
+    const { buildReportWorkbook } = await import('../../io/reportExport');
+    const { emptyMeet } = await import('../../store/meetStore');
+    const entries = ['a', 'b', 'c', 'd'].map((id) => mkEntry({ id, callName: id.toUpperCase(), bwave: 15 }));
+    entries[1].withdrawnBefore = 2;
+    const division = mkDivision(['a', 'b', 'c', 'd']);
+    const p1 = draw('div1', 1, [mkRace('div1', 1, 1, true, ['a', 'b', 'c', 'd'])]);
+    const { order } = rotationOrder(division, [p1], entryMap(entries), 1);
+    expect(order).toEqual(['a', 'c', 'd']);
+
+    const state = { ...emptyMeet(), info: { clubName: 'C', meetId: 'M', date: '2026-11-25', fteThreshold: 0.75 }, entries, divisions: [division], draws: [p1] };
+    const rows = XLSX.utils.sheet_to_json<(string | number | null)[]>(buildReportWorkbook(state).Sheets.Summary, { header: 1, defval: null });
+    expect(String(rows.find((r) => r[2] === 'B')![11])).toContain('SCR P2');
+  });
+});
+
+describe('2.2.1: the Summary lists every entered dog', () => {
+  it('includes a dog scratched in program 1 and one scratched before racing, unplaced', async () => {
+    const XLSX = await import('xlsx');
+    const { buildReportWorkbook } = await import('../../io/reportExport');
+    const { emptyMeet } = await import('../../store/meetStore');
+    const entries = [
+      ...['a', 'b', 'c'].map((id) => mkEntry({ id, callName: id.toUpperCase(), bwave: 15 })),
+      mkEntry({ id: 'p', callName: 'Pre', bwave: 10, preScratched: true }),
+    ];
+    const division = mkDivision(['a', 'b', 'c', 'p']);
+    const draws = ([1, 2, 3] as const).map((p) =>
+      draw('div1', p, [mkRace('div1', p, 1, true, ['a', 'b'], p === 1 ? { c: { kind: 'ABS' } } : {})])
+    );
+    const state = { ...emptyMeet(), info: { clubName: 'C', meetId: 'M', date: '2026-11-25', fteThreshold: 0.75 }, entries, divisions: [division], draws };
+    const rows = XLSX.utils.sheet_to_json<(string | number | null)[]>(buildReportWorkbook(state).Sheets.Summary, { header: 1, defval: null });
+    const c = rows.find((r) => r[2] === 'C')!;
+    const p = rows.find((r) => r[2] === 'Pre')!;
+    expect(c[1]).toBeNull();
+    expect(c[11]).toBe('SCR P1');
+    expect(p[11]).toBe('SCR before racing');
+    expect(rows.find((r) => r[2] === 'A')![1]).toBe(1);
+  });
+});
+
+describe('4.2.2: a dog is graded on its record of the other kind when it has none of this kind', () => {
+  it('seeds a breed-WAVE dog in a mixed division by that WAVE, not as grade D', async () => {
+    const { entryGrade, gradedSortKey } = await import('../draw');
+    const afghan = mkEntry({ id: 'af', callName: 'Afghan', breed: 'AFGHAN HOUND', bwave: 12, mwave: null });
+    const mixed = mkDivision(['af'], { type: 'mixed', name: 'MIXED' });
+    expect(entryGrade(afghan, mixed)).toBe('A');
+    expect(gradedSortKey(afghan, mixed)).toBe(12);
+    const own = mkEntry({ id: 'm', callName: 'M', bwave: 12, mwave: 7 });
+    expect(entryGrade(own, mixed)).toBe('C'); // its own mixed WAVE still governs
+  });
+});

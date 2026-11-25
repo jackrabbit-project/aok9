@@ -23,8 +23,9 @@ function properCase(s: string | null | undefined): string {
   return (s ?? '').toLowerCase().replace(/(^|[^a-z'])([a-z])/g, (_, a: string, b: string) => a + b.toUpperCase());
 }
 
-function outcomesNote(division: Division, draws: ProgramDraw[], entryId: string): string {
+function outcomesNote(division: Division, draws: ProgramDraw[], entryId: string, entry?: Entry): string {
   const notes: string[] = [];
+  if (entry?.withdrawnBefore) notes.push(`SCR P${entry.withdrawnBefore}`);
   for (const draw of draws.filter((d) => d.divisionId === division.id)) {
     for (const race of draw.races) {
       const oc = race.outcomes[entryId];
@@ -107,9 +108,29 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
         a.trc || null,
         (a.nbrc || 0) + (a.nmrc || 0) || null,
         // 2.2.1(4): first time entered dogs are listed as such.
-        [e.fte ? 'FTE' : '', outcomesNote(division, state.draws, s.entryId)].filter(Boolean).join(', '),
+        [e.fte ? 'FTE' : '', outcomesNote(division, state.draws, s.entryId, e)].filter(Boolean).join(', '),
         // The template's rule: a dog with pending registration MUST carry
         // its breed. Every row carries one, as the template's lookup does.
+        properCase(e.breed),
+      ]);
+    }
+    // Every entered dog is listed. A dog that never started -- scratched
+    // before racing, or in its program 1 race -- has no placing or score
+    // (2.2.1(3): placings are for starters) but is reported with its scratch.
+    const placed = new Set(res.standings.map((s) => s.entryId));
+    for (const id of division.entryIds) {
+      if (placed.has(id)) continue;
+      const e = entryMap.get(id);
+      if (!e) continue;
+      const leftover = division.leftoverIds.includes(id) ? ' (LEFTOVER)' : '';
+      const note = e.preScratched ? 'SCR before racing' : 'SCR P1';
+      summary.push([
+        e.regNo ?? 'PENDING',
+        null,
+        e.callName + leftover,
+        e.owner ?? '',
+        null, null, null, null, null, null, null,
+        [e.fte ? 'FTE' : '', note].filter(Boolean).join(', '),
         properCase(e.breed),
       ]);
     }

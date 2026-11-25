@@ -1,7 +1,7 @@
 // Program 1 draw (4.3.3 graded / 4.4.1 ungraded) and post-position draw (4.3.2).
 
 import { raceSizesRunOrder } from './chart';
-import { relevantWave } from './divisions';
+import { seedingWave } from './divisions';
 import { hpExists } from './points';
 import { gradeForWave, nominalWaveForGrade } from './wave';
 import type { Division, Entry, ProgramDraw, Race, Rng } from './types';
@@ -19,7 +19,7 @@ export function shuffle<T>(arr: T[], rng: Rng): T[] {
 /** Sort key for the graded first-program draw: WAVE desc, FTEs slotted by their
  *  assigned grade's nominal WAVE (4.3.1.3), stable within equal keys. */
 export function gradedSortKey(entry: Entry, division: Division): number {
-  const wave = relevantWave(entry, division);
+  const wave = seedingWave(entry, division);
   if (wave !== null) return wave;
   return nominalWaveForGrade(entry.fteGrade);
 }
@@ -114,6 +114,6 @@ export function drawFirstProgram(
 
 /** Grade label shown for a dog in program 1 (A/B/C/D from WAVE or FTE grade). */
 export function entryGrade(entry: Entry, division: Division) {
-  const wave = relevantWave(entry, division);
+  const wave = seedingWave(entry, division);
   return wave === null ? entry.fteGrade : gradeForWave(wave);
 }

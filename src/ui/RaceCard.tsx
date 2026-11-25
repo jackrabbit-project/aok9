@@ -6,7 +6,7 @@ import { Jacket, Warn } from './common';
 import { ordinal, pts } from './fmt';
 import type { Division, Entry, Race, RaceOutcome } from '../domain/types';
 
-const STATUSES = ['OC', 'DNF', 'DQ', 'ABS', 'PSCR'] as const;
+const STATUSES = ['OC', 'DNF', 'DQ', 'ABS'] as const;
 const STATUS_LABEL: Record<string, string> = { OC: 'OC', DNF: 'DNF', DQ: 'DQ', ABS: 'SCR', PSCR: 'PSCR' };
 const STATUS_TITLE: Record<string, string> = {
   OC: 'Off course',

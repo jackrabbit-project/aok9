@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { programCanBeReopened, buildDivisionDraw, buildProgramDraws, useMeet } from '../store/meetStore';
-import { raceOf, totalsThrough } from '../domain/rotation';
+import { activeForNextProgram, raceOf, totalsThrough } from '../domain/rotation';
 import { entryGrade } from '../domain/draw';
 import { pts as fmtPts, wave } from './fmt';
 import { JACKET_COLORS } from '../domain/types';
@@ -126,6 +126,47 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
               ? 'Groups each division by WAVE (graded) or random draw (ungraded), splits races per Figure 8.1 and draws post positions.'
               : 'Drops grades, ranks every dog by points earned so far, regroups races per Figure 8.1 (ties per 4.3.4.1) and draws new post positions.'}
           </p>
+          {program > 1 && prevComplete && (
+            <div className="withdraw-list">
+              <p className="small">
+                Dogs going into Program {program}. An owner may scratch a dog now, before the dogs
+                are regrouped (6.4). After the draw, only an injured or ill dog verified by the Race
+                Committee can be scratched, and it is marked SCR in its race.
+              </p>
+              {state.divisions.map((division) => {
+                const ids = activeForNextProgram(division, state.draws, program - 1);
+                if (ids.length === 0) return null;
+                return (
+                  <div key={division.id}>
+                    <b>{division.name}</b>
+                    <ul className="dog-list">
+                      {ids.map((id) => {
+                        const e = entryMap.get(id);
+                        if (!e) return null;
+                        const out = !!e.withdrawnBefore && e.withdrawnBefore <= program;
+                        return (
+                          <li key={id}>
+                            <span>
+                              {e.callName} <small>({e.breed})</small>
+                              {out && <span className="badge">SCRATCHED</span>}
+                            </span>
+                            <button
+                              className="secondary sm"
+                              onClick={() =>
+                                dispatch({ type: 'updateEntry', id, patch: { withdrawnBefore: out ? null : (program as 2 | 3) } })
+                              }
+                            >
+                              {out ? 'Undo scratch' : 'Scratch'}
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          )}
           <button
             className="big"
             disabled={!canDraw}
@@ -149,7 +190,7 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
       {drawn && !allFinished && draws.some((d) => d.locked) && (
         <Hint>
           Tap the place each dog finished; the same place on two dogs is a dead heat. OC off
-          course · DNF did not finish · DQ disqualified · SCR scratched · PSCR paddock scratch.
+          course · DNF did not finish · DQ disqualified · SCR scratched.
           Save each race.
         </Hint>
       )}

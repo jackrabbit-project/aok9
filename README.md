@@ -77,7 +77,7 @@ to open; the app itself still works with none.
 4. **Program 1** — draw per Figure 8.1 (graded: WAVE order; ungraded: random). Review, swap dogs
    (click two) if the committee adjusts groups, redraw posts, then **Lock** and print the program
    sheet. Enter each race's result with the big buttons: places 1–4 (tap the same place on two
-   dogs for a dead heat), OC, DNF, DQ, SCR, PSCR (paddock scratch, scored as SCR). A DQ'd dog is left out of the placements — place the
+   dogs for a dead heat), OC, DNF, DQ, SCR. A DQ'd dog is left out of the placements — place the
    others as if it had not run (6.1.3). Until the first result is saved, the draw can still be
    **unlocked** to swap dogs or redraw posts, or **discarded** to change entries or divisions.
 5. **Programs 2–3** — one click regroups by points per 4.3.4 with every tie decision explained

@@ -70,6 +70,9 @@ export interface Entry {
   guideMixedMeets: GuideMeet[];
   /** Marked scratched before racing began (never started program 1). */
   preScratched: boolean;
+  /** Scratched by its owner between programs, before the dogs were regrouped
+      for this program (6.4): it runs no race from this program on. */
+  withdrawnBefore?: 2 | 3 | null;
 }
 
 export interface Division {

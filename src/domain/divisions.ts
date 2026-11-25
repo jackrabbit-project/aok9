@@ -77,6 +77,17 @@ export function meetsThreshold(fraction: number, threshold: number): boolean {
 
 /** The WAVE relevant to a dog inside a division (Breed WAVE in breed divisions
  *  unless the dog is a leftover; Mixed WAVE otherwise, 4.2.2). */
+/** The WAVE a dog is seeded and graded by in a division. A dog with no WAVE
+ *  of the division's kind but one of the other kind (a breed WAVE, running
+ *  mixed) is graded on that record rather than as a grade D newcomer: 4.2.2
+ *  grades a dog "based on its current AOK9 record". */
+export function seedingWave(entry: Entry, division: Division): number | null {
+  const own = relevantWave(entry, division);
+  if (own !== null) return own;
+  const asMixed = division.type === 'mixed' || division.leftoverIds.includes(entry.id);
+  return asMixed ? entry.bwave : entry.mwave;
+}
+
 export function relevantWave(entry: Entry, division: Division): number | null {
   const asMixed = division.type === 'mixed' || division.leftoverIds.includes(entry.id);
   return asMixed ? entry.mwave : entry.bwave;

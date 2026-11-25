@@ -59,7 +59,21 @@ export function normalizeMeet(parsed: Partial<MeetState>): MeetState {
     entryIds: d.entryIds.filter((id) => known.has(id)),
     leftoverIds: d.leftoverIds.filter((id) => known.has(id)),
   }));
-  let draws = parsed.draws ?? [];
+  // PSCR was offered briefly (1.5.9) and then folded back into SCR: a scratch
+  // is a scratch wherever it is made. A file saved meanwhile reads as SCR.
+  let draws = (parsed.draws ?? []).map((d) => ({
+    ...d,
+    races: d.races.map((r) =>
+      Object.values(r.outcomes).some((o) => o.kind === 'PSCR')
+        ? {
+            ...r,
+            outcomes: Object.fromEntries(
+              Object.entries(r.outcomes).map(([id, o]) => [id, o.kind === 'PSCR' ? ({ kind: 'ABS' } as const) : o])
+            ),
+          }
+        : r
+    ),
+  }));
   const orphans = new Set<string>();
   for (const d of draws) for (const r of d.races) for (const s of r.slots) if (!known.has(s.entryId)) orphans.add(s.entryId);
   for (const id of orphans) draws = withoutEntry(draws, id);

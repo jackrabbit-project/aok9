@@ -2,7 +2,7 @@
 // tie-resolution chain of 4.3.4.1, producing an audit trail of decisions.
 
 import { scoreRace, effectivePlace, roundPoints } from './points';
-import { relevantWave } from './divisions';
+import { seedingWave } from './divisions';
 import { buildRaces } from './draw';
 import type { Division, Entry, ProgramDraw, Race, Rng, TieDecision } from './types';
 import { isScratch } from './types';
@@ -95,8 +95,8 @@ export function breakTie(
       // identical race and both unplaced -> keep walking back
     }
   }
-  const wa = relevantWave(entries.get(a)!, division) ?? -1;
-  const wb = relevantWave(entries.get(b)!, division) ?? -1;
+  const wa = seedingWave(entries.get(a)!, division) ?? -1;
+  const wb = seedingWave(entries.get(b)!, division) ?? -1;
   if (wa !== wb) {
     return { cmp: wb - wa, why: `higher WAVE in the Grading Guide (${Math.max(wa, wb)} vs ${Math.min(wa, wb)})` };
   }
@@ -124,7 +124,11 @@ export function rotationOrder(
   prevProgram: number
 ): { order: string[]; decisions: TieDecision[] } {
   const totals = totalsThrough(division, draws, prevProgram);
-  const active = activeForNextProgram(division, draws, prevProgram);
+  // A dog its owner scratched before this regrouping (6.4) is not regrouped.
+  const active = activeForNextProgram(division, draws, prevProgram).filter((id) => {
+    const w = entries.get(id)?.withdrawnBefore;
+    return !w || w > prevProgram + 1;
+  });
 
   const order = [...active].sort((a, b) => {
     const diff = (totals[b] ?? 0) - (totals[a] ?? 0);
