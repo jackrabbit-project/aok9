@@ -75,8 +75,18 @@ export function assertGuideLayout(rows: unknown[][]): void {
   }
 }
 
+/** A meet cell. Most hold a meet code (2025-S67); some hold a date, which the
+    xlsx reader gives as a Date at local midnight. Use the calendar date, so the
+    result is the same on every device whatever its time zone. */
+function meetId(v: unknown): string | null {
+  if (v instanceof Date) {
+    return `${v.getFullYear()}-${String(v.getMonth() + 1).padStart(2, '0')}-${String(v.getDate()).padStart(2, '0')}`;
+  }
+  return str(v);
+}
+
 function meetAt(row: unknown[], i: number): GuideMeet | null {
-  const id = str(row[i]);
+  const id = meetId(row[i]);
   const score = num(row[i + 2]);
   if (id === null && score === null) return null;
   return { meet: id, score };

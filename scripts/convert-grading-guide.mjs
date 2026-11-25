@@ -61,8 +61,15 @@ const num = (v) => {
   return Number.isFinite(n) ? n : null;
 };
 const str = (v) => (v === null || v === undefined ? null : String(v).trim() || null);
+/** A meet cell. Most hold a meet code (2025-S67); some hold a date, which the
+    xlsx reader gives as a Date at local midnight. Write the calendar date, so
+    the file is the same on every machine whatever its time zone. */
+const meetId = (v) =>
+  v instanceof Date
+    ? `${v.getFullYear()}-${String(v.getMonth() + 1).padStart(2, '0')}-${String(v.getDate()).padStart(2, '0')}`
+    : str(v);
 const meet = (r, i) => {
-  const id = str(r[i]);
+  const id = meetId(r[i]);
   const score = num(r[i + 2]);
   if (id === null && score === null) return null;
   return { meet: id, score };
