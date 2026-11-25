@@ -1,7 +1,7 @@
 {
   "name": "aok9-race-secretary",
   "private": true,
-  "version": "1.5.8",
+  "version": "1.5.9",
   "license": "MIT",
   "type": "module",
   "scripts": {
