@@ -61,13 +61,13 @@ export function buildReportWorkbook(state: MeetState): XLSX.WorkBook {
       return p3.length === 0 || p3.some((x) => x.races.some((r) => !r.finished));
     });
   const summary: Row[] = [
-    ...(unfinished ? [['PROVISIONAL — the meet is not finished; programs remain to be run (4.1.3).'] as Row] : []),
+
     [`CLUB NAME: ${state.info.clubName}`],
     ['MEET TYPE: SPRINT'],
     [`DATE: ${state.info.date}`],
     // Row 4 holds the template's how-to note; the meet ID goes there instead,
     // so each division block starts on row 5 as in the template.
-    [`MEET ID: ${state.info.meetId}`],
+    [`MEET ID: ${state.info.meetId}${unfinished ? ' — PROVISIONAL: the meet is not finished; programs remain to be run (4.1.3)' : ''}`],
   ];
   for (const division of state.divisions) {
     const res = computeDivisionResults(division, state.draws, entryMap);

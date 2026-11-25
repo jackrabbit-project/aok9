@@ -162,7 +162,9 @@ export function drawNextProgram(
   return {
     program,
     divisionId: division.id,
-    races: buildRaces(division, program, order, rng),
+    // Every dog scratched or disqualified: nobody left to run (Figure 8.1
+    // starts at one dog), so the division sits this program out.
+    races: order.length ? buildRaces(division, program, order, rng) : [],
     tieDecisions: decisions,
     locked: false,
   };

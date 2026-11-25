@@ -171,6 +171,19 @@ describe('2.2.1 / 6.5: the meet report and results page show FTEs, reruns and an
     // Take program 3 away: the report says the meet is not finished.
     const partial = { ...state, draws: state.draws.filter((d) => d.program !== 3) };
     const p = XLSX.utils.sheet_to_json<(string | number | null)[]>(buildReportWorkbook(partial).Sheets.Summary, { header: 1, defval: null });
-    expect(String(p[0][0])).toMatch(/^PROVISIONAL/);
+    expect(String(p[3][0])).toMatch(/PROVISIONAL/);
+    expect(String(p[4][0])).toMatch(/^DIVISION TYPE/); // divisions still start on row 5
+  });
+});
+
+describe('a division with every dog scratched or disqualified', () => {
+  it('sits the next program out instead of stopping the draw', async () => {
+    const { drawNextProgram } = await import('../rotation');
+    const { seededRng } = await import('./helpers');
+    const entries = ['a', 'b'].map((id) => mkEntry({ id, callName: id.toUpperCase(), bwave: 12 }));
+    const division = mkDivision(['a', 'b']);
+    const p1 = draw('div1', 1, [mkRace('div1', 1, 1, true, [], { a: { kind: 'DQ' }, b: { kind: 'PSCR' } })]);
+    const p2 = drawNextProgram(division, [p1], entryMap(entries), 2, seededRng(3));
+    expect(p2.races).toEqual([]);
   });
 });

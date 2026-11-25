@@ -201,10 +201,16 @@ export function ProgramScreen({ program }: { program: 1 | 2 | 3 }) {
                   </ul>
                 </div>
               )}
-              {!draw.locked && (
+              {draw.races.length === 0 && (
+                <Hint>No dogs left to run in this division: every dog is scratched or disqualified.</Hint>
+              )}
+              {!draw.locked && draw.races.length > 0 && (
                 <Hint>
-                  Review the groups. Click two dogs to swap them between races if the committee
-                  adjusts the draw; redraw posts per race as needed. Races run in order — Race 1
+                  Review the groups.{' '}
+                  {program === 1
+                    ? 'Click two dogs to swap them between races if the committee adjusts the draw; redraw posts per race as needed.'
+                    : 'Groups follow the points so far (4.3.4); redraw posts per race as needed.'}{' '}
+                  Races run in order — Race 1
                   (lowest) first{draw.races.length > 1 ? `, Race ${draw.races.length} (top) last` : ''}. Then lock to enter results.
                 </Hint>
               )}

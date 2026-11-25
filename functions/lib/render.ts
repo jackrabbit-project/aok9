@@ -65,7 +65,7 @@ function raceTable(r: PublicRace): string {
       return `<tr><td class="post${cls}">${esc(post)}</td><td class="opt">${esc(s.jacket)}</td><td><b>${esc(s.name)}</b> <small>${esc(s.breed)}</small></td><td class="res">${res}</td><td class="num">${pts}</td></tr>`;
     })
     .join('');
-  return `<h3>Race ${esc(r.raceNo)}${r.isHP ? '<span class="badge hp">High Point</span>' : ''}${r.rerun ? '<span class="badge">rerun</span>' : ''}${r.finished ? '' : '<span class="badge">not yet run</span>'}</h3>
+  return `<h3>Race ${esc(r.raceNo)}${r.isHP ? '<span class="badge hp">High Point</span>' : ''}${r.rerun ? '<span class="badge">rerun</span>' : ''}${r.split ? '<span class="badge">points split</span>' : ''}${r.finished ? '' : '<span class="badge">not yet run</span>'}</h3>
 <div class="tbl-wrap"><table><thead><tr><th>Post</th><th class="opt">Jacket</th><th>Dog</th><th>Result</th><th class="num">Pts</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 

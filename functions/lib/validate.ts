@@ -60,6 +60,7 @@ function race(v: unknown): PublicRace {
     isHP: bool(o.isHP),
     finished: bool(o.finished),
     ...(o.rerun === true ? { rerun: true } : {}),
+    ...(o.split === true ? { split: true } : {}),
     slots: list(o.slots, 8, slot),
   };
 }

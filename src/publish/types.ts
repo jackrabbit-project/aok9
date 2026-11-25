@@ -24,6 +24,8 @@ export interface PublicRace {
   finished: boolean;
   /** marked rerun on the race card (6.5: results show which races were rerun) */
   rerun?: boolean;
+  /** points split equally under 6.5.1(b) */
+  split?: boolean;
   slots: PublicSlot[];
 }
 

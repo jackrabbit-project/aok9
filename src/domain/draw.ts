@@ -106,7 +106,7 @@ export function drawFirstProgram(
   return {
     program: 1,
     divisionId: division.id,
-    races: buildRaces(division, 1, order, rng),
+    races: order.length ? buildRaces(division, 1, order, rng) : [],
     tieDecisions: [],
     locked: false,
   };
